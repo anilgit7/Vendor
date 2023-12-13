@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge, and Firefox */
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.mainbar.active{
+    margin-left: 0px;
+    width: 100%;
+}
+
+/***************** Admin nav buttons ***********************/
+.active-notification-tabs{
+    color: black;
+}
+.dropdown-nav-menu{
+    inset: -3px auto auto -5px !important;
+}
+/***********************************************************/
