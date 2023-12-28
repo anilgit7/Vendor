@@ -18,4 +18,7 @@ class AdminController extends Controller
     public function list_customer(){
         return view('backend.admin');
     }
+    public function category(){
+        return view('backend.admin');
+    }
 }

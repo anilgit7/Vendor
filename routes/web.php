@@ -33,6 +33,7 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
     route::group(['prefix'=> 'customer'],function(){
         route::get('/list_user',[AdminController::class,'list_customer'])->name('admin.customer.list');
     });
+    route::get('/categories',[AdminController::class, 'category'])->name('admin.category');
 });
 
 /***********************************Merchant ROute***************************************** */
