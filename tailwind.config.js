@@ -2,6 +2,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
+const plugin = require('tailwindcss/plugin')
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -23,5 +24,23 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        forms,typography,
+        plugin(function ({ addUtilities }) {
+            addUtilities({
+              '.scrollbar-hide': {
+                /* IE and Edge */
+                '-ms-overflow-style': 'none',
+      
+                /* Firefox */
+                'scrollbar-width': 'none',
+      
+                /* Safari and Chrome */
+                '&::-webkit-scrollbar': {
+                  display: 'none'
+                }
+              }
+            })
+        })
+    ],
 };

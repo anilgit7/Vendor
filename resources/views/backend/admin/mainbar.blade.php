@@ -110,7 +110,10 @@
                 @include('backend.admin.list_merchant')
             @elseif (\Route::current()->getName() == 'admin.customer.list') 
                 @include('backend.admin.list_customer')
+            @elseif(\Route::current()->getName() == 'admin.category')
+                @include('backend.admin.category')
             @endif
+            @include('backend.admin.add')
         </div>
     </div>
 </div>
