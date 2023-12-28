@@ -113,6 +113,7 @@
             @elseif(\Route::current()->getName() == 'admin.category')
                 @include('backend.admin.category')
             @endif
+            @include('backend.admin.add')
         </div>
     </div>
 </div>
