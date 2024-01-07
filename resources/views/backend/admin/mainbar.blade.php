@@ -9,12 +9,9 @@
             <li class="mr-2">
                 <a href="{{ route('admin.dashboard') }}" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
             </li>
-            @if((request()->segment(1) === 'admin') && (request()->segment(2) === 'merchant'))
+            @if($title)
                 <li class="text-gray-600 mr-2 font-medium">/</li>
-                <li class="cursor-default text-gray-600 mr-2 font-medium">Merchant</li>
-            @elseif((request()->segment(1) === 'admin') && (request()->segment(2) === 'customer'))
-                <li class="text-gray-600 mr-2 font-medium">/</li>
-                <li class="cursor-default text-gray-600 mr-2 font-medium">Customer</li>
+                <li class="cursor-default text-gray-600 mr-2 font-medium capitalize">{{ $title }}</li>
             @endif
         </ul>
         <div class="ml-auto flex items-center">
@@ -104,6 +101,9 @@
             </div>
         </div>
     </div>
+    <div id="message" class="bg-white text-red-700 p-4 h-[1rem] relative" role="alert">
+        <h1 class="font-bold"></h1>
+    </div>
     <div class="min-h-screen p-4 space-y-[1rem] bg-white">
         <div>
             @if (\Route::current()->getName() == 'admin.merchant.list') 
@@ -111,9 +111,8 @@
             @elseif (\Route::current()->getName() == 'admin.customer.list') 
                 @include('backend.admin.list_customer')
             @elseif(\Route::current()->getName() == 'admin.category')
-                @include('backend.admin.category')
+                @include('backend.admin.category.view')
             @endif
-            @include('backend.admin.add')
         </div>
     </div>
 </div>

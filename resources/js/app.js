@@ -1,4 +1,6 @@
 import 'flowbite';
+import jQuery from 'jquery';
+window.$ = jQuery;
 
 /*************************** Sidebar Collapse ***********************************/
 const sidebarToggle = document.querySelector('.sidebar-toggle')
@@ -36,4 +38,3 @@ document.querySelectorAll('[data-tab]').forEach(function (item) {
         target.classList.remove('hidden')
     })
 })
-/********************************************************************************/

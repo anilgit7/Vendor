@@ -32,6 +32,6 @@ class IsAdmin
                 return redirect()->route('home');
             }
         }
-        return redirect()->back()->with('message','fuck you');
+        return redirect()->back()->with('message','Unauthorized access attempt');
     }
 }
