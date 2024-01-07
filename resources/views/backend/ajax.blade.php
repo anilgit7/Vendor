@@ -1,0 +1,1 @@
+@include('backend.ajax.category_ajax')
