@@ -25,7 +25,6 @@ class AdminController extends Controller
         $categories = Category::get()->all();
         $title = 'category';
         return view('backend.admin', compact('categories', 'title'));
-
     }
     public function add_category(Request $request){
         if(Category::where('category_name', $request->category_name)->exists()){

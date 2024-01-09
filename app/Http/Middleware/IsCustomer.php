@@ -17,6 +17,9 @@ class IsCustomer
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Auth::check()) {
+            return $next($request);
+        }
         if(Auth::check()){
             if(Auth::user()->user_type==2){
                 return $next($request);
@@ -32,6 +35,6 @@ class IsCustomer
                 return redirect()->route('home');
             }
         }
-        return redirect()->back()->with('message','fuck you');
+        return redirect()->back()->with('message','Unauthorized access attempt. System logging out.');
     }
 }

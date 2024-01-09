@@ -6,7 +6,7 @@ $(document).ready(function(){
     loadTable();
     function loadTable(){
         $.ajax({
-            url: 'view-categories',
+            url: "{{ route('admin.category.view') }}",
             success : function(result){
                 if(result.categories.length>0){
                     $('tbody').html('');
@@ -37,7 +37,7 @@ $(document).ready(function(){
     $('#form_add_category').on('submit',function(e){
         e.preventDefault();
         $.ajax({
-            url : 'add-category',
+            url : "{{ route('admin.category.add') }}",
             type : "POST",
             data : $('#form_add_category').serialize(),
             success : function(result){
@@ -54,10 +54,12 @@ $(document).ready(function(){
     $('#category_table').on('click','.editCategory',function(e){
         e.preventDefault();
         var category_id = $(this).attr('data-category-id');
+        var url = "{{ route('admin.category.edit', 'category_id') }}";
+        url = url.replace('category_id', category_id);
         $('#edit-category-container').show();
         $('#edit-category-form').removeClass('translate-x-full hidden');
         $.ajax({
-            url : 'edit-category/' + category_id,
+            url :  url,
             type : 'get',
             success : function(result){
                 if(result.status == 404){
@@ -78,8 +80,10 @@ $(document).ready(function(){
     $('#form_edit_category').on('submit',function(e){
         e.preventDefault();
         var category_id = $('#edit_category_id').val();
+        var url = "{{ route('admin.category.update', 'category_id') }}";
+        url = url.replace('category_id', category_id);
         $.ajax({
-            url : "update-category/" + category_id,
+            url : url,
             type : 'post',
             data : $('#form_edit_category').serialize(),
             success : function(result){
@@ -94,10 +98,13 @@ $(document).ready(function(){
     /****************************** Delete Category *********************************/
     /********************************************************************************/
     $('#category_table').on('click','.deleteCategory',function(){
-        var id = $(this).attr('data-category-id');
+        var category_id = $(this).attr('data-category-id');
         var obj = $(this);
+        var url = "{{ route('admin.category.delete', 'category_id') }}";
+        url = url.replace('category_id', category_id);
         $.ajax({
-            url: "delete-category/" + id,
+            // url: "delete-category/" + category_id,
+            url: url,
             type : 'GET',
             success : function(result){
                 $(obj).parent().parent().remove();

@@ -25,12 +25,10 @@ class HomeController extends Controller
             if($ut==0){
                 return redirect()->route('admin.dashboard');
             }
-            elseif($ut==1){
+            if($ut==1){
                 return redirect()->route('merchant.dashboard');
             }
-            else{
-                Session::flush();
-                Auth::logout();
+            if($ut==2){
                 return redirect()->route('home');
             }
         }
