@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             [
                 'name'=>'customer',
                 'email'=>'customer@gmail.com',
-                'user_type'=>'0',
+                'user_type'=>'2',
                 'phone_number'=>'',
                 'password'=>Hash::make('admin'),
             ],

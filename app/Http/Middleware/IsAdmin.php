@@ -17,6 +17,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Auth::check()) {
+            Session::flush();
+            Auth::logout();
+            return redirect()->route('home');
+        }
         if(Auth::check()){
             if(Auth::user()->user_type==0){
                 return $next($request);
@@ -32,6 +37,6 @@ class IsAdmin
                 return redirect()->route('home');
             }
         }
-        return redirect()->back()->with('message','Unauthorized access attempt');
+        return redirect()->back()->with('message','Unauthorized access attempt. System logging out.');
     }
 }

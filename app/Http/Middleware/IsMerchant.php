@@ -17,6 +17,11 @@ class IsMerchant
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!Auth::check()) {
+            Session::flush();
+            Auth::logout();
+            return redirect()->route('home');
+        }
         if(Auth::check()){
             if(Auth::user()->user_type==1){
                 return $next($request);
@@ -32,6 +37,6 @@ class IsMerchant
                 return redirect()->route('home');
             }
         }
-        return redirect()->back()->with('message','fuck you');
+        return redirect()->back()->with('message','Unauthorized access attempt. System logging out.');
     }
 }
