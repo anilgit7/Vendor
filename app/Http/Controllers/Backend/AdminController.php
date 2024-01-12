@@ -30,7 +30,7 @@ class AdminController extends Controller
         if(Category::where('category_name', $request->category_name)->exists()){
             return response()->json([
                 'status' => '400',
-                'message' => 'Category '.$request->category_name.' already exists',
+                'error' => 'Category '.$request->category_name.' already exists',
             ]);
         }
         else{
@@ -75,8 +75,16 @@ class AdminController extends Controller
     }
     public function delete_category($id){
         $category = Category::find($id);
-        $category_name =$category->category_name;
-        $category->delete();
-        return response()->json(['message' => 'Category '.$category_name.' deleted successfully']);
+        if($category){
+            $category_name =$category->category_name;
+            $category->delete();
+            return response()->json(['message' => 'Category '.$category_name.' deleted successfully']);
+        }
+        else{
+            return response()->json([
+                'status' => '404',
+                'error' => 'Category not found',
+            ]);
+        }
     }
 }

@@ -13,6 +13,7 @@ $(document).ready(function(){
                     for(let i=0; i<result.categories.length; i++){
                         $('tbody').append(
                             `<tr class="border-b">
+                                <input type="hidden"  value="`+(result.categories[i]['id'])+`">
                                 <td class="py-[.5rem] pr-[2rem]">`+(i+1)+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.categories[i]["category_name"])+`</td>
                                 <td class="flex gap-[.3rem] py-[.5rem] place-content-end">
@@ -43,7 +44,13 @@ $(document).ready(function(){
             success : function(result){
                 loadTable();
                 $('#form_add_category').trigger('reset');
-                $('#message h1').html(result.message).show(0).delay(2500).hide(0);
+                if(result.status == '400')
+                {
+                    $('#message h1').html(result.error).show(0).delay(2500).hide(0);
+                }
+                else{
+                    $('#message h1').html(result.message).show(0).delay(2500).hide(0);
+                }
             }
         });
     });
@@ -99,7 +106,6 @@ $(document).ready(function(){
     /********************************************************************************/
     $('#category_table').on('click','.deleteCategory',function(){
         var category_id = $(this).attr('data-category-id');
-        var obj = $(this);
         var url = "{{ route('admin.category.delete', 'category_id') }}";
         url = url.replace('category_id', category_id);
         $.ajax({
@@ -107,8 +113,13 @@ $(document).ready(function(){
             url: url,
             type : 'GET',
             success : function(result){
-                $(obj).parent().parent().remove();
-                $('#message h1').html(result.message).show(0).delay(2500).hide(0);
+                loadTable();
+                if(result.status == 404){
+                    $('#message h1').html(result.error).show(0).delay(2500).hide(0);
+                }
+                else{
+                    $('#message h1').html(result.message).show(0).delay(2500).hide(0);
+                }
             }
         });
     });
