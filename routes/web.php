@@ -47,7 +47,7 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
 });
 
 /*********************************** Merchant Route ******************************************/
-route::group(['prefix'=>'merchant'],function(){
+route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::get('/dashboard',[MerchantController::class,'index'])->name('merchant.dashboard');
 });
 
