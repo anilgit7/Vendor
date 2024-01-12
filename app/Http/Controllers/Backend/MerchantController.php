@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class MerchantController extends Controller
 {
     public function index(){
-        return view('backend.merchant');
+        $title="merchant";
+        return view('backend.merchant',compact('title'));
     }
 }
