@@ -8,7 +8,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
+            <input type="hidden" name="status" id="status" value="verified">
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
@@ -23,11 +23,11 @@
                 <x-label for="user_type" value="User Type" />
                 <div class="flex justify-between">
                     <div class="flex">
-                        <x-input id="user_type" class="block mt-1 " type="radio" value="2" name="user_type" required checked/>
+                        <x-input id="customer" class="block mt-1 " type="radio" value="2" name="user_type" onclick="user_status(this)" required checked/>
                         <span class="ml-2">Customer</span>
                     </div>
                     <div class="flex">
-                        <x-input id="user_type" class="block mt-1 " type="radio" value="1" name="user_type" required/><span class="ml-2">Merchant</span>
+                        <x-input id="merchant" class="block mt-1 " type="radio" value="1" name="user_type" onclick="user_status(this)" required/><span class="ml-2">Merchant</span>
                     </div>
                 </div>
             </div>
@@ -82,6 +82,16 @@
     function limitkeypress(event,value,maxLength){
         if(value !=undefined && value.toString().length >=maxLength){
             event.preventDefault();
+        }
+    }
+    function user_status(){
+        let status = document.getElementById('status');
+        let userType = document.querySelector("input[type='radio'][name=user_type]:checked").value;
+        if(userType == '1'){
+            status.value = 'unverified';
+        }
+        else{
+            status.value = 'verified';
         }
     }
 </script>

@@ -9,9 +9,9 @@ $(document).ready(function(){
             url: "{{ route('admin.category.view') }}",
             success : function(result){
                 if(result.categories.length>0){
-                    $('tbody').html('');
+                    $('#category_data').html('');
                     for(let i=0; i<result.categories.length; i++){
-                        $('tbody').append(
+                        $('#category_data').append(
                             `<tr class="border-b">
                                 <input type="hidden"  value="`+(result.categories[i]['id'])+`">
                                 <td class="py-[.5rem] pr-[2rem]">`+(i+1)+`</td>
