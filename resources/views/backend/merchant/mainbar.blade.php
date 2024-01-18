@@ -7,7 +7,7 @@
         </button>
         <ul class="flex items-center text-sm ml-4 hidden xs:flex">
             <li class="mr-2">
-                <a href="{{ route('admin.dashboard') }}" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
+                <a href="{{ route('merchant.dashboard') }}" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
             </li>
             @if($title)
                 <li class="text-gray-600 mr-2 font-medium">/</li>
