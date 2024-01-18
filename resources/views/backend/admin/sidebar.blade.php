@@ -27,7 +27,7 @@
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                <ul id="dropdown-merchant" class="space-y-2 py-2 {{ ((Route::currentRouteName() === 'admin.merchant.new')) ? '' : 'hidden' }}">
+                <ul id="dropdown-merchant" class="space-y-2 py-2 {{  Request::is('admin/merchant/*') ? '' : 'hidden' }}">
                     <li>
                         <a href="{{ route('admin.merchant.new') }}" class="text-base text-gray-300 rounded-lg flex items-center p-1 2xs:p-2 group hover:bg-gray-100 transition duration-75 pl-3 2xs:pl-5 xs:pl-11 {{ (Route::currentRouteName() === 'admin.merchant.new') ? 'bg-[#F3F4F6] text-gray-900' : '' }}">
                             <svg class="flex-shrink-0 w-3 h-3 2xs:w-6 2xs:h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="text-base text-gray-300 rounded-lg flex items-center p-1 2xs:p-2 group hover:bg-gray-100 transition duration-75 pl-3 2xs:pl-5 xs:pl-11">
+                        <a href="{{ route('admin.merchant.verify') }}" class="text-base text-gray-300 rounded-lg flex items-center p-1 2xs:p-2 group hover:bg-gray-100 transition duration-75 pl-3 2xs:pl-5 xs:pl-11 {{ (route::currentRouteName() === 'admin.merchant.verify') ? 'bg-[#F3F4F6] text-gray-900' : '' }}">
                             <svg class="flex-shrink-0 w-3 h-3 2xs:w-6 2xs:h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M.99 5.24A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25l.01 9.5A2.25 2.25 0 0116.76 17H3.26A2.267 2.267 0 011 14.74l-.01-9.5zm8.26 9.52v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75v.615c0 .414.336.75.75.75h5.373a.75.75 0 00.627-.74zm1.5 0a.75.75 0 00.627.74h5.373a.75.75 0 00.75-.75v-.615a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75v.625zm6.75-3.63v-.625a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75v.625c0 .414.336.75.75.75h5.25a.75.75 0 00.75-.75zm-8.25 0v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75v.625c0 .414.336.75.75.75H8.5a.75.75 0 00.75-.75zM17.5 7.5v-.625a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75V7.5c0 .414.336.75.75.75h5.25a.75.75 0 00.75-.75zm-8.25 0v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75V7.5c0 .414.336.75.75.75H8.5a.75.75 0 00.75-.75z"></path>
                             </svg>
@@ -52,7 +52,7 @@
             </li>
 
             <li>
-                <button type="button" class="flex items-center w-full p-1 2xs:p-2 text-base text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 {{ ((request()->segment(1) === 'admin') && (request()->segment(2) === 'customer')) ? 'bg-gray-100 text-gray-900' : '' }}" aria-controls="dropdown-customers" data-collapse-toggle="dropdown-customers">
+                <button type="button" class="flex items-center w-full p-1 2xs:p-2 text-base text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 {{ Request::is('admin/customer/*') ? 'bg-gray-100 text-gray-900' : '' }}" aria-controls="dropdown-customers" data-collapse-toggle="dropdown-customers">
                     <svg class="flex-shrink-0 w-3 h-3 2xs:w-5 2xs:h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
                     </svg>

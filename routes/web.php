@@ -34,6 +34,10 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
     route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     route::group(['prefix'=> 'merchant'],function(){
         route::get('/new-merchant',[AdminController::class,'list_merchant'])->name('admin.merchant.new');
+        route::get('/new-list',[AdminController::class,'new_list'])->name('admin.merchant.new.list');
+        route::post('/new-list/status-update/{id}',[AdminController::class, 'status_update'])->name('admin.merchant.new.update');
+        route::get('/new_merchant/delete/{id}',[AdminController::class,'new_merchant_delete'])->name('admin.merchant.new.delete');
+        route::get('/verified-merchant',[AdminController::class, 'verify_merchant'])->name('admin.merchant.verify');
     });
     route::group(['prefix'=> 'customer'],function(){
         route::get('/list_user',[AdminController::class,'list_customer'])->name('admin.customer.list');
