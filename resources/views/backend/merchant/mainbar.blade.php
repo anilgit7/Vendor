@@ -106,13 +106,8 @@
     </div>
     <div class="min-h-screen p-4 space-y-[1rem] bg-white">
         <div>
-            @if (\Route::current()->getName() == 'admin.merchant.new') 
-                @include('backend.admin.merchant.unverified')
-                @include('backend.admin.merchant.verified')
-            @elseif (\Route::current()->getName() == 'admin.customer.list') 
-                @include('backend.admin.list_customer')
-            @elseif(\Route::current()->getName() == 'admin.category')
-                @include('backend.admin.category.view')
+            @if(\Route::current()->getName() == 'merchant.product')
+                @include('backend.merchant.product.view') 
             @endif
         </div>
     </div>

@@ -53,6 +53,10 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
 /*********************************** Merchant Route ******************************************/
 route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::get('/dashboard',[MerchantController::class,'index'])->name('merchant.dashboard');
+    route::get('/products',[MerchantController::class, 'product'])->name('merchant.product');
+    route::group(['prefix'=>'product'],function(){
+        route::get('/view-product',[MerchantController::class, 'view_product'])->name('merchant.product');
+    });
 });
 
 // Route::middleware([

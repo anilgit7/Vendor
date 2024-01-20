@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'name'=>'merchant',
                 'email'=>'merchant@gmail.com',
                 'user_type'=>'1',
-                'status' => 'unverified',
+                'status' => 'verified',
                 'phone_number'=>'',
                 'password'=>Hash::make('admin'),
             ],
