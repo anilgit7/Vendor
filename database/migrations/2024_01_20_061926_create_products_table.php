@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string("product_name");
             $table->string("price");
             $table->string("color");
+            $table->string("category");
             $table->string("size");
             $table->string("material");
-            $table->string("brand");
+            $table->string("brand")->nullable();
             $table->string("weight");
-            $table->string("warranty");
+            $table->string("warranty")->nullable();
             $table->string("shop_name");
             $table->string("shop_address")->nullable();
             $table->string("merchant_email");
