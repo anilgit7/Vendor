@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class MerchantController extends Controller
 {
@@ -16,22 +18,28 @@ class MerchantController extends Controller
     public function view_product(){
         $title="Product";
         $categories=Category::get()->all();
-        return view('backend.merchant',compact('title','categories'));
+        $products=Product::get()->all();
+        return view('backend.merchant',compact('title','categories','products'));
     }
-    public function store(Request $request)
+    public function list_product(){
+        $products = Product::where('shop_name', Auth::user()->name)->get()->all();
+        return response()->json(['products'=>$products]);
+        // return view('backend.merchant', compact('products'));
+    }
+    public function add_product(Request $request)
     {
         $product = new Product;
-        $product->product_name = $request->input('product_name');
-        $product->price = $request->input('product_price');
-        $product->color = $request->input('product_color');
-        $product->category = $request->input('product_category');
-        $product->size = $request->input('product_size');
-        $product->material = $request->input('product_material');
-        $product->brand = $request->input('product_brand');
-        $product->weight = $request->input('product_weight');
-        $product->warranty = $request->input('product_warranty');
-        $product->shop_name = $request->input('shop_name');
-        $product->merchant_email = $request->input('merchant_email');
+        $product->product_name = $request->product_name;
+        $product->price = $request->product_price;
+        $product->color = $request->product_color;
+        $product->category = $request->product_category;
+        $product->size = $request->product_size;
+        $product->material = $request->product_material;
+        $product->brand = $request->product_brand;
+        $product->weight = $request->product_weight;
+        $product->warranty = $request->product_warranty;
+        $product->shop_name = $request->shop_name;
+        $product->merchant_email = $request->merchant_email;
 
         $image = $request->image;
         $imagename = time().'.'.$image->getClientOriginalExtension();
@@ -39,6 +47,60 @@ class MerchantController extends Controller
         $product->images = $imagename;
 
         $product->save();
-        return redirect()->back()->with('message','Image Upload Successfully');
+        return response()->json(['message'=>'Product added successfully']);
+    }
+
+    public function delete_product($id){
+        $product = Product::find($id);
+        if($product){
+            // $fullImgPath = storage_path("images/backend/products/".$product->images);
+            // if(File::exists($fullImgPath)) {
+            //     File::delete($fullImgPath);
+            // }
+            $product_name =$product->product_name;
+            $product->delete();
+            return response()->json(['message' => 'Product '.$product_name.' deleted successfully']);
+        }
+        else{
+            return response()->json([
+                'status' => '404',
+                'error' => 'Image not found',
+            ]);
+        }
+    }
+
+    public function edit_product($id){
+        $product = Product::find($id);
+        if($product){
+            return response()->json([
+                'product' => $product
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => '404',
+                'message' => 'product not found'
+            ]);
+        }
+    }
+    public function update_product(Request $request, $id){
+        $product= Product::find($id);
+        $product->product_name = $request->edit_product_name;
+        $product->price = $request->edit_product_price;
+        $product->color = $request->edit_product_color;
+        $product->category = $request->edit_product_category;
+        $product->size = $request->edit_product_size;
+        $product->material = $request->edit_product_material;
+        $product->brand = $request->edit_product_brand;
+        $product->weight = $request->edit_product_weight;
+        $product->warranty = $request->edit_product_warranty;
+        $image = $request->edit_image;
+        $imagename = time().'.'.$image->getClientOriginalExtension();
+        $request->image->move('images/backend/products',$imagename);
+        $product->images = $imagename;
+
+        $product->update();
+        return response()->json(['message' => 'Product updated successfully']);
+    
     }
 }

@@ -54,8 +54,12 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
 route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::get('/dashboard',[MerchantController::class,'index'])->name('merchant.dashboard');
     route::group(['prefix'=>'product'],function(){
+        route::get('/new-product',[MerchantController::class,'list_product'])->name('merchant.product.new');
         route::get('/view-product',[MerchantController::class, 'view_product'])->name('merchant.product');
-        route::post('/add-product', [MerchantController::class, 'store'])->name('product.add');
+        route::post('/add-product', [MerchantController::class, 'add_product'])->name('product.add');
+        route::get('/edit-product/{id}',[MerchantController::class, 'edit_product'])->name('product.edit');
+        route::post('/update-product/{id}',[MerchantController::class, 'update_product'])->name('product.update');
+        route::get('/delete-product/{id}', [MerchantController::class, 'delete_product'])->name('product.delete');
     });
 });
 // Route::middleware([
