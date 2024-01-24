@@ -6,7 +6,7 @@
             <div class="flex place-content-center lg:place-content-end lg:justify-between">
                 <div></div>
                 <div class="pb-[2rem] space-y-[2rem]">
-                <h1 class="text-center capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[2.5rem]">Sign Up</h1>
+                <h1 class="text-center capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[2.5rem]">Create an Account</h1>
                     <div class="bg-[#353935] py-[1rem] sm:py-[3rem] px-[1rem] sm:px-[6rem] rounded-[.8rem]">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
@@ -27,8 +27,8 @@
                             </div>
 
                             <div class="mt-4 hidden">
-                                <x-input id="status" class="block max-sm:py-[.2rem] mt-1 w-full" type="hidden" name="status" value="verified" required/>
-                                <x-input id="customer" class="block max-sm:py-[.2rem] mt-1 w-full" type="hidden" value="2" name="user_type" required/>
+                                <x-input id="status" class="block max-sm:py-[.2rem] mt-1 w-full" type="hidden" name="status" value="unverified" required/>
+                                <x-input id="merchant" class="block max-sm:py-[.2rem] mt-1 w-full" type="hidden" value="1" name="user_type" required/>
                             </div>
 
                             <div class="mt-4">

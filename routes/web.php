@@ -22,6 +22,9 @@ use App\Http\Controllers\Backend\MerchantController;
 
 /********************************** Public Route ****************************************/
 route::get('/userchecking',[HomeController::class,'userfront']);
+route::get('/merchant-register', function(){
+    return view('auth.merchant_register');
+})->name('merchant.register');
 route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 /********************************** Customer Route ****************************************/

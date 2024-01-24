@@ -18,13 +18,11 @@
     </head>
     <body class="font-sans antialiased select-none">
         <x-banner />
-        @include('frontend.hefo.header')
         <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->
 
             @yield('main')
         </div>
-        @include('frontend.hefo.footer')
         @stack('modals')
 
         @livewireScripts
