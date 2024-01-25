@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-[2rem] xl:gap-[5rem] 2xl:gap-[3rem]">
             <div class="bg-white flex flex-col items-center py-[1.5rem] px-[.85rem] space-y-[1.5rem] rounded-[.5rem] hover:shadow-[0px_4px_8px_.5px_rgba(0,0,0,0.25)]">
                 <h1 class="capitalize font-bold text-[1rem] 2xs:text-[1.2rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">Women's fashion</h1>
-                <a href="#" class="flex flex-col items-center space-y-[2rem]">
+                <a href="{{ route('product.list') }}" class="flex flex-col items-center space-y-[2rem]">
                     <div class="h-[6rem] 3xs:h-[7.5rem] 2xs:h-[9.5rem] xs:h-[12.25rem] w-full">
                         <img src="{{ asset('/images/frontend/womenfashion.png') }}" alt="" class="h-full w-full ">
                     </div>
