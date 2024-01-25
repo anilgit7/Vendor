@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AdminController;
@@ -30,6 +31,7 @@ route::get('/logout',[HomeController::class,'logout'])->name('logout');
 /********************************** Customer Route ****************************************/
 route::group(['middleware' => 'customer'], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
+    route::get('/product-list',[ProductController::class, 'list_product'])->name('product.list');
 });
 
 /*********************************** Admin Route ******************************************/
