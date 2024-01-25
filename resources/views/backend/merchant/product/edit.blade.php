@@ -36,15 +36,15 @@
             <div>
                 <label for="edit_product_size" class="block mb-2 text-sm font-medium text-gray-900">Size Available </label>
                 <div id="checkbtn" class="flex items-center space-x-4">
-                    <label for="size_1" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_product_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="S" >S</label>
-                    <label for="size_2" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="L" >L</label>
-                    <label for="size_3" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="size" value="XL" >XL</label>
-                    <label for="size_4" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="esize" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="XXL" >XXL</label>
+                    <label for="size_1" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_product_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="S" checked>S</label>
+                    <label for="size_2" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="L">L</label>
+                    <label for="size_3" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="size" value="XL">XL</label>
+                    <label for="size_4" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="esize" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="XXL">XXL</label>
                 </div>
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="edit_product_image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image</label>
-                <input type="file" id="edit_image" name="image" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2" required>
+                <input type="file" id="edit_product_image" name="edit_product_image" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2">
             </div>
 
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">

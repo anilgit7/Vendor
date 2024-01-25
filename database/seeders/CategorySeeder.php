@@ -16,15 +16,19 @@ class CategorySeeder extends Seeder
         $category = [
             [
                 'category_name' => 'Clothes',
+                'image' => 'category-1.png',
             ],
             [
                 'category_name' => 'Stationary',
+                'image' => 'category-2.png',
             ],
             [
                 'category_name' => 'Daily Use',
+                'image' => 'category-3.png',
             ],
             [
                 'category_name' => 'Vegetables',
+                'image' => 'category-4.png',
             ],
         ];
 

@@ -14,6 +14,10 @@
                     <label for="edit_category_name" class="block mb-2 text-sm font-medium text-gray-900">Category Name</label>
                     <input type="text" id="edit_category_name" name="edit_category_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type category name" required>
                 </div>
+                <div>
+                    <label for="edit_category_image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                    <input type="file" id="edit_category_image" name="edit_category_image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                </div>
                 <div class="bottom-0 left-0 flex justify-between w-full pb-4 space-x-4 md:px-4 md:absolute">
                     <button type="submit" id="edit_category" value="Edit category" class="flex bg-[#337ab8] hover:bg-[#004a89] text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">
                         <span class="">Save</span>

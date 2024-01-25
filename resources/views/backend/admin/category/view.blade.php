@@ -11,6 +11,7 @@
                     <tr class="border-b">
                         <th class="text-start pr-[2rem] pb-[.5rem]">S.N</th>
                         <th class="text-start pr-[2rem] pb-[.5rem]">Category Name</th>
+                        <th class="text-start pr-[2rem] pb-[.5rem]">Image</th>
                         <th class="text-end pb-[.5rem]">Action</th>
                     </tr>
                 </thead>

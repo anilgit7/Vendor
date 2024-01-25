@@ -4,9 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -56,7 +57,6 @@ class AdminController extends Controller
         $title = 'Verified Merchant';
         return view('backend.admin', compact('title'));
     }
-
     public function list_customer(){
         $title = 'customer';
         return view('backend.admin', compact('title'));
@@ -76,11 +76,14 @@ class AdminController extends Controller
         else{
             $category = new Category;
             $category_name = $category->category_name = ucfirst($request->category_name);
+            $image = $request->category_image;
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->category_image->move('images/backend/category',$imagename);
+            $category->image = $imagename;
             $category->save();
             return response()->json(['message' => 'Category '.$category_name. ' created successfully']);
         }
     }
-
     public function view_category(){
         $categories = Category::get()->all();
         return response()->json(['categories'=>$categories]);
@@ -100,15 +103,43 @@ class AdminController extends Controller
         }
     }
     public function update_category(Request $request, $id){
-        if(Category::where('category_name', $request->edit_category_name)->exists()){
+        $category= Category::find($id);
+        $previousName = $category->category_name;
+        if($previousName == $request->edit_category_name){
+            if($request->edit_category_image){
+                $category_image = $category->image;
+                $image_path = 'images/backend/category/'.$category_image;
+                if (File::exists($image_path)){
+                    File::delete($image_path);
+                }
+                $image = $request->edit_category_image;
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $request->edit_category_image->move('images/backend/category',$imagename);
+                $category->image = $imagename;
+                $category->update();
+                return response()->json(['message' => 'Category updated successfully']);
+            }
+            else{
+                return response()->json(['message' => 'No changes made']);
+            }
+        }
+        elseif(Category::where('category_name', $request->edit_category_name)->exists()){
             return response()->json([
                 'status' => '400',
                 'message' => 'Category '.$request->edit_category_name.' already exists',
             ]);
         }
         else{
-            $category= Category::find($id);
             $category->category_name = $request->edit_category_name;
+            $category_image = $category->image;
+            $image_path = 'images/backend/category/'.$category_image;
+            if (File::exists($image_path)){
+                File::delete($image_path);
+            }
+            $image = $request->edit_category_image;
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->edit_category_image->move('images/backend/category',$imagename);
+            $category->image = $imagename;
             $category->update();
             return response()->json(['message' => 'Category updated successfully']);
         }
@@ -116,8 +147,24 @@ class AdminController extends Controller
     public function delete_category($id){
         $category = Category::find($id);
         if($category){
+            $category_image = $category->image;
             $category_name =$category->category_name;
             $category->delete();
+            $image_path = 'images/backend/category/'.$category_image; 
+            if (File::exists($image_path)){
+                File::delete($image_path);
+            }
+            if(Product::where('category', $category_name)->exists()){
+                $products = Product::where('category', $category_name)->get()->all();
+                foreach($products as $product){
+                    $list_image = $product->image;
+                    $product->delete();
+                    $image_path = 'images/backend/products/'.$list_image;
+                    if (File::exists($image_path)) {
+                        File::delete($image_path);
+                    }
+                }
+            }
             return response()->json(['message' => 'Category '.$category_name.' deleted successfully']);
         }
         else{

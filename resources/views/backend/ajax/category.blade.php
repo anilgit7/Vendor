@@ -13,9 +13,10 @@ $(document).ready(function(){
                     for(let i=0; i<result.categories.length; i++){
                         $('#category_data').append(
                             `<tr class="border-b">
-                                <input type="hidden"  value="`+(result.categories[i]['id'])+`">
-                                <td class="py-[.5rem] pr-[2rem]">`+(i+1)+`</td>
-                                <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.categories[i]["category_name"])+`</td>
+                                <input type="hidden" value="`+(result.categories[i]['id'])+`">
+                                <td class="py-[.5rem] pr-[2rem] align-top">`+(i+1)+`</td>
+                                <td class="py-[.5rem] pr-[2rem] align-top capitalize">`+(result.categories[i]["category_name"])+`</td>
+                                <td class="pr-[2rem] capitalize py-[.5rem]"><img src="{{asset('images/backend/category')}}/`+(result.categories[i]["image"])+`" class="w-[4rem] object-contain"></td>
                                 <td class="flex gap-[.3rem] py-[.5rem] place-content-end">
                                     <button data-category-id="`+(result.categories[i]['id'])+`" class="editCategory flex bg-blue-500 hover:bg-blue-700 text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">
                                         <span class="">Edit</span>
@@ -40,7 +41,8 @@ $(document).ready(function(){
         $.ajax({
             url : "{{ route('admin.category.add') }}",
             type : "POST",
-            data : $('#form_add_category').serialize(),
+            data : new FormData(this),
+            contentType: 'multipart/form-data',
             success : function(result){
                 loadTable();
                 $('#form_add_category').trigger('reset');
@@ -51,7 +53,9 @@ $(document).ready(function(){
                 else{
                     $('#message h1').html(result.message).show(0).delay(2500).hide(0);
                 }
-            }
+            },
+            contentType : false,
+            processData : false
         });
     });
 
@@ -92,13 +96,16 @@ $(document).ready(function(){
         $.ajax({
             url : url,
             type : 'post',
-            data : $('#form_edit_category').serialize(),
+            data : new FormData(this),
+            contentType: 'multipart/form-data',
             success : function(result){
                 loadTable();
                 closeForm();
                 $('#form_edit_category').trigger('reset');
                 $('#message h1').html(result.message).show(0).delay(2500).hide(0);
-            }
+            },
+            contentType : false,
+            processData : false
         });
     });
 
