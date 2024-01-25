@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\MerchantController;
+use App\Http\Controllers\Frontend\EsewaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,26 @@ route::get('/logout',[HomeController::class,'logout'])->name('logout');
 route::group(['middleware' => 'customer'], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
     route::get('/product-list',[ProductController::class, 'list_product'])->name('product.list');
+    route::group(['prefix' => 'product'], function () {
+        route::get('/list',[ProductController::class, 'list_product'])->name('products.list');
+        route::get('/details',[ProductController::class, 'product_detail'])->name('product.detail');
+        route::group(['middleware' => 'auth'], function(){
+            route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
+            route::get('/checkout/success',[EsewaController::class, 'success'])->name('esewa.success');
+            route::get('/checkout/failure',[EsewaController::class, 'failure'])->name('esewa.failure');
+            route::get('/payment/response',[EsewaController::class, 'response'])->name('payment.response');
+            route::get('/checkout',[ProductController::class, 'checkout'])->name('products.checkout');
+        });
+    });
+    route::group(['middleware' => 'auth'], function(){
+        route::get('/cartlist', [ProductController::class, 'cartlist'])->name('product.cartlist');
+        route::get('/cartlist/delete/all', [ProductController::class, 'cartlist_delete_all'])->name('product.cartlist.remove.all');
+        route::get('/cartlist/delete/{id}', [ProductController::class, 'cartlist_delete'])->name('product.carlist.delete');
+        route::get('/cartlist/deletebyname/{name}', [ProductController::class, 'cartlist_delete_name'])->name('product.carlist.delete.name');
+        
+        route::post('/cartlist/update/{id}', [ProductController::class, 'cartlist_update_quantity'])->name('product.cartlist.update.quantity');
+        route::get('/order', [ProductController::class, 'order'])->name('product.order');
+    });
 });
 
 /*********************************** Admin Route ******************************************/

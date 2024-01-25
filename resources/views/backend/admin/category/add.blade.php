@@ -5,12 +5,16 @@
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         <span class="sr-only">Close menu</span>
     </button>
-    <form id="form_add_category">
+    <form id="form_add_category" enctype="multipart/form-data">
         @csrf
         <div class="space-y-4">
             <div>
                 <label for="category_name" class="block mb-2 text-sm font-medium text-gray-900">Category Name</label>
                 <input type="text" id="category_name" name="category_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type category name" required>
+            </div>
+            <div>
+                <label for="category_image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                <input type="file" id="category_image" name="category_image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
             </div>
             <div class="bottom-0 left-0 flex justify-between w-full pb-4 space-x-4 md:px-4 md:absolute">
                 <button type="submit" id="add_category" value="Add category" class="flex bg-[#337ab8] hover:bg-[#004a89] text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">

@@ -106,7 +106,7 @@ $(document).ready(function(){
                     $('#edit_product_category').val(result.product['category']);
                     $('#edit_product_color').val(result.product['color']);
                     $('#edit_product_size').val(result.product['size']);
-                    $('#edit_image').val(result.product['image']);
+                    $('#edit_product_image').val(result.product['image']);
                     $('#edit_product_material').val(result.product['material']);
                     $('#edit_product_weight').val(result.product['weight']);
                     $('#edit_product_brand').val(result.product['brand']);
@@ -116,15 +116,12 @@ $(document).ready(function(){
             }
         });
     });
-
     /********************************************************************************/
     /****************************** Update product *********************************/
     /********************************************************************************/
     /********************************************************************************/
     $('#form_edit_product').on('submit',function(e){
         e.preventDefault();
-        console.log("anil");
-        var formdata=new FormData(this);
         var product_id = $('#edit_product_id').val();
         var url = "{{ route('product.update', 'product_id') }}";
         url = url.replace('product_id', product_id);
@@ -132,7 +129,7 @@ $(document).ready(function(){
             url : url,
             type : 'POST',
             contentType: 'multipart/form-data',
-            data : formdata,
+            data : new FormData(this),
             success : function(result){
                 loadProductTable();
                 closeForm();

@@ -24,7 +24,6 @@ class MerchantController extends Controller
     public function list_product(){
         $products = Product::where('shop_name', Auth::user()->name)->get()->all();
         return response()->json(['products'=>$products]);
-        // return view('backend.merchant', compact('products'));
     }
     public function add_product(Request $request)
     {
@@ -49,16 +48,16 @@ class MerchantController extends Controller
         $product->save();
         return response()->json(['message'=>'Product added successfully']);
     }
-
     public function delete_product($id){
         $product = Product::find($id);
         if($product){
-            // $fullImgPath = storage_path("images/backend/products/".$product->images);
-            // if(File::exists($fullImgPath)) {
-            //     File::delete($fullImgPath);
-            // }
+            $product_image = $product->images;
             $product_name =$product->product_name;
             $product->delete();
+            $image_path = 'images/backend/products/'.$product_image; 
+            if (File::exists($image_path)){
+                File::delete($image_path);
+            }
             return response()->json(['message' => 'Product '.$product_name.' deleted successfully']);
         }
         else{
@@ -68,7 +67,6 @@ class MerchantController extends Controller
             ]);
         }
     }
-
     public function edit_product($id){
         $product = Product::find($id);
         if($product){
@@ -94,13 +92,18 @@ class MerchantController extends Controller
         $product->brand = $request->edit_product_brand;
         $product->weight = $request->edit_product_weight;
         $product->warranty = $request->edit_product_warranty;
-        $image = $request->edit_image;
-        $imagename = time().'.'.$image->getClientOriginalExtension();
-        $request->image->move('images/backend/products',$imagename);
-        $product->images = $imagename;
-
+        if($request->edit_product_image){
+            $product_image = $product->images;
+            $image_path = 'images/backend/products/'.$product_image;
+            if (File::exists($image_path)){
+                File::delete($image_path);
+            }
+            $image = $request->edit_product_image;
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->edit_product_image->move('images/backend/products',$imagename);
+            $product->images = $imagename;
+        }
         $product->update();
         return response()->json(['message' => 'Product updated successfully']);
-    
     }
 }
