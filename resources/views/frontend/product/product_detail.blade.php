@@ -4,12 +4,12 @@
             <div class="bg-white flex flex-col 2xl:flex-row justify-between max-2xl:space-y-[1rem] p-[.8rem] 2xs:p-[2rem]">
                 <div class="flex flex-col lg:flex-row max-2xl:justify-between 2xl:gap-[2rem] max-lg:space-y-[1rem]">
                     <div class="h-[6rem] 3xs:h-[8rem] 2xs:h-[12rem] xs:h-[18rem] sm:h-[30rem] lg:h-[24rem] w-[6rem] 3xs:w-[8rem] 2xs:w-[12rem] xs:w-[18rem] max-sm:mx-auto sm:w-[30rem] lg:w-[24rem]">
-                        <img src="{{ asset('images/frontend/electronics.png') }}" alt="" class="h-full w-full">
+                        <img src="/images/backend/products/{{$product->images}}" alt="" class="h-full w-full">
                     </div>
                     <hr class="lg:hidden">
                     <div class="space-y-[.5rem] sm:w-[30rem] lg:w-auto">
                         <div class="space-y-[.5rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                            <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Electronic blub</h1>
+                            <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">{{$product->product_name}}</h1>
                             <div class="flex items-center pb-[.3rem]">
                                 <span>4.3</span>
                                 <svg class="h-3 xs:h-4 ml-2 text-[#F28C28]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -19,15 +19,15 @@
                             <hr class="w-full">
                         </div>
                         <div class="space-y-[.5rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                            <span>Rs.1500</span>
+                            <span id="price">Rs. {{$product->price}}</span>
                             <div class="flex items-center space-x-[.6rem]">
-                                <button>
+                                <button class="subtbtn" onclick="handleDecrement('{{$product->price}}')">
                                     <svg class="h-3 2xs:h-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: rgb(242, 140, 40);">
                                         <path fill="currentColor" d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path>
                                     </svg>
                                 </button>
-                                <span>Qty: </span>
-                                <button>
+                                <p>Qty :  <span id="quantity_count">2</span></p>
+                                <button class="addbtn" onclick="handleIncrement('{{$product->price}}')">
                                     <svg class="h-3 2xs:h-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="color: rgb(242, 140, 40); margin-left: 10px;"><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg>
                                 </button>
                             </div>
@@ -42,33 +42,65 @@
                                     <h1>size</h1>
                                     <h1>item weight</h1>
                                     <h1>number of pieces</h1>
-                                    <h1>warrenty description</h1>
+                                    <h1>warranty description</h1>
                                 </div>
                                 <div class="space-y-[.2rem] text-end capitalize text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                                    <h1>Alumnium</h1>
-                                    <h1>black</h1>
-                                    <h1>no brand</h1>
-                                    <h1>sm</h1>
-                                    <h1>1kg</h1>
+                                    <h1>{{$product->material}}</h1>
+                                    <h1>{{$product->color}}</h1>
+                                    <h1>{{$product->brand}}</h1>
+                                    <h1>{{$product->size}}</h1>
+                                    <h1>{{$product->weight}} kg</h1>
                                     <h1>1</h1>
-                                    <h1>no warrenty</h1>
+                                    <h1>{{$product->warranty}} year</h1>
                                 </div>
                             </div>
                             <div class="w-full flex flex-col max-3xs:space-y-[.3rem] 3xs:flex-row justify-between gap-[.2rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                                <a href="#" class="px-[1rem] xs:px-[1.5rem] sm:px-[2.5rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Buy now</a>
-                                    <form action="{{route('product.cart','id->1')}}" method="post">
-                                        @csrf
-                                        <input type="text" class="hidden" name="name" value="">
-                                        <input type="number" class="hidden" name="price" value="">
-                                        <input type="text" class="hidden" name="restaurant_email" value="">
-                                        <input type="number" class="hidden" name="quantity" value="1">
-                                        <input type="text" class="hidden" name="image" value="">
-                                        <input type="text" class="hidden" name="restaurant_email" value="">
-                                        
-                                        <button type="submit" value="submit" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">
-                                            <span class="">Add to cart</span>
+                                <form action="https://uat.esewa.com.np/epay/main" method="POST">
+                                    <input type="hidden" name="submit-quantity" id="submit-quantity">
+                                    @php
+                                        $quantity = 1;
+                                        $subtotal=$quantity*$product->price;
+                                        $shipping = 30;
+                                        $taxrate = 0.02;
+                                        $taxamount = $taxrate * $subtotal;
+                                        $total = $taxamount+$shipping+$subtotal;
+                                    @endphp
+                                    <input value="{{$total}}" name="tAmt" type="hidden">
+                                    <input value="{{$subtotal}}" name="amt" type="hidden">
+                                    <input value="{{$taxamount}}" name="txAmt" type="hidden">
+                                    <input value="0" name="psc" type="hidden">
+                                    <input value="{{$shipping}}" name="pdc" type="hidden">
+                                    <input value="EPAYTEST" name="scd" type="hidden">
+                                    <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+                                    <input value="{{ route('esewa.success') }}" type="hidden" name="su">
+                                    <input value="{{ route('esewa.failure') }}" type="hidden" name="fu">
+                                    <button type="submit" class="px-[1rem] xs:px-[1.5rem] sm:px-[2.5rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Buy now</button>
+                                </form>
+                                <div id="cartDismiss">
+                                    @if($cart)
+                                        <button data-product-id="{{$product->id}}" class="removeCart capitalize px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">
+                                            <span>remove</span>
                                         </button>
-                                    </form>
+                                    @else
+                                        <form id="addToCart">
+                                            @csrf
+                                            <input type="hidden" value="{{$product->id}}" id="productId">
+                                            <input type="text" class="hidden" name="name" value="{{$product->product_name}}">
+                                            <input type="hidden" name="price" value="{{$product->price}}">
+                                            @auth
+                                                <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
+                                                <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
+                                            @endauth
+                                            <input type="hidden" value="1" name="quantity" id="quantity">
+                                            <input type="hidden" name="image" value="{{$product->images}}">
+                                            <input type="hidden" name="merchant_email" value="{{$product->merchant_email}}">
+                                            
+                                            <button type="submit" value="submit" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">
+                                                <span class="">Add to cart</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                                 <!-- <a href="#" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Add to cart</a> -->
                             </div>
                         </div>
@@ -106,7 +138,7 @@
                     <div class="space-y-[1.1rem]">
                         <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Shop details</h1>
                         <div class="flex items-center capitalize">
-                            <h1 class="font-semibold">abc shop</h1>
+                            <h1 class="font-semibold">{{$product->shop_name}}</h1>
                             <div class="flex ml-auto items-center">
                                 <svg class="h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -119,21 +151,56 @@
                                 <span>Chat</span>
                             </div>
                         </div>
-                        <div class="flex items-start capitalize">
-                            <div class="h-full">
-                                <svg class="h-4 mr-2 mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                    <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
-                                </svg>
+                        @if($product->shop_address)
+                            <div class="flex items-start capitalize">
+                                <div class="h-full">
+                                    <svg class="h-4 mr-2 mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                        <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
+                                    </svg>
+                                </div>
+                                <h1 class="break mr-[3rem] font-semibold">{{$product->shop_address}}</h1>
                             </div>
-                            <h1 class="break mr-[3rem] font-semibold">koteshwor, kathmandu fnksdf dfadfad dfa </h1>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="bg-white  p-[.8rem] 2xs:p-[2rem] space-y-[.3rem]">
                 <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000] text-[.65rem] 2xs:text-[.9rem] xs:[1.1rem] sm::text-[1.2rem]">Product description</h1>
-                <p class="text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">Discover the Ultima Boom 161 EQ Wireless Earbuds, a fusion of style and technology. With a sleek matte finish and dual-tone design, these Bluetooth V5.3 earbuds offer a range of up to 10 meters. Enjoy a gaming advantage with 60ms Low Latency and choose from three EQ modes for a personalized audio experience. The IPX4 Sweat Resistance ensures durability during workouts. With a total playtime of 42 hours, ASAP Charge technology, and touch controls, these earbuds are a perfect daily companion. Available in Deep Black or Mystic White, backed by a 6-month warranty and 15-day replacement guarantee. Elevate your audio with Ultima Boom 161 EQ.</p>
+                <p class="text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
+                    @if($product->description)
+                        {{$product->description}}
+                    @else
+                        No description found
+                    @endif
+                </p>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    const quantityCount = document.getElementById("quantity_count");
+    const productQuantity = document.getElementById("quantity")
+    const productPrice = document.getElementById('price');
+    var count = 1;
+    quantityCount.innerHTML = count;
+    const handleIncrement = (price) => {
+        if(count<=9){
+            count++;
+            quantityCount.innerHTML = count;
+            productQuantity.value = count;
+            productPrice.innerHTML = 'Rs. ' + count*price;
+        }
+        else{
+            count = 10;
+        }
+    };
+    const handleDecrement = (price) => {
+        if(count>=2){
+            count--;
+            quantityCount.innerHTML = count;
+            productQuantity.value = count;
+            productPrice.innerHTML = 'Rs. ' + count*price;
+        }
+    };
+</script>

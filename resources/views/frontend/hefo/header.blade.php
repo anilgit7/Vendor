@@ -9,7 +9,8 @@
                 </div>
                 <div class="flex sm:grid grid-cols-12 lg:grid-cols-12 xl:grid-cols-9 gap-[1rem] items-center">
                     <a href="{{ route('home') }}" class="h-[2rem] xs:h-[2.8rem] w-[5rem] xs:w-[7.5rem] col-span-3 md:col-span-3 lg:col-span-2">
-                        <img src="{{asset('images/frontend/logo.png')}}" alt="" class="h-full w-full">
+                        <!-- <img src="{{asset('images/frontend/logo.png')}}" alt="" class="h-full w-full"> -->
+                        <h1 class="font-bold text-[1.8rem] drop-shadow-[0px_0px_.5px_#000000] shadow-[0px_0px_5px_1px_#f28c28] px-0.5">D-Mart</h1>
                     </a>
                     <div class="hidden sm:block sm:relative col-span-7 md:col-span-5 lg:col-span-7 xl:col-span-5">
                         <form>
