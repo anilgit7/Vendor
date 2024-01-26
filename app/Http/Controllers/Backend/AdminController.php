@@ -132,15 +132,23 @@ class AdminController extends Controller
         else{
             $category->category_name = $request->edit_category_name;
             $category_image = $category->image;
-            $image_path = 'images/backend/category/'.$category_image;
-            if (File::exists($image_path)){
-                File::delete($image_path);
+            if($request->edit_category_image){
+                $image_path = 'images/backend/category/'.$category_image;
+                if (File::exists($image_path)){
+                    File::delete($image_path);
+                }
+                $image = $request->edit_category_image;
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $request->edit_category_image->move('images/backend/category',$imagename);
+                $category->image = $imagename;
             }
-            $image = $request->edit_category_image;
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->edit_category_image->move('images/backend/category',$imagename);
-            $category->image = $imagename;
             $category->update();
+
+            $products = Product::where('category', $previousName)->get()->all();
+            foreach($products as $product){
+                $product->category = $request->edit_category_name;
+                $product->update();
+            }
             return response()->json(['message' => 'Category updated successfully']);
         }
     }

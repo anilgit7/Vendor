@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,26 +12,33 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function list_product(){
-        return view('frontend.product');
+    public function list_product($category){
+        $categories = Category::get()->all();
+        $productlists = Product::where('category', $category)->get()->all();
+        $category_name = $category;
+        return view('frontend.product',compact('categories', 'productlists','category_name'));
     }
 
-    public function product_detail(){
-        return view('frontend.product');
+    public function product_detail($id){
+        $product = Product::find($id);
+        $user_email = Auth::user()->email;
+        $cart = Cart::where('item_name',$product->product_name)->where('user_email',$user_email)->where('merchant_email',$product->merchant_email)->exists();
+        return view('frontend.product',compact('product','cart'));
     }
 
 
 
     public function cart(Request $request, $id){
         $lists = Product::find($id);
-        $restaurant_email = $lists->restaurant_email;
+        $merchant_email = $lists->merchant_email;
         $category = $lists->category;
         $addCarts = Cart::get()->all();
         if(Cart::exists()){
             $name = $request->name;
             $user_email = Auth::user()->email;
-            if(Cart::where('item_name', $name)->where('user_email', $user_email)->where('restaurant_email', $restaurant_email)->exists()){
+            if(Cart::where('item_name', $name)->where('user_email', $user_email)->where('merchant_email', $merchant_email)->exists()){
                 return redirect()->back();
+                // return response()->json(['message' => 'Successfully added to cart']);
             }
             else{
                 $carts = new Cart;
@@ -38,9 +46,9 @@ class ProductController extends Controller
                 $carts->item_image = $request->image;
                 $carts->price = $request->price;
                 $carts->quantity = $request->quantity;
-                $carts->restaurant_email = $request->restaurant_email;
-                $carts->user_email = Auth::user()->email;
-                $carts->user_phone = Auth::user()->user_phone;
+                $carts->merchant_email = $request->merchant_email;
+                $carts->user_email = $request->user_email;
+                $carts->user_phone = $request->user_phone;
                 $carts->save();
                 return redirect()->back();
             }
@@ -52,7 +60,7 @@ class ProductController extends Controller
             $carts->item_image = $request->image;
             $carts->price = $request->price;
             $carts->quantity = $request->quantity;
-            $carts->restaurant_email = $request->restaurant_email;
+            $carts->merchant_email = $request->merchant_email;
             $carts->user_email = $request->user_email;
             $carts->user_phone = $request->user_phone;
             $carts->save();
@@ -61,10 +69,18 @@ class ProductController extends Controller
         
     }
 
+    public function ajax_product_cart_delete($id){
+        $product = product::find($id);
+        $user_email = Auth::user()->email;
+        $cart = Cart::where('item_name', $product->product_name)->where('merchant_email', $product->merchant_email)->where('user_email',$user_email);
+        $cart->delete();
+        return response()->json('Removed successfully');
+    } 
+
     public function cartlist(){
         $user_email = Auth::user()->email;
         $carts = Cart::where('user_email', $user_email)->get()->all();
-        return view('frontend.products', compact('carts'));
+        return view('frontend.product', compact('carts'));
     }
 
     public function cartlist_delete($id)
@@ -74,9 +90,9 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function cartlist_delete_name($name)
+    public function cartlist_delete_name($id)
     {
-        $cart = Cart::where('item_name',$name);
+        $cart = Cart::where('item_name',$id);
         $cart->delete();
         return redirect()->back();
     }
@@ -108,7 +124,7 @@ class ProductController extends Controller
         foreach($carts as $cart){
             if($orders){
                 foreach($orders as $order){
-                    $orderlists = Order::where('item_name', $cart->item_name)->where('restaurant_email', $cart->restaurant_email)->where('user_email', $cart->user_email)->get()->all();
+                    $orderlists = Order::where('item_name', $cart->item_name)->where('merchant_email', $cart->merchant_email)->where('user_email', $cart->user_email)->get()->all();
                     if($orderlists){
                         foreach($orderlists as $orderlist){
                             $orderlist->quantity = $cart->quantity;
@@ -122,7 +138,7 @@ class ProductController extends Controller
                         $order->item_image = $cart->item_image;
                         $order->price = $cart->price;
                         $order->quantity = $cart->quantity;
-                        $order->restaurant_email = $cart->restaurant_email;
+                        $order->merchant_email = $cart->merchant_email;
                         $order->user_email = $cart->user_email;
                         $order->user_phone = $cart->user_phone;
                         $order->delivery_status = 'accepted';
@@ -136,7 +152,7 @@ class ProductController extends Controller
                 $order->item_image = $cart->item_image;
                 $order->price = $cart->price;
                 $order->quantity = $cart->quantity;
-                $order->restaurant_email = $cart->restaurant_email;
+                $order->merchant_email = $cart->merchant_email;
                 $order->user_email = $cart->user_email;
                 $order->user_phone = $cart->user_phone;
                 $order->delivery_status = 'accepted';
@@ -149,6 +165,5 @@ class ProductController extends Controller
             $cart->delete();
         }
         return redirect()->back();
-
     }
 }

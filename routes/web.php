@@ -32,10 +32,10 @@ route::get('/logout',[HomeController::class,'logout'])->name('logout');
 /********************************** Customer Route ****************************************/
 route::group(['middleware' => 'customer'], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
-    route::get('/product-list',[ProductController::class, 'list_product'])->name('product.list');
+    route::get('/product-list/{category}',[ProductController::class, 'list_product'])->name('product.list');
     route::group(['prefix' => 'product'], function () {
         route::get('/list',[ProductController::class, 'list_product'])->name('products.list');
-        route::get('/details',[ProductController::class, 'product_detail'])->name('product.detail');
+        route::get('/details/{id}',[ProductController::class, 'product_detail'])->name('product.detail');
         route::group(['middleware' => 'auth'], function(){
             route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
             route::get('/checkout/success',[EsewaController::class, 'success'])->name('esewa.success');
@@ -45,6 +45,7 @@ route::group(['middleware' => 'customer'], function(){
         });
     });
     route::group(['middleware' => 'auth'], function(){
+        route::get('/cart/delete/{id}',[ProductController::class,'ajax_product_cart_delete'])->name('product.cart.delete');
         route::get('/cartlist', [ProductController::class, 'cartlist'])->name('product.cartlist');
         route::get('/cartlist/delete/all', [ProductController::class, 'cartlist_delete_all'])->name('product.cartlist.remove.all');
         route::get('/cartlist/delete/{id}', [ProductController::class, 'cartlist_delete'])->name('product.carlist.delete');
