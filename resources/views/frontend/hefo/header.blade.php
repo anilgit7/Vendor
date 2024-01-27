@@ -13,14 +13,17 @@
                         <h1 class="font-bold text-[1.8rem] drop-shadow-[0px_0px_.5px_#000000] shadow-[0px_0px_5px_1px_#f28c28] px-0.5">D-Mart</h1>
                     </a>
                     <div class="hidden sm:block sm:relative col-span-7 md:col-span-5 lg:col-span-7 xl:col-span-5">
-                        <form>
-                            <input type="text" name="searchbar" placeholder="Search in D-mart" class="w-full rounded-[8rem] mt-1 text-[.9rem] border border-gray-400 text-gray-900 focus:ring-primary-600 focus:border-primary-600">
+                        <form action="{{ route('result.page') }}" method="get">
+                            @csrf
+                            <input type="text" name="search" placeholder="Search in D-mart" class="searchForm w-full rounded-[8rem] mt-1 text-[.9rem] border border-gray-400 text-gray-900 focus:ring-primary-600 focus:border-primary-600" onfocus="this.value=''">
                             <button type="submit" class="absolute top-3.5 right-3">
                                 <svg class="h-5 w-5 text-[#444444]" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="currentColor" d="M12.14 4.18a5.504 5.504 0 0 1 .72 6.89c.12.1.22.21.36.31c.2.16.47.36.81.59c.34.24.56.39.66.47c.42.31.73.57.94.78c.32.32.6.65.84 1c.25.35.44.69.59 1.04c.14.35.21.68.18 1c-.02.32-.14.59-.36.81s-.49.34-.81.36c-.31.02-.65-.04-.99-.19c-.35-.14-.7-.34-1.04-.59c-.35-.24-.68-.52-1-.84c-.21-.21-.47-.52-.77-.93c-.1-.13-.25-.35-.47-.66c-.22-.32-.4-.57-.56-.78c-.16-.2-.29-.35-.44-.5a5.503 5.503 0 0 1-6.44-.98c-2.14-2.15-2.14-5.64 0-7.78a5.498 5.498 0 0 1 7.78 0m-1.41 6.36a3.513 3.513 0 0 0 0-4.95a3.495 3.495 0 0 0-4.95 0a3.495 3.495 0 0 0 0 4.95a3.495 3.495 0 0 0 4.95 0"/>
                                 </svg>
                             </button>
                         </form>
+                        <div class="search-list hidden sm:block absolute w-full rounded-[.8rem] flex flex-col z-[10000] py-1 space-y-[.2rem]">
+                        </div>
                     </div>
                     <div class="col-span-2 md:col-span-4 lg:col-span-3 xl:col-span-2 ml-auto">
                         <div class="flex space-x-[1rem] md:space-x-[2rem] items-center">
@@ -81,14 +84,17 @@
                 </div>
             </div>
             <div class="block sm:hidden relative" id="show-content">
-                <form>
-                    <input type="text" name="searchbar" placeholder="Search in D-mart" class="w-full rounded-[8rem] text-[.8rem] xs:text-[.9rem] max-2xs:p-[.3rem] border border-gray-400 text-gray-900 focus:ring-primary-600 focus:border-primary-600">
+                <form action="{{ route('result.page') }}" method="post">
+                    @csrf
+                    <input type="text" name="search" placeholder="Search in D-mart" class="searchForm w-full rounded-[8rem] text-[.8rem] xs:text-[.9rem] max-2xs:p-[.3rem] border border-gray-400 text-gray-900 focus:ring-primary-600 focus:border-primary-600">
                     <button type="submit" class="absolute max-2xs:top-2.5 2xs:top-2.5 right-3">
                         <svg class="max-2xs:h-4 2xs:h-5 max-2xs:w-4 2xs:w-5 text-[#444444]" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill="currentColor" d="M12.14 4.18a5.504 5.504 0 0 1 .72 6.89c.12.1.22.21.36.31c.2.16.47.36.81.59c.34.24.56.39.66.47c.42.31.73.57.94.78c.32.32.6.65.84 1c.25.35.44.69.59 1.04c.14.35.21.68.18 1c-.02.32-.14.59-.36.81s-.49.34-.81.36c-.31.02-.65-.04-.99-.19c-.35-.14-.7-.34-1.04-.59c-.35-.24-.68-.52-1-.84c-.21-.21-.47-.52-.77-.93c-.1-.13-.25-.35-.47-.66c-.22-.32-.4-.57-.56-.78c-.16-.2-.29-.35-.44-.5a5.503 5.503 0 0 1-6.44-.98c-2.14-2.15-2.14-5.64 0-7.78a5.498 5.498 0 0 1 7.78 0m-1.41 6.36a3.513 3.513 0 0 0 0-4.95a3.495 3.495 0 0 0-4.95 0a3.495 3.495 0 0 0 0 4.95a3.495 3.495 0 0 0 4.95 0"/>
                         </svg>
                     </button>
                 </form>
+                <div class="search-list sm:hidden absolute w-full rounded-[.8rem] flex flex-col z-[10000] py-1 space-y-[.2rem]">
+                </div>
             </div>
         </div>
     </div>

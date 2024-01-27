@@ -1,3 +1,4 @@
+@include('backend.ajax.search')
 @if(request()->segment(1)==="admin" && request()->segment(2)==="categories")
     @include('backend.ajax.category')
 @elseif (\Route::current()->getName() == 'admin.merchant.new')

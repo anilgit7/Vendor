@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\MerchantController;
 use App\Http\Controllers\Frontend\EsewaController;
+use App\Http\Controllers\Frontend\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,11 @@ route::get('/logout',[HomeController::class,'logout'])->name('logout');
 /********************************** Customer Route ****************************************/
 route::group(['middleware' => 'customer'], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
+    route::group(['prefix' => 'search'], function(){
+        route::get('/search', [SearchController::class, 'search'])->name('search');
+        route::get('/remove-search', [SearchController::class, 'remove_search'])->name('remove.search');
+        route::get('/result-page',[SearchController::class, 'result_page'])->name('result.page');
+    });
     route::get('/product-list/{category}',[ProductController::class, 'list_product'])->name('product.list');
     route::group(['prefix' => 'product'], function () {
         route::get('/list',[ProductController::class, 'list_product'])->name('products.list');
