@@ -21,8 +21,13 @@ class ProductController extends Controller
 
     public function product_detail($id){
         $product = Product::find($id);
-        $user_email = Auth::user()->email;
-        $cart = Cart::where('item_name',$product->product_name)->where('user_email',$user_email)->where('merchant_email',$product->merchant_email)->exists();
+        if(Auth::user()){
+            $user_email = Auth::user()->email;
+            $cart = Cart::where('item_name',$product->product_name)->where('user_email',$user_email)->where('merchant_email',$product->merchant_email)->exists();
+        }
+        else{
+            $cart = '';
+        }
         return view('frontend.product',compact('product','cart'));
     }
 
