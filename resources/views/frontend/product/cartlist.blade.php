@@ -96,7 +96,7 @@
                                 <a href="{{ route('product.order') }}" class="text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cash on delivery</a>
                             </div>
                             <p class="text-center text-[#4b5563]">or</p>
-                            <a href="{{ url()->previous() }}" class="text-[#F28C28] hover:text-[#c2660c] max-2xs:text-[.8rem] max-xs:text-[.85rem] xs:text-[.9rem] font-medium text-center w-full">Continue Order</a>
+                            <a href="{{ route('home') }}" class="text-[#F28C28] hover:text-[#c2660c] max-2xs:text-[.8rem] max-xs:text-[.85rem] xs:text-[.9rem] font-medium text-center w-full">Continue Order</a>
                         </div>
                     </div>
                 </div>

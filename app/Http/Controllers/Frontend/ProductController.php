@@ -74,6 +74,47 @@ class ProductController extends Controller
         
     }
 
+    public function buy_now(Request $request, $id){
+        $lists = Product::find($id);
+        $merchant_email = $lists->merchant_email;
+        $category = $lists->category;
+        $addCarts = Cart::get()->all();
+        if(Cart::exists()){
+            $name = $request->name;
+            $user_email = Auth::user()->email;
+            if(Cart::where('item_name', $name)->where('user_email', $user_email)->where('merchant_email', $merchant_email)->exists()){
+                return redirect()->route('product.cartlist');
+                // return response()->json(['message' => 'Successfully added to cart']);
+            }
+            else{
+                $carts = new Cart;
+                $carts->item_name = $request->name;
+                $carts->item_image = $request->image;
+                $carts->price = $request->price;
+                $carts->quantity = $request->quantity;
+                $carts->merchant_email = $request->merchant_email;
+                $carts->user_email = $request->user_email;
+                $carts->user_phone = $request->user_phone;
+                $carts->save();
+                return redirect()->route('product.cartlist');
+            }
+        }
+        else{
+
+            $carts = new Cart;
+            $carts->item_name = $request->name;
+            $carts->item_image = $request->image;
+            $carts->price = $request->price;
+            $carts->quantity = $request->quantity;
+            $carts->merchant_email = $request->merchant_email;
+            $carts->user_email = $request->user_email;
+            $carts->user_phone = $request->user_phone;
+            $carts->save();
+            return redirect()->route('product.cartlist');
+        }
+        
+    }
+
     public function ajax_product_cart_delete($id){
         $product = product::find($id);
         $user_email = Auth::user()->email;
