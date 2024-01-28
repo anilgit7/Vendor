@@ -111,15 +111,16 @@
                     <div class="space-y-[1.1rem]">
                         <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Delivery</h1>
                         <div class="flex items-start capitalize">
-                            <div class="h-full">
+                            <button class="h-full relative" id="map-shower" onclick="mapFunction()">
                                 <svg class="h-4 mr-2 mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                     <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
                                 </svg>
-                            </div>
+                            </button>
                             <h1 class="break mr-[3rem] font-semibold">koteshwor, kathmandu fnksdf dfadfad dfa </h1>
                             <div class="ml-auto">
                                 <span>Change</span>
                             </div>
+                            
                         </div>
                         <div class="flex items-center capitalize">
                             <h1 class="font-semibold">delivery cost</h1>
@@ -177,7 +178,7 @@
         </div>
     </div>
 </div>
-
+@include('frontend.product.map')
 <script>
     const quantityCount = document.getElementById("quantity_count");
     const productQuantity = document.getElementById("quantity")
@@ -203,4 +204,17 @@
             productPrice.innerHTML = 'Rs. ' + count*price;
         }
     };
+</script>
+
+<script>
+    var mapShower = document.getElementById('map-shower');
+    var mapViwer = document.getElementById('map-viwer');
+
+    function mapFunction(){
+        mapViwer.classList.remove("hidden");
+    }
+
+    function mapClose(){
+        mapViwer.classList.add('hidden');
+    }
 </script>
