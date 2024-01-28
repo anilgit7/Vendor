@@ -27,7 +27,7 @@ use App\Http\Controllers\Frontend\SearchController;
 route::get('/userchecking',[HomeController::class,'userfront']);
 route::get('/merchant-register', function(){
     return view('auth.merchant_register');
-})->name('merchant.register');
+})->name('merchant.register')->middleware('logout');
 route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 /********************************** Customer Route ****************************************/
@@ -44,6 +44,7 @@ route::group(['middleware' => 'customer'], function(){
         route::get('/details/{id}',[ProductController::class, 'product_detail'])->name('product.detail');
         route::group(['middleware' => 'auth'], function(){
             route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
+            route::post('/list/buy/{id}/cart',[ProductController::class, 'buy_now'])->name('buy.now');
             route::get('/checkout/success',[EsewaController::class, 'success'])->name('esewa.success');
             route::get('/checkout/failure',[EsewaController::class, 'failure'])->name('esewa.failure');
             route::get('/payment/response',[EsewaController::class, 'response'])->name('payment.response');

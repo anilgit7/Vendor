@@ -55,25 +55,18 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col max-3xs:space-y-[.3rem] 3xs:flex-row justify-between gap-[.2rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                                <form action="https://uat.esewa.com.np/epay/main" method="POST">
-                                    <input type="hidden" name="submit-quantity" id="submit-quantity">
-                                    @php
-                                        $quantity = 1;
-                                        $subtotal=$quantity*$product->price;
-                                        $shipping = 30;
-                                        $taxrate = 0.02;
-                                        $taxamount = $taxrate * $subtotal;
-                                        $total = $taxamount+$shipping+$subtotal;
-                                    @endphp
-                                    <input value="{{$total}}" name="tAmt" type="hidden">
-                                    <input value="{{$subtotal}}" name="amt" type="hidden">
-                                    <input value="{{$taxamount}}" name="txAmt" type="hidden">
-                                    <input value="0" name="psc" type="hidden">
-                                    <input value="{{$shipping}}" name="pdc" type="hidden">
-                                    <input value="EPAYTEST" name="scd" type="hidden">
-                                    <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-                                    <input value="{{ route('esewa.success') }}" type="hidden" name="su">
-                                    <input value="{{ route('esewa.failure') }}" type="hidden" name="fu">
+                                <form action="{{ route('buy.now',$product->id) }}" method="post">
+                                    @csrf
+                                    <input type="text" class="hidden" name="name" value="{{$product->product_name}}">
+                                    <input type="hidden" name="price" value="{{$product->price}}">
+                                    @auth
+                                        <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
+                                        <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
+                                    @endauth
+                                    <input type="hidden" value="1" name="quantity" id="quantity">
+                                    <input type="hidden" name="image" value="{{$product->images}}">
+                                    <input type="hidden" name="merchant_email" value="{{$product->merchant_email}}">
+                                    
                                     <button type="submit" class="px-[1rem] xs:px-[1.5rem] sm:px-[2.5rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Buy now</button>
                                 </form>
                                 <div id="cartDismiss">
