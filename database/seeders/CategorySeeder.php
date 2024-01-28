@@ -15,20 +15,36 @@ class CategorySeeder extends Seeder
     {
         $category = [
             [
-                'category_name' => 'Clothes',
-                'image' => 'category-1.png',
+                'category_name' => 'Beauty',
+                'image' => 'beautyCategory.png',
+            ],
+            [
+                'category_name' => 'Electronic',
+                'image' => 'electronicCategory.png',
+            ],
+            [
+                'category_name' => 'Fashion',
+                'image' => 'FashionCategory.png',
+            ],
+            [
+                'category_name' => 'Grocery',
+                'image' => 'groceryCategory.png',
+            ],
+            [
+                'category_name' => 'Home',
+                'image' => 'homeCategory.png',
+            ],
+            [
+                'category_name' => 'Sports And Out Door',
+                'image' => 'SportsAndOutDoor.png',
             ],
             [
                 'category_name' => 'Stationary',
-                'image' => 'category-2.png',
+                'image' => 'StationaryCategory.png',
             ],
             [
-                'category_name' => 'Daily Use',
-                'image' => 'category-3.png',
-            ],
-            [
-                'category_name' => 'Vegetables',
-                'image' => 'category-4.png',
+                'category_name' => 'Toy And Game',
+                'image' => 'toyAndGameCategory.png',
             ],
         ];
 
