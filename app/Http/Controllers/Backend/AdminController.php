@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -11,21 +12,25 @@ use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
+    private $adminRepository;
+    public function __construct(AdminRepositoryInterface $adminRepository){
+        $this->adminRepository = $adminRepository;
+    }
     public function index(){
         $title = 'dashboard';
         return view('backend.admin', compact('title'));
     }
     public function list_merchant(){
-        $title = 'Unverified Merchant';
-        $users = User::where('user_type', '1')->where('status', 'unverified')->get();
+        $title = 'New Merchant List';
+        $users = $this->adminRepository->new_merchant();
         return view('backend.admin', compact('title','users'));
     }
     public function new_list(){
-        $users = User::where('user_type', '1')->where('status', 'unverified')->get();
+        $users = $this->adminRepository->new_merchant();
         return response()->json(['users' => $users]);
     }
     public function new_merchant_delete($id){
-        $new_merchant = User::find($id);
+        $new_merchant = $this->adminRepository->find_account($id);
         if($new_merchant){
             $new_merchant_name =ucfirst($new_merchant->name);
             $new_merchant->delete();
@@ -39,7 +44,7 @@ class AdminController extends Controller
         }
     }
     public function status_update(Request $request, $id){
-        $merchant = User::find($id);
+        $merchant = $this->adminRepository->find_account($id);
         if($merchant){
             $merchant_name =ucfirst($merchant->name);
             $merchant->status = $request->status;
@@ -55,26 +60,59 @@ class AdminController extends Controller
     }
     public function verify_merchant(){
         $title = 'Verified Merchant';
-        return view('backend.admin', compact('title'));
+        $users = $this->adminRepository->verified_merchant();
+        return view('backend.admin', compact('title','users'));
+    }
+    public function verified_list(){
+        $users = $this->adminRepository->verified_merchant();
+        return response()->json(['users' => $users]);
+    }
+    public function verified_merchant_delete($id){
+        $new_merchant = $this->adminRepository->find_account($id);
+        if($new_merchant){
+            $new_merchant_name =ucfirst($new_merchant->name);
+            $new_merchant->delete();
+            return response()->json(['message' => 'Merchant '.$new_merchant_name.' deleted successfully']);
+        }
+        else{
+            return response()->json([
+                'status' => '404',
+                'error' => 'Merchant not found',
+            ]);
+        }
     }
     public function list_customer(){
         $title = 'customer';
-        return view('backend.admin', compact('title'));
+        $users = $this->adminRepository->customer_list();
+        return view('backend.admin', compact('title','users'));
+    }
+    public function delete_customer($id){
+        $users = $this->adminRepository->find_account($id);
+        $customer = ucfirst($users->name);
+        if(!$users){
+            return response()->json([
+                'status' => '400',
+                'error' => $customer.' account not found',
+            ]);
+        }else{
+            $users->delete();
+            return response()->json(['message'=>$customer.' account deleted successfully']);
+        }
     }
     public function category(){
-        $categories = Category::get()->all();
+        $categories = $this->adminRepository->get_category();
         $title = 'category';
         return view('backend.admin', compact('categories', 'title'));
     }
     public function add_category(Request $request){
-        if(Category::where('category_name', $request->category_name)->exists()){
+        if($this->adminRepository->category_exist($request->category_name)){
             return response()->json([
                 'status' => '400',
                 'error' => 'Category '.$request->category_name.' already exists',
             ]);
         }
         else{
-            $category = new Category;
+            $category = $this->adminRepository->create_category();
             $category_name = $category->category_name = ucfirst($request->category_name);
             $image = $request->category_image;
             $imagename = time().'.'.$image->getClientOriginalExtension();
@@ -85,11 +123,11 @@ class AdminController extends Controller
         }
     }
     public function view_category(){
-        $categories = Category::get()->all();
+        $categories = $this->adminRepository->get_category();
         return response()->json(['categories'=>$categories]);
     }
     public function edit_category($id){
-        $category = Category::find($id);
+        $category = $this->adminRepository->find_category($id);
         if($category){
             return response()->json([
                 'category' => $category
@@ -103,7 +141,7 @@ class AdminController extends Controller
         }
     }
     public function update_category(Request $request, $id){
-        $category= Category::find($id);
+        $category= $this->adminRepository->find_category($id);
         $previousName = $category->category_name;
         if($previousName == $request->edit_category_name){
             if($request->edit_category_image){
@@ -123,7 +161,7 @@ class AdminController extends Controller
                 return response()->json(['message' => 'No changes made']);
             }
         }
-        elseif(Category::where('category_name', $request->edit_category_name)->exists()){
+        elseif($this->adminRepository->category_exist($request->edit_category_name)){
             return response()->json([
                 'status' => '400',
                 'message' => 'Category '.$request->edit_category_name.' already exists',
@@ -144,7 +182,7 @@ class AdminController extends Controller
             }
             $category->update();
 
-            $products = Product::where('category', $previousName)->get()->all();
+            $products = $this->adminRepository->get_category_product($previousName);
             foreach($products as $product){
                 $product->category = $request->edit_category_name;
                 $product->update();
@@ -153,7 +191,7 @@ class AdminController extends Controller
         }
     }
     public function delete_category($id){
-        $category = Category::find($id);
+        $category = $this->adminRepository->find_category($id);
         if($category){
             $category_image = $category->image;
             $category_name =$category->category_name;
@@ -162,8 +200,8 @@ class AdminController extends Controller
             if (File::exists($image_path)){
                 File::delete($image_path);
             }
-            if(Product::where('category', $category_name)->exists()){
-                $products = Product::where('category', $category_name)->get()->all();
+            if($this->adminRepository->category_product_exist($category_name)){
+                $products =$this->adminRepository->get_category_product($category_name);
                 foreach($products as $product){
                     $list_image = $product->image;
                     $product->delete();

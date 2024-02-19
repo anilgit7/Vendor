@@ -111,7 +111,7 @@
             @elseif (\Route::current()->getName() == 'admin.merchant.verify') 
                 @include('backend.admin.merchant.verified')
             @elseif (\Route::current()->getName() == 'admin.customer.list') 
-                @include('backend.admin.list_customer')
+                @include('backend.admin.customer')
             @elseif(\Route::current()->getName() == 'admin.category')
                 @include('backend.admin.category.view')
             @endif
