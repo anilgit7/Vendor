@@ -1,1 +1,0 @@
-<h1>Customer in this page</h1>

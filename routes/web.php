@@ -72,9 +72,12 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
         route::post('/new-list/status-update/{id}',[AdminController::class, 'status_update'])->name('admin.merchant.new.update');
         route::get('/new_merchant/delete/{id}',[AdminController::class,'new_merchant_delete'])->name('admin.merchant.new.delete');
         route::get('/verified-merchant',[AdminController::class, 'verify_merchant'])->name('admin.merchant.verify');
+        route::get('/verified-list',[AdminController::class,'verified_list'])->name('admin.merchant.verified.list');
+        route::get('/verified_merchant/delete/{id}',[AdminController::class,'verified_merchant_delete'])->name('admin.merchant.verified.delete');
     });
     route::group(['prefix'=> 'customer'],function(){
         route::get('/list_user',[AdminController::class,'list_customer'])->name('admin.customer.list');
+        route::get('/delete/user/{id}',[AdminController::class,'delete_customer'])->name('admin.customer.delete');
     });
     route::get('/categories',[AdminController::class, 'category'])->name('admin.category');
     route::get('/view-categories',[AdminController::class, 'view_category'])->name('admin.category.view');
