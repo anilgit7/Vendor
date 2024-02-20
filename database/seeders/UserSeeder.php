@@ -33,6 +33,22 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make('admin'),
             ],
             [
+                'name'=>'merchant2',
+                'email'=>'merchant2@gmail.com',
+                'user_type'=>'1',
+                'status' => 'verified',
+                'phone_number'=>'',
+                'password'=>Hash::make('admin'),
+            ],
+            [
+                'name'=>'merchant3',
+                'email'=>'merchant3@gmail.com',
+                'user_type'=>'1',
+                'status' => 'verified',
+                'phone_number'=>'',
+                'password'=>Hash::make('admin'),
+            ],
+            [
                 'name'=>'customer',
                 'email'=>'customer@gmail.com',
                 'user_type'=>'2',

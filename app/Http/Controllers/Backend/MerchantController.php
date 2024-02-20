@@ -8,26 +8,31 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Repositories\Interfaces\MerchantRepositoryInterface;
 
 class MerchantController extends Controller
 {
+    private $merchantRepository;
+    public function __construct(MerchantRepositoryInterface $merchantRepository){
+        $this->merchantRepository = $merchantRepository;
+    }
     public function index(){
         $title="merchant";
         return view('backend.merchant',compact('title'));
     }
     public function view_product(){
         $title="Product";
-        $categories=Category::get()->all();
-        $products=Product::get()->all();
+        $categories= $this->merchantRepository->get_category();
+        $products= $this->merchantRepository->get_product();
         return view('backend.merchant',compact('title','categories','products'));
     }
     public function list_product(){
-        $products = Product::where('shop_name', Auth::user()->name)->get()->all();
+        $products = $this->merchantRepository->product_list();
         return response()->json(['products'=>$products]);
     }
     public function add_product(Request $request)
     {
-        $product = new Product;
+        $product = $this->merchantRepository->create_product();
         $product->product_name = $request->product_name;
         $product->price = $request->product_price;
         $product->color = $request->product_color;
@@ -49,7 +54,7 @@ class MerchantController extends Controller
         return response()->json(['message'=>'Product added successfully']);
     }
     public function delete_product($id){
-        $product = Product::find($id);
+        $product = $this->merchantRepository->find_product($id);
         if($product){
             $product_image = $product->images;
             $product_name =$product->product_name;
@@ -68,7 +73,7 @@ class MerchantController extends Controller
         }
     }
     public function edit_product($id){
-        $product = Product::find($id);
+        $product = $this->merchantRepository->find_product($id);
         if($product){
             return response()->json([
                 'product' => $product
@@ -82,7 +87,7 @@ class MerchantController extends Controller
         }
     }
     public function update_product(Request $request, $id){
-        $product= Product::find($id);
+        $product= $this->merchantRepository->find_product($id);
         $product->product_name = $request->edit_product_name;
         $product->price = $request->edit_product_price;
         $product->color = $request->edit_product_color;
