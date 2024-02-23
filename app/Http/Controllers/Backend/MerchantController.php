@@ -33,10 +33,11 @@ class MerchantController extends Controller
     public function add_product(Request $request)
     {
         $product = $this->merchantRepository->create_product();
+        $product->category_id = $request->product_category;
         $product->product_name = $request->product_name;
+        $product->slug = create_slug($request->product_name);
         $product->price = $request->product_price;
         $product->color = $request->product_color;
-        $product->category = $request->product_category;
         $product->size = $request->product_size;
         $product->material = $request->product_material;
         $product->brand = $request->product_brand;

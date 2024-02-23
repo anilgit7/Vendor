@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -104,7 +105,7 @@ class AdminController extends Controller
         $title = 'category';
         return view('backend.admin', compact('categories', 'title'));
     }
-    public function add_category(Request $request){
+    public function add_category(Request $request, ){
         if($this->adminRepository->category_exist($request->category_name)){
             return response()->json([
                 'status' => '400',
@@ -114,6 +115,7 @@ class AdminController extends Controller
         else{
             $category = $this->adminRepository->create_category();
             $category_name = $category->category_name = ucfirst($request->category_name);
+            $category->slug = create_slug($request->category_name);
             $image = $request->category_image;
             $imagename = time().'.'.$image->getClientOriginalExtension();
             $request->category_image->move('images/backend/category',$imagename);
@@ -169,6 +171,7 @@ class AdminController extends Controller
         }
         else{
             $category->category_name = $request->edit_category_name;
+            $category->slug = create_slug($request->edit_category_name);
             $category_image = $category->image;
             if($request->edit_category_image){
                 $image_path = 'images/backend/category/'.$category_image;

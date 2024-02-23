@@ -25,13 +25,13 @@ class HomeController extends Controller
             // $ut = User::findOrFail(Auth::user()->id);
             $ut=Auth::user()->user_type;
             if($ut==0){
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.dashboard')->with(['message'=>'Sucessfully logged in']);
             }
             if($ut==1){
-                return redirect()->route('merchant.dashboard');
+                return redirect()->route('merchant.dashboard')->with(['message'=>'Sucessfully logged in']);
             }
             if($ut==2){
-                return redirect()->route('home');
+                return redirect()->route('home')->with(['message'=>'Sucessfully logged in']);
             }
         }
         else{

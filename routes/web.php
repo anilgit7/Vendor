@@ -38,10 +38,11 @@ route::group(['middleware' => 'customer'], function(){
         route::get('/remove-search', [SearchController::class, 'remove_search'])->name('remove.search');
         route::get('/result-page',[SearchController::class, 'result_page'])->name('result.page');
     });
-    route::get('/product-list/{category}',[ProductController::class, 'list_product'])->name('product.list');
+    // route::get('/product-list/{category}',[ProductController::class, 'list_product'])->name('product.list');
+    route::get('/{category:slug}',[ProductController::class, 'list_product'])->name('product.list');
     route::group(['prefix' => 'product'], function () {
         route::get('/list',[ProductController::class, 'list_product'])->name('products.list');
-        route::get('/details/{id}',[ProductController::class, 'product_detail'])->name('product.detail');
+        route::get('/details/{product:slug}',[ProductController::class, 'product_detail'])->name('product.detail');
         route::group(['middleware' => 'auth'], function(){
             route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
             route::post('/list/buy/{id}/cart',[ProductController::class, 'buy_now'])->name('buy.now');

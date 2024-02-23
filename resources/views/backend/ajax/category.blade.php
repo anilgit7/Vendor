@@ -48,10 +48,10 @@ $(document).ready(function(){
                 $('#form_add_category').trigger('reset');
                 if(result.status == '400')
                 {
-                    $('#message h1').html(result.error).show(0).delay(2500).hide(0);
+                    $('#message h1').html(result.error).show(0).delay(2500).hide(500);
                 }
                 else{
-                    $('#message h1').html(result.message).show(0).delay(2500).hide(0);
+                    $('#message h1').html(result.message).show(0).delay(2500).hide(500);
                 }
             },
             contentType : false,

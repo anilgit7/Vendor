@@ -12,15 +12,50 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function list_product($category){
+    public function list_product(Request $request,Category $category){
         $categories = Category::get()->all();
-        $productlists = Product::where('category', $category)->get()->all();
-        $category_name = $category;
-        return view('frontend.product',compact('categories', 'productlists','category_name'));
+        // dd(Product::where('category_id',$category->id)->get());
+        // $productlists = Product::where('category_id',$category->id)->get()->orderBy('product_name','asc');
+        if(request()->query('sort') == 'a_to_z'){
+            $sorted= 'a_to_z';
+            $productlists = Product::where('category_id', $category->id)
+                        ->orderBy('product_name', 'asc')
+                        ->get();
+            $message = "Items sorted in ascending order";
+        }
+        elseif(request()->query('sort') == 'z_to_a'){
+            $sorted= 'z_to_a';
+            $productlists = Product::where('category_id', $category->id)
+                        ->orderBy('product_name', 'desc')
+                        ->get();
+            $message = "Items sorted in descending order";
+        }
+        elseif(request()->query('sort') == 'price_low_to_high'){
+            $sorted= 'price_low_to_high';
+            $productlists = Product::where('category_id', $category->id)
+                        ->orderBy('price', 'asc')
+                        ->get();
+            $message = "Sorted by price in ascending order";
+        }
+        elseif(request()->query('sort') == 'price_high_to_low'){
+            $sorted= 'price_high_to_low';
+            $productlists = Product::where('category_id', $category->id)
+                        ->orderBy('price', 'desc')
+                        ->get();
+            $message = "Sorted by price in descending order";
+        }
+        else{
+            $sorted = 'random';
+            $productlists = Product::where('category_id', $category->id)
+                            ->get();
+            $message = "Random items ordering";
+        }
+        $category_name = $category->category_name;
+        return view('frontend.product',compact('categories', 'productlists','category','sorted'))->with(['message'=>$message]);
     }
 
-    public function product_detail($id){
-        $product = Product::find($id);
+    public function product_detail(Product $product){
+        $product = Product::where('slug',$product->slug)->first();
         if(Auth::user()){
             $user_email = Auth::user()->email;
             $cart = Cart::where('item_name',$product->product_name)->where('user_email',$user_email)->where('merchant_email',$product->merchant_email)->exists();
