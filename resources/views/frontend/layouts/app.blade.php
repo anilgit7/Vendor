@@ -19,6 +19,7 @@
     </head>
     <body class="font-sans antialiased select-none">
         <x-banner />
+        @include('message')
         @include('frontend.hefo.header')
         <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->

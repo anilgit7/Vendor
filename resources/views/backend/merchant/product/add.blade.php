@@ -21,9 +21,13 @@
             <div>
                 <label for="product_category" class="block mb-2 text-sm font-medium text-gray-900">Category </label>
                 <select name="product_category" id="product_category" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2">
-                    @foreach($categories as $category)
-                        <option value="{{$category->category_name}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
-                    @endforeach
+                    @if($categories)
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
+                        @endforeach
+                    @else
+                        <option class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">No category available</option>
+                    @endif
                 </select>
             </div>
             <div>
