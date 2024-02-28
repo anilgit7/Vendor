@@ -9,8 +9,6 @@
         @include('frontend.product.result')
     @elseif(\Route::current()->getName() === 'product.detail')
         @include('frontend.product.product_detail')
-    @elseif (\Route::current()->getName() == 'product.cartlist')
-        @include('frontend.product.cartlist')
     @elseif (\Route::current()->getName() == 'payment.response')
         @include('frontend.product.response')
     @endif

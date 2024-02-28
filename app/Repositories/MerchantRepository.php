@@ -15,13 +15,26 @@ class MerchantRepository implements MerchantRepositoryInterface{
         return new Product;
     }
     public function get_product(){
-        return Product::get()->all();
+        $merchant = auth()->user();
+    
+        if (!$merchant) {
+            return redirect()->back()->with(['message' => 'Merchant not found']);
+        }
+        $product = $merchant->product;
+        return $product;
     }
     public function get_category(){
         return Category::get()->all();
     }
     public function product_list(){
-        return Product::where('shop_name', Auth::user()->name)->get()->all();
+        $merchant = auth()->user();
+    
+        if (!$merchant) {
+            return response()->json(['message' => 'Merchant not found']);
+        }
+        $product = $merchant->product;
+        return $product;
+        // return Product::where('merchant_id', Auth::user()->name)->get()->all();
     }
 
 }

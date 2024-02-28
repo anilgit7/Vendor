@@ -7,7 +7,7 @@
                         <img src="/images/backend/products/{{$product->images}}" alt="" class="h-full w-full">
                     </div>
                     <hr class="lg:hidden">
-                    <div class="space-y-[.5rem] sm:w-[30rem] lg:w-auto">
+                    <div class="space-y-[.5rem] sm:w-[30rem] lg:w-auto lg:ml-[.5rem] xl:ml-0">
                         <div class="space-y-[.5rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
                             <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">{{$product->product_name}}</h1>
                             <div class="flex items-center pb-[.3rem]">
@@ -63,38 +63,20 @@
                                         <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
                                         <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
                                     @endauth
-                                    <input type="hidden" value="1" name="quantity" id="quantity">
+                                    <input type="hidden" value="1" name="quantity" id="buy-quantity">
                                     <input type="hidden" name="image" value="{{$product->images}}">
                                     <input type="hidden" name="merchant_email" value="{{$product->merchant_email}}">
                                     
                                     <button type="submit" class="px-[1rem] xs:px-[1.5rem] sm:px-[2.5rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Buy now</button>
                                 </form>
-                                <div id="cartDismiss">
-                                    @if($cart)
-                                        <button data-product-id="{{$product->id}}" class="removeCart capitalize px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">
-                                            <span>remove</span>
-                                        </button>
-                                    @else
-                                        <form id="addToCart">
-                                            @csrf
-                                            <input type="hidden" value="{{$product->id}}" id="productId">
-                                            <input type="text" class="hidden" name="name" value="{{$product->product_name}}">
-                                            <input type="hidden" name="price" value="{{$product->price}}">
-                                            @auth
-                                                <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
-                                                <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
-                                            @endauth
-                                            <input type="hidden" value="1" name="quantity" id="quantity">
-                                            <input type="hidden" name="image" value="{{$product->images}}">
-                                            <input type="hidden" name="merchant_email" value="{{$product->merchant_email}}">
-                                            
-                                            <button type="submit" value="submit" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">
-                                                <span class="">Add to cart</span>
-                                            </button>
-                                        </form>
-                                    @endif
-                                </div>
-                                <!-- <a href="#" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Add to cart</a> -->
+                                <form class="ajax-cart-form" id="addToCart" action="{{route("cart.add")}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}" id="productId">
+                                    <input type="hidden" value="1" name="quantity" id="add-quantity">
+                                    <button type="submit" value="add-to-cart" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center" class="add-to-cart-btn">
+                                        <span class="">Add to cart</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -132,7 +114,7 @@
                     <div class="space-y-[1.1rem]">
                         <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Shop details</h1>
                         <div class="flex items-center capitalize">
-                            <h1 class="font-semibold">{{$product->shop_name}}</h1>
+                            <h1 class="font-semibold">{{$product->merchant->name}}</h1>
                             <div class="flex ml-auto items-center">
                                 <svg class="h-5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -145,14 +127,14 @@
                                 <span>Chat</span>
                             </div>
                         </div>
-                        @if($product->shop_address)
+                        @if($product->merchant->shop_address)
                             <div class="flex items-start capitalize">
                                 <div class="h-full">
                                     <svg class="h-4 mr-2 mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                         <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
                                     </svg>
                                 </div>
-                                <h1 class="break mr-[3rem] font-semibold">{{$product->shop_address}}</h1>
+                                <h1 class="break mr-[3rem] font-semibold">{{$product->merchant->shop_address}}</h1>
                             </div>
                         @endif
                     </div>
@@ -174,16 +156,20 @@
 @include('frontend.product.map')
 <script>
     const quantityCount = document.getElementById("quantity_count");
-    const productQuantity = document.getElementById("quantity")
+    const productBuyQuantity = document.getElementById("buy-quantity");
+    const productAddQuantity = document.getElementById("add-quantity");
     const productPrice = document.getElementById('price');
     var count = 1;
     quantityCount.innerHTML = count;
+    // console.log(productQuantity.value)
     const handleIncrement = (price) => {
         if(count<=9){
             count++;
             quantityCount.innerHTML = count;
-            productQuantity.value = count;
+            productBuyQuantity.value = count;
+            productAddQuantity.value = count;
             productPrice.innerHTML = 'Rs. ' + count*price;
+            // console.log(productQuantity.value)
         }
         else{
             count = 10;
@@ -193,7 +179,8 @@
         if(count>=2){
             count--;
             quantityCount.innerHTML = count;
-            productQuantity.value = count;
+            productBuyQuantity.value = count;
+            productAddQuantity.value = count;
             productPrice.innerHTML = 'Rs. ' + count*price;
         }
     };

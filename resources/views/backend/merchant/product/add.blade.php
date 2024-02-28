@@ -7,8 +7,9 @@
     <form id="form_add_product">
         @csrf
         <div class="space-y-4">
-            <input type="hidden" name="merchant_email" value="{{auth()->user()->email}}">
-            <input type="hidden" name="shop_name" value="{{auth()->user()->name}}">
+            <!-- <input type="hidden" name="merchant_email" value="{{auth()->user()->email}}"> -->
+            <input type="hidden" name="merchant_id" value="{{auth()->user()->id}}">
+            <!-- <input type="hidden" name="shop_name" value="{{auth()->user()->name}}"> -->
 
             <div>
                 <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900">Product Name </label>
@@ -37,10 +38,10 @@
             <div>
                 <label for="product_size" class="block mb-2 text-sm font-medium text-gray-900">Size Available </label>
                 <div id="checkbtn" class="flex items-center space-x-4">
-                    <label for="size_1" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_1" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size" value="S" checked>S</label>
-                    <label for="size_2" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_2" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size" value="L" >L</label>
-                    <label for="size_3" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_3" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size" value="XL" >XL</label>
-                    <label for="size_4" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_4" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size" value="XXL" >XXL</label>
+                    <label for="size_1" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_1" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size[]" value="S" checked>S</label>
+                    <label for="size_2" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_2" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size[]" value="L" >L</label>
+                    <label for="size_3" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_3" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size[]" value="XL" >XL</label>
+                    <label for="size_4" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size_4" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="product_size[]" value="XXL" >XXL</label>
                 </div>
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
@@ -63,6 +64,10 @@
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="product_warranty" class="block mb-2 text-sm font-medium text-gray-900">Warranty</label>
                 <input type="number" id="product_warrenty" name="product_warranty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Warranty in year">
+            </div>
+            <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
+                <label for="product_description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                <textarea name="description" id="product_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" cols="30" rows="10"></textarea>
             </div>
             <div class="bottom-0 left-0 flex justify-between w-full pb-4 space-x-4 md:px-4">
                 <button type="submit" id="add_product" value="Add product" class="flex bg-[#337ab8] hover:bg-[#004a89] text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">

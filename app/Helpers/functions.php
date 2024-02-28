@@ -29,3 +29,7 @@ function create_slug($title){
     }
     return $slug;
 }
+
+function find_product($id){
+    return Product::find($id);
+}

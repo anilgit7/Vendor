@@ -18,7 +18,6 @@ $(document).ready(function(){
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["product_name"])+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["price"])+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["color"])+`</td>
-                                <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["category"])+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["size"])+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["material"])+`</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">`+(result.products[i]["brand"])+`</td>
@@ -103,9 +102,21 @@ $(document).ready(function(){
                 else{
                     $('#edit_product_name').val(result.product['product_name']);
                     $('#edit_product_price').val(result.product['price']);
-                    $('#edit_product_category').val(result.product['category']);
                     $('#edit_product_color').val(result.product['color']);
-                    $('#edit_product_size').val(result.product['size']);
+                    $('#edit_product_description').val(result.product['description']);
+                    var sizes = result.product['size'].split(', ');
+                    if(sizes.includes('S')){
+                        $('#edit_s').prop('checked', true);
+                    }
+                    if(sizes.includes('L')){
+                        $('#edit_l').prop('checked', true);
+                    }
+                    if(sizes.includes('XL')){
+                        $('#edit_xl').prop('checked', true);
+                    }
+                    if(sizes.includes('XXL')){
+                        $('#edit_xxl').prop('checked', true);
+                    }
                     $('#edit_product_image').val(result.product['image']);
                     $('#edit_product_material').val(result.product['material']);
                     $('#edit_product_weight').val(result.product['weight']);
@@ -147,5 +158,7 @@ $(document).ready(function(){
 function closeForm(){
     $('#edit-product-form').addClass('translate-x-full hidden');
     $('#edit-product-container').delay(2500).hide();
+    // $('#edit-product-form').reset();
+    $('#form_edit_product')[0].reset();
 }
 </script>

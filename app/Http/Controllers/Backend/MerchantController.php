@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Repositories\Interfaces\MerchantRepositoryInterface;
 
 class MerchantController extends Controller
@@ -32,27 +33,31 @@ class MerchantController extends Controller
     }
     public function add_product(Request $request)
     {
-        $product = $this->merchantRepository->create_product();
-        $product->category_id = $request->product_category;
-        $product->product_name = $request->product_name;
-        $product->slug = create_slug($request->product_name);
-        $product->price = $request->product_price;
-        $product->color = $request->product_color;
-        $product->size = $request->product_size;
-        $product->material = $request->product_material;
-        $product->brand = $request->product_brand;
-        $product->weight = $request->product_weight;
-        $product->warranty = $request->product_warranty;
-        $product->shop_name = $request->shop_name;
-        $product->merchant_email = $request->merchant_email;
-
-        $image = $request->image;
-        $imagename = time().'.'.$image->getClientOriginalExtension();
-        $request->image->move('images/backend/products',$imagename);
-        $product->images = $imagename;
-
-        $product->save();
-        return response()->json(['message'=>'Product added successfully']);
+        if(empty($request->product_size)){
+            return response()->json(['message'=>"Size is required"]);
+        }
+        else{
+            $product = $this->merchantRepository->create_product();
+            $product->category_id = $request->product_category;
+            $product->merchant_id = $request->merchant_id;
+            $product->product_name = $request->product_name;
+            $product->slug = create_slug($request->product_name);
+            $product->price = $request->product_price;
+            $product->description = $request->description;
+            $product->color = $request->product_color;
+            $product->size = implode(', ', $request->product_size);
+            $product->material = $request->product_material;
+            $product->brand = $request->product_brand;
+            $product->weight = $request->product_weight;
+            $product->warranty = $request->product_warranty;
+            $image = $request->image;
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->image->move('images/backend/products',$imagename);
+            $product->images = $imagename;
+    
+            $product->save();
+            return response()->json(['message'=>'Product added successfully']);
+        }
     }
     public function delete_product($id){
         $product = $this->merchantRepository->find_product($id);
@@ -69,7 +74,7 @@ class MerchantController extends Controller
         else{
             return response()->json([
                 'status' => '404',
-                'error' => 'Image not found',
+                'error' => 'Prouduct not found',
             ]);
         }
     }
@@ -83,33 +88,39 @@ class MerchantController extends Controller
         else{
             return response()->json([
                 'status' => '404',
-                'message' => 'product not found'
+                'message' => 'Product not found'
             ]);
         }
     }
     public function update_product(Request $request, $id){
         $product= $this->merchantRepository->find_product($id);
-        $product->product_name = $request->edit_product_name;
-        $product->price = $request->edit_product_price;
-        $product->color = $request->edit_product_color;
-        $product->category = $request->edit_product_category;
-        $product->size = $request->edit_product_size;
-        $product->material = $request->edit_product_material;
-        $product->brand = $request->edit_product_brand;
-        $product->weight = $request->edit_product_weight;
-        $product->warranty = $request->edit_product_warranty;
-        if($request->edit_product_image){
-            $product_image = $product->images;
-            $image_path = 'images/backend/products/'.$product_image;
-            if (File::exists($image_path)){
-                File::delete($image_path);
-            }
-            $image = $request->edit_product_image;
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->edit_product_image->move('images/backend/products',$imagename);
-            $product->images = $imagename;
+        if(empty($request->edit_product_size)){
+            return response()->json(['message'=>'Please select a size']);
         }
-        $product->update();
-        return response()->json(['message' => 'Product updated successfully']);
+        else{
+            $product->product_name = $request->edit_product_name;
+            $product->category_id = $request->edit_product_category;
+            $product->description = $request->edit_description;
+            $product->price = $request->edit_product_price;
+            $product->color = $request->edit_product_color;
+            $product->size = implode(', ', $request->edit_product_size);
+            $product->material = $request->edit_product_material;
+            $product->brand = $request->edit_product_brand;
+            $product->weight = $request->edit_product_weight;
+            $product->warranty = $request->edit_product_warranty;
+            if($request->edit_product_image){
+                $product_image = $product->images;
+                $image_path = 'images/backend/products/'.$product_image;
+                if (File::exists($image_path)){
+                    File::delete($image_path);
+                }
+                $image = $request->edit_product_image;
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $request->edit_product_image->move('images/backend/products',$imagename);
+                $product->images = $imagename;
+            }
+            $product->update();
+            return response()->json(['message' => 'Product updated successfully']);
+        }
     }
 }
