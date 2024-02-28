@@ -27,7 +27,7 @@
                                             <div class="grid max-md:grid-cols-1 grid-cols-3 max-md:space-y-[.4rem] justify-between w-full">
                                                 <h1 class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#374151]">{{ $cart->item_name }}</h1>
                                                 <div class="flex flex-col space-y-[.7rem] md:mx-auto">
-                                                    <form action="{{ route('product.cartlist.update.quantity', $cart->id) }}" method="post" id="form-quantity-submit-{{$count}}">
+                                                    <form action="{{ route('cart.update', $cart->id) }}" method="post" id="form-quantity-submit-{{$count}}">
                                                         @csrf
                                                         <select name="quantity" value="quantity" class="text-[#374151] text-[.7rem] xs:text-[.9rem] font-semibold border-[#d1d5db] rounded-[.4rem] py-[.15rem] xs:py-[.25rem] shadow-sm px-[.55rem] xs:pl-[.75rem] xs:pr-[1.75rem] mr-[.25rem] w-fit" id="select_change" onchange="submit_form(<?php echo $count; ?>)">
                                                             @for($i=1; $i<=10; $i++)
@@ -35,13 +35,13 @@
                                                             @endfor
                                                         </select>
                                                     </form>
-                                                    <a href="{{ route('product.carlist.delete', $cart->id) }}" class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#F28C28] hover:text-[#c2660c]  max-lg:hidden">Remove</a>
+                                                    <a href="{{ route('cart.delete', $cart->id) }}" class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#F28C28] hover:text-[#c2660c]  max-lg:hidden">Remove</a>
                                                 </div>
                                                 @php ($cart->price = $cart->price * $cart->quantity)
                                                 <span class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#374151] md:ml-auto">Rs. {{ $cart->price }}/-</span>
                                             </div>
                                             <span class="text-[.7rem] xs:text-[.9rem] text-black font-medium">Avialable</span>
-                                            <a href="{{ route('product.carlist.delete', $cart->id) }}" class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#F28C28] hover:text-[#c2660c] lg:hidden">Remove</a>
+                                            <a href="{{ route('cart.delete', $cart->id) }}" class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#F28C28] hover:text-[#c2660c] lg:hidden">Remove</a>
                                         </div>
                                     </div>
                                     <hr class="h-[1rem]">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="flex">
 
-                            <a href="{{ route('product.cartlist.remove.all') }}" class="ml-auto text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove all</a>
+                            <a href="{{ route('cart.delete.all') }}" class="ml-auto text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove all</a>
                         </div>
                     </div>
                     <div class="lg:pl-[9.5rem] space-y-[2.5rem]">

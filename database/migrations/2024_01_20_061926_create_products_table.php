@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            // $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('merchant_id');
             $table->string("product_name");
+            $table->string('description');
             $table->string('slug');
             $table->string("price");
             $table->string("color");
@@ -25,11 +25,11 @@ return new class extends Migration
             $table->string("brand")->nullable();
             $table->string("weight");
             $table->string("warranty")->nullable();
-            $table->string("shop_name");
-            $table->string("shop_address")->nullable();
-            $table->string("merchant_email");
             $table->string("images");
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('merchant_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

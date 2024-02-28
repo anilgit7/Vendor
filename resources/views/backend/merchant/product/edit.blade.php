@@ -25,7 +25,7 @@
                 <label for="edit_product_category" class="block mb-2 text-sm font-medium text-gray-900">Category </label>
                 <select name="edit_product_category" id="edit_product_category" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2">
                     @foreach($categories as $category)
-                        <option value="{{$category->category_name}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
+                        <option value="{{$category->id}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -36,10 +36,10 @@
             <div>
                 <label for="edit_product_size" class="block mb-2 text-sm font-medium text-gray-900">Size Available </label>
                 <div id="checkbtn" class="flex items-center space-x-4">
-                    <label for="size_1" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_product_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="S" checked>S</label>
-                    <label for="size_2" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="_size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="L">L</label>
-                    <label for="size_3" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="size" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="size" value="XL">XL</label>
-                    <label for="size_4" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="esize" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size" value="XXL">XXL</label>
+                    <label for="edit_s" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_s" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size[]" value="S">S</label>
+                    <label for="edit_l" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_l" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size[]" value="L">L</label>
+                    <label for="edit_xl" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_xl" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size[]" value="XL">XL</label>
+                    <label for="edit_xxl" class="block mb-2 text-sm font-medium text-gray-900"><input type="checkbox" id="edit_xxl" class="w-4 h-4 rounded-full focus:ring-0 mr-1 mb-1 text-sm font-medium text-gray-900" name="edit_product_size[]" value="XXL">XXL</label>
                 </div>
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
@@ -62,6 +62,10 @@
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="edit_product_warranty" class="block mb-2 text-sm font-medium text-gray-900">Warranty</label>
                 <input type="number" id="edit_product_warranty" name="edit_product_warranty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Warranty in year">
+            </div>
+            <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
+                <label for="edit_product_description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                <textarea name="edit_description" id="edit_product_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" cols="30" rows="10"></textarea>
             </div>
             <div class="bottom-0 left-0 flex justify-between w-full pb-4 space-x-4 md:px-4">
                 <button type="submit" id="edit_product" value="Edit product" class="flex bg-[#337ab8] hover:bg-[#004a89] text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">

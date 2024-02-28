@@ -9,44 +9,38 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function search(Request $request){
-
-        if($request->ajax()){
-            $searches=Product::where('id','like','%'.$request->search.'%')
-            ->orwhere('product_name','like','%'.$request->search.'%')
-            ->orwhere('category','like','%'.$request->search.'%')->get();
-            $output='';
-            if($searches){
+        if ($request->ajax()) {
+            $searches = Product::whereHas('category', function($query) use ($request) {
+                $query->where('category_name', 'like', '%' . $request->search . '%');
+            })
+            ->orWhere('id', 'like', '%' . $request->search . '%')
+            ->orWhere('product_name', 'like', '%' . $request->search . '%')
+            ->get();
+    
+            if (!empty($searches)) {
                 return response()->json(['search' => $searches]);
             }
-            else{
-                return response()->json([
-                    'status' => '404',
-                    'error' => 'No result found',
-                ]);
-            }    
         }
-        else{
-            return response()->json([
-                'status' => '404',
-                'error' => 'No result found',
-            ]);
-        }
+        return response()->json([
+            'status' => '404',
+            'error' => 'No result found',
+        ]);
+    }
     
+    public function remove_search(Request $request){
     
+        $output ='';
+        return $output;
+    }
     
-      }
-    
-      public function remove_search(Request $request){
-        
-            $output ='';
-            return $output;
-      }
-    
-      public function result_page(Request $request){
+    public function result_page(Request $request){
         $search_name = ucfirst($request->search);
-        $searches=Product::where('id','like','%'.$request->search.'%')
+        $searches=Product::whereHas('category',function($query) use ($request){
+                $query->where('category_name','like','%'.$request->search.'%');
+            })
+            ->orwhere('id','like','%'.$request->search.'%')
             ->orwhere('product_name','like','%'.$request->search.'%')
-            ->orwhere('category','like','%'.$request->search.'%')->get();
+            ->get();
         return view('frontend.product',compact('searches','search_name'));
-      }
+    }
 }

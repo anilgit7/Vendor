@@ -2,6 +2,7 @@ import 'flowbite';
 import jQuery from 'jquery';
 window.$ = jQuery;
 
+
 /*************************** Sidebar Collapse ***********************************/
 const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebarOverlay = document.querySelector('.sidebar-overlay')

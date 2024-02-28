@@ -1,4 +1,5 @@
 @include('backend.ajax.search')
+@include('backend.ajax.add_to_cart')
 @if(request()->segment(1)==="admin" && request()->segment(2)==="categories")
     @include('backend.ajax.category')
 @elseif (\Route::current()->getName() == 'admin.merchant.new')
@@ -9,6 +10,4 @@
     @include('backend.ajax.customer')
 @elseif(\Route::current()->getName() == 'merchant.product')
     @include('backend.ajax.product')
-@elseif(\Route::current()->getName() == 'product.detail')
-    @include('backend.ajax.add_to_cart')
 @endif

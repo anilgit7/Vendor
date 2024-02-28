@@ -84,18 +84,10 @@
                                                         <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
                                                     </svg>
                                                 </div>
-                                                <form action="{{route('product.cart',$productlist->id)}}" method="post">
+                                                <form class="ajax-cart-form" id="addToCart-{{ $productlist->id }}" action="{{route("cart.add")}}" method="post">
                                                     @csrf
-                                                    <input type="text" class="hidden" name="name" value="{{$productlist->product_name}}">
-                                                    <input type="hidden" name="price" value="{{$productlist->price}}">
-                                                    @auth
-                                                        <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
-                                                        <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
-                                                    @endauth
-                                                    <input type="hidden" name="quantity" value="1">
-                                                    <input type="hidden" name="image" value="{{$productlist->images}}">
-                                                    <input type="hidden" name="merchant_email" value="{{$productlist->merchant_email}}">
-                                                    
+                                                    <input type="hidden" name="product_id" value="{{$productlist->id}}" id="productId">
+                                                    <input type="hidden" value="1" name="quantity" id="add-quantity">
                                                     <button type="submit" value="submit" >
                                                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cart-shopping" class="h-6 w-6 text-[#F28C28]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path fill="currentColor" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
