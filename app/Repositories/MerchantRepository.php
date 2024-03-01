@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,11 @@ class MerchantRepository implements MerchantRepositoryInterface{
         $product = $merchant->product;
         return $product;
         // return Product::where('merchant_id', Auth::user()->name)->get()->all();
+    }
+
+    public function get_order(){
+        $orders = Order::get();
+        return $orders;
     }
 
 }

@@ -108,6 +108,10 @@
         <div>
             @if(\Route::current()->getName() == 'merchant.product')
                 @include('backend.merchant.product.view') 
+            @elseif(\Route::current()->getName() == 'merchant.order')
+                @include('backend.merchant.order.view')
+            @elseif(\Route::current()->getName() == 'merchant.order.detail')
+                @include('backend.merchant.order.order_detail') 
             @endif
         </div>
     </div>

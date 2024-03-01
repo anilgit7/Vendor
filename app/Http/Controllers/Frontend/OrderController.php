@@ -30,7 +30,8 @@ class OrderController extends Controller
             $order = new Order;
             $order->user_id = Auth::user()->id;
             $order->billing_name= $request->first_name.' '.$request->last_name;
-            $order->billing_address = $request->address;
+            // $order->billing_address = $request->address;
+            $order->order_tracking_id = 'ot-'.date("U");
             $order->billing_address = 'from the map';
             $order->billing_email = $request->email;
             $order->payment = $request->payment;

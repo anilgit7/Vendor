@@ -20,4 +20,8 @@ class Product extends Model
     public function merchant(){
         return $this->belongsTo(User::class,'merchant_id');
     }
+
+    public function orderItems(){
+        return $this->belongsToMany(Order_Item::class, 'order_items');
+    }
 }
