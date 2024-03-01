@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Order_Item;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -123,4 +125,81 @@ class MerchantController extends Controller
             return response()->json(['message' => 'Product updated successfully']);
         }
     }
+    public function order(){
+        $merchant_id = Auth::user()->id;
+        $orders = Order::whereHas('orderItems.product', function ($query) use ($merchant_id) {
+                $query->where('merchant_id', $merchant_id);
+            })
+            ->get();
+        $title = "Orders";
+        $orderItems = Order_Item::whereHas('product', function ($query) use ($merchant_id) {
+                $query->where('merchant_id', $merchant_id);
+            })
+            ->whereIn('order_id', $orders->pluck('id')) // Fetch order items for all orders fetched above
+            ->with('product') // Load the product information for each order item
+            ->get();
+        $subtotals = $orderItems->sum(function ($orderItem) {
+            return $orderItem->quantity * $orderItem->product->price;
+        });
+    
+        $taxrate = 0.01;
+        $taxamount = $taxrate * $subtotals;
+        $total = $subtotals + $taxamount;
+        $shipped = $orderItems->isNotEmpty() ? $orderItems->first()->status : null;
+        return view('backend.merchant', compact('title', 'orders', 'shipped','total'));
+    }
+    
+    public function order_detail($order_tracking_id){
+        $title = "Order Details";
+        $merchant_id = Auth::user()->id;
+    
+        $order = Order::where('order_tracking_id', $order_tracking_id)->first();
+        if (!$order) {
+            return redirect()->back()->with(['error' => true, 'message' => 'Order not found']);
+        }
+    
+        $orderItems = Order_Item::whereHas('product', function ($query) use ($merchant_id) {
+                $query->where('merchant_id', $merchant_id);
+            })
+            ->where('order_id', $order->id)
+            ->with('product') // Load the product information for each order item
+            ->get();
+    
+        // Calculate subtotals, tax amount, and total
+        $subtotals = $orderItems->sum(function ($orderItem) {
+            return $orderItem->quantity * $orderItem->product->price;
+        });
+    
+        $taxrate = 0.01;
+        $taxamount = $taxrate * $subtotals;
+        $total = $subtotals + $taxamount;
+    
+        return view('backend.merchant', compact('title', 'order', 'orderItems', 'subtotals', 'taxamount', 'total'));
+    }
+    
+
+    public function order_status(Request $request, $id) {
+        $order = Order::with('orderItems.product')->findOrFail($id);
+        if ($request->delivery == 'pending') {
+            return redirect()->route('merchant.order')->with(['success' => true, 'message' => 'No changes made.']);
+        }
+        if ($request->delivery == 'picked') {
+            $merchant_id = Auth::user()->id;
+            foreach ($order->orderItems as $orderItem) {
+                if ($orderItem->product->merchant_id == $merchant_id) {
+                    $orderItem->status = $request->delivery;
+                    $orderItem->save();
+                }
+            }
+            $pickedCount = $order->orderItems->where('status', 'picked')->count();
+            if ($pickedCount == $order->orderItems->count()) {
+                $order->delivery_status = 'processing';
+            } else {
+                $order->delivery_status = 'incomplete';
+            }
+            $order->save();
+        }
+        return redirect()->route('merchant.order')->with(['success' => true, 'message' => 'Status updated successfully']);
+    }
+    
 }

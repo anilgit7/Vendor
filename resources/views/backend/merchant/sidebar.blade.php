@@ -25,6 +25,16 @@
                     </span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('merchant.order') }}" class="flex items-center w-full p-1 2xs:p-2 text-base text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 {{ ((request()->segment(1) === 'merchant') && (request()->segment(2) === 'order')) ? 'bg-gray-100 text-gray-900' : '' }}">
+                    <svg class="flex-shrink-0 w-3 h-3 2xs:w-5 2xs:h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                        <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
+                    </svg>
+                    <span class="flex-1 ml-1 2xs:ml-3 text-[.8rem] 2xs:text-[1rem] whitespace-nowrap group-hover:text-gray-900 truncate">
+                        Order
+                    </span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

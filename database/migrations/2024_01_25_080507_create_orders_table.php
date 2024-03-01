@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('tax')->nullable();
             $table->bigInteger('total')->nullable();
             $table->string('delivery_status')->nullable();
-            $table->integer('invoice_no')->nullable();
+            $table->string('order_tracking_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

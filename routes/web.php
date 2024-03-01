@@ -97,6 +97,9 @@ route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
         route::post('/update-product/{id}',[MerchantController::class, 'update_product'])->name('product.update');
         route::get('/delete-product/{id}', [MerchantController::class, 'delete_product'])->name('product.delete');
     });
+    route::get('/order',[MerchantController::class, 'order'])->name('merchant.order');
+    route::get('/order/{id}',[MerchantController::class,'order_detail'])->name('merchant.order.detail');
+    route::post('/update-status/{id}',[MerchantController::class,'order_status'])->name('merchant.order.status');
 });
 // Route::middleware([
 //     'auth:sanctum',
