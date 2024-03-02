@@ -71,6 +71,16 @@
                     </span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('admin.order')}}" class="flex items-center w-full p-1 2xs:p-2 text-base text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 {{ (Route::currentRouteName() === 'admin.order') ? 'bg-[#F3F4F6] text-gray-900' : '' }}">
+                    <svg class="flex-shrink-0 w-3 h-3 2xs:w-6 2xs:h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M4 13c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2m.2 1.5l1.06 1.05l-3.99 3.95l-2.53-2.55l1.07-1.05l1.47 1.49M4 3c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2M4 5h4v4H4m8-4h10v2H12m0 12v-2h10v2m-10-8h10v2H12Z"/>
+                    </svg>
+                    <span class="flex-1 ml-1 2xs:ml-3 text-[.8rem] 2xs:text-[1rem] whitespace-nowrap group-hover:text-gray-900 truncate">
+                        Order
+                    </span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

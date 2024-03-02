@@ -125,80 +125,110 @@ class MerchantController extends Controller
             return response()->json(['message' => 'Product updated successfully']);
         }
     }
-    public function order(){
+    // public function order(){
+    //     $merchant_id = Auth::user()->id;
+    //     $orders = Order::whereHas('orderItems.product', function ($query) use ($merchant_id) {
+    //             $query->where('merchant_id', $merchant_id);
+    //         })
+    //         ->get();
+    //     $title = "Orders";
+    //     $orderItems = Order_Item::whereHas('product', function ($query) use ($merchant_id) {
+    //             $query->where('merchant_id', $merchant_id);
+    //         })
+    //         ->whereIn('order_id', $orders->pluck('id')) // Fetch order items for all orders fetched above
+    //         ->with('product') // Load the product information for each order item
+    //         ->get();
+    //     $subtotals = $orderItems->sum(function ($orderItem) {
+    //         return $orderItem->quantity * $orderItem->product->price;
+    //     });
+    //     $taxrate = 0.01;
+    //     $taxamount = $taxrate * $subtotals;
+    //     $total = $subtotals + $taxamount;
+    //     $shipped = $orderItems->isNotEmpty() ? $orderItems->first()->status : null;
+    //     return view('backend.merchant', compact('title', 'orders', 'shipped','total'));
+    // }
+
+    public function order() {
         $merchant_id = Auth::user()->id;
+    
+        // Fetch orders related to the merchant
         $orders = Order::whereHas('orderItems.product', function ($query) use ($merchant_id) {
                 $query->where('merchant_id', $merchant_id);
             })
             ->get();
-        $title = "Orders";
-        $orderItems = Order_Item::whereHas('product', function ($query) use ($merchant_id) {
-                $query->where('merchant_id', $merchant_id);
-            })
-            ->whereIn('order_id', $orders->pluck('id')) // Fetch order items for all orders fetched above
-            ->with('product') // Load the product information for each order item
-            ->get();
-        $subtotals = $orderItems->sum(function ($orderItem) {
-            return $orderItem->quantity * $orderItem->product->price;
-        });
     
-        $taxrate = 0.01;
-        $taxamount = $taxrate * $subtotals;
-        $total = $subtotals + $taxamount;
-        $shipped = $orderItems->isNotEmpty() ? $orderItems->first()->status : null;
-        return view('backend.merchant', compact('title', 'orders', 'shipped','total'));
+        $title = "Orders";
+        $orderDetails = [];
+    
+        foreach ($orders as $order) {
+            // Fetch order items for each order
+            $orderItems = Order_Item::where('order_id', $order->id)
+                ->with('product')
+                ->get();
+    
+            // Calculate subtotal for the current order
+            $subtotal = $orderItems->sum(function ($orderItem) {
+                return $orderItem->quantity * $orderItem->product->price;
+            });
+    
+            // Calculate tax amount for the current order
+            $taxrate = 0.01;
+            $taxamount = $taxrate * $subtotal;
+    
+            // Calculate total for the current order
+            $total = $subtotal + $taxamount;
+    
+            // Push order details along with subtotal to the array
+            $orderDetails[] = [
+                'order' => $order,
+                'subtotal' => $subtotal,
+                'total' => $total,
+            ];
+        }
+        return view('backend.merchant', compact('title', 'orderDetails'));
     }
+    
     
     public function order_detail($order_tracking_id){
         $title = "Order Details";
         $merchant_id = Auth::user()->id;
-    
         $order = Order::where('order_tracking_id', $order_tracking_id)->first();
         if (!$order) {
             return redirect()->back()->with(['error' => true, 'message' => 'Order not found']);
         }
-    
         $orderItems = Order_Item::whereHas('product', function ($query) use ($merchant_id) {
                 $query->where('merchant_id', $merchant_id);
             })
             ->where('order_id', $order->id)
             ->with('product') // Load the product information for each order item
             ->get();
-    
+        $pickedStatus = $orderItems->where('status', 'picked')->count() === $orderItems->count() ? 'picked' : 'pending';
         // Calculate subtotals, tax amount, and total
         $subtotals = $orderItems->sum(function ($orderItem) {
             return $orderItem->quantity * $orderItem->product->price;
         });
-    
         $taxrate = 0.01;
         $taxamount = $taxrate * $subtotals;
         $total = $subtotals + $taxamount;
-    
-        return view('backend.merchant', compact('title', 'order', 'orderItems', 'subtotals', 'taxamount', 'total'));
+        return view('backend.merchant', compact('title', 'order', 'orderItems', 'subtotals', 'taxamount', 'total','pickedStatus'));
     }
-    
-
     public function order_status(Request $request, $id) {
         $order = Order::with('orderItems.product')->findOrFail($id);
-        if ($request->delivery == 'pending') {
-            return redirect()->route('merchant.order')->with(['success' => true, 'message' => 'No changes made.']);
-        }
-        if ($request->delivery == 'picked') {
-            $merchant_id = Auth::user()->id;
+        $merchant_id = Auth::user()->id;
+        // Update order items status based on request delivery status
+        $valid_statuses = ['pending', 'picked']; // Valid delivery statuses
+        if (in_array($request->delivery, $valid_statuses)) {
             foreach ($order->orderItems as $orderItem) {
                 if ($orderItem->product->merchant_id == $merchant_id) {
                     $orderItem->status = $request->delivery;
                     $orderItem->save();
                 }
             }
-            $pickedCount = $order->orderItems->where('status', 'picked')->count();
-            if ($pickedCount == $order->orderItems->count()) {
-                $order->delivery_status = 'processing';
-            } else {
-                $order->delivery_status = 'incomplete';
-            }
-            $order->save();
         }
+        // Update order delivery status based on order items' statuses
+        $pickedCount = $order->orderItems->where('status', 'picked')->count();
+        $order->delivery_status = ($pickedCount == $order->orderItems->count()) ? 'shipping' : 'processing';
+        $order->save();
         return redirect()->route('merchant.order')->with(['success' => true, 'message' => 'Status updated successfully']);
     }
     

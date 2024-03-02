@@ -83,7 +83,7 @@
                         </h1>
                     </div>
                     <div class="max-[280px]:px-1 max-[280px]:py-1 px-2 py-2 dark:text-white truncate">
-                        <a href="{{ route('profile.show') }}" class="max-[280px]:text-[.7rem] max-sm:text-[.9rem] font-semibold pb-1 text-gray-600 hover:text-gray-900 hover:border-y-2 border-gray-100 rounded-[.3rem]">
+                        <a href="#" class="max-[280px]:text-[.7rem] max-sm:text-[.9rem] font-semibold pb-1 text-gray-600 hover:text-gray-900 hover:border-y-2 border-gray-100 rounded-[.3rem]">
                             {{ __('Profile') }}
                         </a>
                     </div>
@@ -114,6 +114,10 @@
                 @include('backend.admin.customer')
             @elseif(\Route::current()->getName() == 'admin.category')
                 @include('backend.admin.category.view')
+            @elseif(\Route::current()->getName() == 'admin.order')
+                @include('backend.admin.order.view')
+            @elseif(\Route::current()->getName() == 'admin.order.detail')
+                @include('backend.admin.order.order_detail')
             @endif
         </div>
     </div>

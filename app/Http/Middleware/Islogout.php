@@ -25,6 +25,6 @@ class Islogout
             Auth::logout();
             return $next($request);
         }
-        return redirect()->back()->with('message','System logging out.');
+        return redirect()->back()->with(['success'=>true,'message'=>'System logging out.']);
     }
 }

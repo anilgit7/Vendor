@@ -27,31 +27,15 @@ class OrderController extends Controller
 
     public function order(Request $request){
         if(auth()->check()) {
-            $order = new Order;
-            $order->user_id = Auth::user()->id;
-            $order->billing_name= $request->first_name.' '.$request->last_name;
-            // $order->billing_address = $request->address;
-            $order->order_tracking_id = 'ot-'.date("U");
-            $order->billing_address = 'from the map';
-            $order->billing_email = $request->email;
-            $order->payment = $request->payment;
-            $order->shipping_cost = $request->shipping;
-            $order->tax = $request->tax;
-            
-            // Calculate total based on shipping cost, tax, and subtotal
-            $order->subtotal = Cart::subtotal();
-            $order->total = $order->subtotal + $order->shipping_cost + $order->tax;
-    
-            $order->delivery_status = 'pending';
-            $order->save();
-            foreach(Cart::content() as $cartItem) {
-                $order->orderItems()->create([
-                    'product_id' => $cartItem->id,
-                    'quantity' => $cartItem->qty,
-                ]);
+            if($request->payment == 'cash'){
+                create_order($request);
+                return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
             }
-            Cart::destroy();
-            return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
+            if($request->payment == 'cash'){
+                // statements to go to esewa
+                // create_order($request);
+                // return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
+            }
         }
         else{
             return redirect()->route('login')->with(['error' => true, 'message' => 'You must be logged in to place an order.']);
