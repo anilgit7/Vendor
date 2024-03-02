@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Repositories\Interfaces\AdminRepositoryInterface;
@@ -36,5 +37,8 @@ class AdminRepository implements AdminRepositoryInterface{
     }
     public function category_product_exist($category){
         return Product::where('category', $category)->exists();
+    }
+    public function get_order(){
+        return Order::get();
     }
 }

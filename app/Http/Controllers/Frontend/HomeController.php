@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,31 @@ class HomeController extends Controller
         else{
             Session::flush();
             Auth::logout();
-            return redirect()->route('home');
+            return redirect()->route('home')->with(['warning'=> true,'message'=>'Unauthorized access attempt.']);
         }
+    }
+    public function user_profile(){
+        return view('frontend.profile');
+    }
+    public function dashboard(){
+        return view('frontend.profile');
+    }
+    public function order(){
+        $user = Auth::user();
+        $orders = $user->orders;
+        return view('frontend.profile',compact('orders'));
+    }
+    public function order_detail($order_tracking_id){
+        $order = Order::where('order_tracking_id', $order_tracking_id)->first();
+        if (!$order) {
+            return redirect()->back()->with(['error' => true, 'message' => 'Order not found']);
+        }
+        $orderItems = $order->orderItems()
+            ->with('product')
+            ->get();
+        return view('frontend.profile',compact('order','orderItems'));
+    }
+    public function setting(){
+        return view('frontend.profile');
     }
 }

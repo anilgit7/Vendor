@@ -12,4 +12,5 @@ Interface AdminRepositoryInterface{
     public function category_exist($category_name);
     public function get_category_product($category);
     public function category_product_exist($category);
+    public function get_order();
 }

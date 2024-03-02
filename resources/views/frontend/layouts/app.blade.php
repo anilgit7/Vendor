@@ -33,5 +33,6 @@
         @livewireScripts
         
         @include('backend.ajax')
+        @include('frontend.hefo.response')
     </body>
 </html>

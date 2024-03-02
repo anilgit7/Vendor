@@ -29,14 +29,14 @@ class IsMerchant
             if(Auth::user()->user_type==0){
                 Session::flush();
                 Auth::logout();
-                return redirect()->route('home');
+                return redirect()->route('home')->with(['warning'=>true,'message'=>'Unauthorized access attempt.']);
             }
             if(Auth::user()->user_type==2){
                 Session::flush();
                 Auth::logout();
-                return redirect()->route('home');
+                return redirect()->route('home')->with(['warning'=>true,'message'=>'Unauthorized access attempt.']);
             }
         }
-        return redirect()->back()->with('message','Unauthorized access attempt. System logging out.');
+        return redirect()->back()->with(['warning'=>true,'message'=>'Unauthorized access attempt.']);
     }
 }

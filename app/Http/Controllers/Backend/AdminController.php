@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Order_Item;
 use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Models\Category;
 use App\Models\Product;
@@ -112,17 +114,15 @@ class AdminController extends Controller
                 'error' => 'Category '.$request->category_name.' already exists',
             ]);
         }
-        else{
-            $category = $this->adminRepository->create_category();
-            $category_name = $category->category_name = ucfirst($request->category_name);
-            $category->slug = create_slug($request->category_name);
-            $image = $request->category_image;
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->category_image->move('images/backend/category',$imagename);
-            $category->image = $imagename;
-            $category->save();
-            return response()->json(['message' => 'Category '.$category_name. ' created successfully']);
-        }
+        $category = $this->adminRepository->create_category();
+        $category_name = $category->category_name = ucfirst($request->category_name);
+        $category->slug = create_slug($request->category_name);
+        $image = $request->category_image;
+        $imagename = time().'.'.$image->getClientOriginalExtension();
+        $request->category_image->move('images/backend/category',$imagename);
+        $category->image = $imagename;
+        $category->save();
+        return response()->json(['message' => 'Category '.$category_name. ' created successfully']);
     }
     public function view_category(){
         $categories = $this->adminRepository->get_category();
@@ -130,17 +130,15 @@ class AdminController extends Controller
     }
     public function edit_category($id){
         $category = $this->adminRepository->find_category($id);
-        if($category){
-            return response()->json([
-                'category' => $category
-            ]);
-        }
-        else{
+        if (!$category) {
             return response()->json([
                 'status' => '404',
                 'message' => 'Category not found'
             ]);
         }
+        return response()->json([
+            'category' => $category
+        ]);
     }
     public function update_category(Request $request, $id){
         $category= $this->adminRepository->find_category($id);
@@ -195,32 +193,54 @@ class AdminController extends Controller
     }
     public function delete_category($id){
         $category = $this->adminRepository->find_category($id);
-        if($category){
-            $category_image = $category->image;
-            $category_name =$category->category_name;
-            $category->delete();
-            $image_path = 'images/backend/category/'.$category_image; 
-            if (File::exists($image_path)){
-                File::delete($image_path);
-            }
-            if($this->adminRepository->category_product_exist($category_name)){
-                $products =$this->adminRepository->get_category_product($category_name);
-                foreach($products as $product){
-                    $list_image = $product->image;
-                    $product->delete();
-                    $image_path = 'images/backend/products/'.$list_image;
-                    if (File::exists($image_path)) {
-                        File::delete($image_path);
-                    }
-                }
-            }
-            return response()->json(['message' => 'Category '.$category_name.' deleted successfully']);
-        }
-        else{
+        if (!$category) {
             return response()->json([
                 'status' => '404',
                 'error' => 'Category not found',
             ]);
+        }
+        $category_image = $category->image;
+        $category_name = $category->category_name;
+        $category->delete();
+        $image_path = 'images/backend/category/'.$category_image;
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        // Delete products associated with the category and their images
+        $products = $category->products;
+        foreach ($products as $product) {
+            $product_image_path = 'images/backend/products/'.$product->image;
+            if (File::exists($product_image_path)) {
+                File::delete($product_image_path);
+            }
+            $product->delete();
+        }
+        return response()->json(['message' => 'Category '.$category_name.' deleted successfully']);
+    }
+    public function order(){
+        $orders = $this->adminRepository->get_order();
+        $title = "Orders";
+        return view('backend.admin', compact('title', 'orders'));
+    }
+    public function order_detail($order_tracking_id){
+        $title = "Order Details";
+        $order = Order::where('order_tracking_id', $order_tracking_id)->first();
+        if (!$order) {
+            return redirect()->back()->with(['error' => true, 'message' => 'Order not found']);
+        }
+        $orderItems = $order->orderItems()->with('product')->get();
+        return view('backend.admin', compact('title', 'order','orderItems'));
+    }
+    public function order_status(Request $request, $id){
+        $order = Order::findOrFail($id);
+        $validStatus = ['pending', 'processing', 'delivered'];
+        if(in_array($request->delivery, $validStatus)) {
+            $order->delivery_status = $request->delivery;
+            $order->save();
+            return redirect()->route('admin.order')->with(['success' => true, 'message' => 'Status updated successfully']);
+        }
+        else{
+            return redirect()->route('admin.order')->with(['success' => false, 'message' => 'Invalid delivery status']);
         }
     }
 }

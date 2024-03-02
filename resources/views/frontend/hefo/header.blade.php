@@ -45,7 +45,7 @@
                                                 </h1>
                                             </div>
                                             <div class="max-[280px]:px-1 max-[280px]:py-1 px-2 py-2 dark:text-white truncate">
-                                                <a href="{{ route('profile.show') }}" class="max-[280px]:text-[.7rem] max-sm:text-[.9rem] font-semibold pb-1 text-gray-900 hover:border-y-2 rounded-[.3rem]">
+                                                <a href="{{ route('user.dashboard') }}" class="max-[280px]:text-[.7rem] max-sm:text-[.9rem] font-semibold pb-1 text-gray-900 hover:border-y-2 rounded-[.3rem]">
                                                     {{ __('Profile') }}
                                                 </a>
                                             </div>
@@ -139,5 +139,3 @@
         }
     }
 </script>
-
-@include('frontend.hefo.response')

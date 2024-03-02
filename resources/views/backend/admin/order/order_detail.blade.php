@@ -39,14 +39,18 @@
                         <h1 class="font-bold text-[#111827] drop-shadow-[0px_0px_.5px_#000000]">Order Status</h1>
                     </div>
                     <div class="bg-[#f9fafb] flex flex-col py-2 px-4">
-                        @if($pickedStatus == 'picked')
-                            <span class="font-bold text-[#111827] capitalize">{{$pickedStatus}}</span>
+                        @if($order->delivery_status == 'delivered')
+                            <span class="font-bold text-[#111827] capitalize">{{$order->delivery_status}}</span>
                         @else
-                            <form action="{{route('merchant.order.status',$order->id)}}" method="POST">
+                            <form action="{{route('admin.order.status',$order->id)}}" method="POST">
                                 @csrf
                                 <select name="delivery" id="delivery" class="bg-[#f9fafb] border-none">
-                                    <option value="picked" {{($order->delivery_status == 'picked')? 'selected':''}}>Picked</option>
-                                    <option value="pending" {{($order->delivery_status == 'pending')? 'selected':''}}>Pending</option>
+                                    @if($order->delivery_status == 'shipping')
+                                        <option value="delivered" {{($order->delivery_status == 'delivered')? 'selected':''}}>Delivered</option>
+                                    @else
+                                        <option value="processing" {{($order->delivery_status == 'processing')? 'selected':''}}>Procesing</option>
+                                        <option value="pending" {{($order->delivery_status == 'pending')? 'selected':''}}>Pending</option>
+                                    @endif
                                 </select>
                                 <button type="submit" class="bg-[#e9eaeb] p-2 hover:bg-[#d9dadb] hover:text-white">Submit</button>
                             </form>
@@ -84,18 +88,23 @@
                 <div class="bg-[#f9fafb] max-2xs:px-[.5rem] 2xs:px-[1rem] sm:px-[2rem] py-[1.9rem] rounded-[.5rem] space-y-[.9rem]">
                     <div class="flex justify-between">
                         <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Subtotal</h1>
-                        <span class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#111827] font-semibold">Rs. {{$subtotals}}/-</span>
+                        <span class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#111827] font-semibold">Rs. {{$order->subtotal}}/-</span>
+                    </div>
+                    <hr class="h-[1px]">
+                    <div class="flex justify-between">
+                        <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Shipping</h1>
+                        <span class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#111827] font-semibold">Rs. {{$order->shipping_cost}}/-</span>
                     </div>
                     <hr class="h-[1px]">
                     <div class="flex justify-between">
                         <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Tax</h1>
-                        <span class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#111827] font-semibold">Rs. {{$taxamount}}/-</span>
+                        <span class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#111827] font-semibold">Rs. {{$order->tax}}/-</span>
                     </div>
                     <hr class="h-[1px]">
                     <div class="flex justify-between">
                         <h1 class="max-2xs:text-[.8rem] max-xs:text-[.85rem] xs:text-[.9rem] sm:text-[1rem] md:text-[1.2rem] text-[#111827] font-semibold">Total</h1>
                         <span class="max-2xs:text-[.8rem] max-xs:text-[.85rem] xs:text-[.9rem] sm:text-[1rem] md:text-[1.2rem] text-[#111827] font-semibold">Rs.
-                        {{$total}}/-
+                        {{$order->total}}/-
                         </span>
                     </div>
                 </div>
