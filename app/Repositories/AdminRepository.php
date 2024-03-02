@@ -39,6 +39,6 @@ class AdminRepository implements AdminRepositoryInterface{
         return Product::where('category', $category)->exists();
     }
     public function get_order(){
-        return Order::get();
+        return Order::orderBy('created_at', 'desc')->get();
     }
 }
