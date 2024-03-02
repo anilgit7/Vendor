@@ -153,7 +153,7 @@ class MerchantController extends Controller
         // Fetch orders related to the merchant
         $orders = Order::whereHas('orderItems.product', function ($query) use ($merchant_id) {
                 $query->where('merchant_id', $merchant_id);
-            })
+            })->orderBy('created_at', 'desc')
             ->get();
         $title = "Orders";
         $orderDetails = [];
