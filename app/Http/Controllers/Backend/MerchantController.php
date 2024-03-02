@@ -150,22 +150,20 @@ class MerchantController extends Controller
 
     public function order() {
         $merchant_id = Auth::user()->id;
-    
         // Fetch orders related to the merchant
         $orders = Order::whereHas('orderItems.product', function ($query) use ($merchant_id) {
                 $query->where('merchant_id', $merchant_id);
             })
             ->get();
-    
         $title = "Orders";
         $orderDetails = [];
-    
         foreach ($orders as $order) {
-            // Fetch order items for each order
             $orderItems = Order_Item::where('order_id', $order->id)
-                ->with('product')
-                ->get();
-    
+            ->whereHas('product', function ($query) use ($merchant_id) {
+                $query->where('merchant_id', $merchant_id);
+            })
+            ->with('product')
+            ->get();
             // Calculate subtotal for the current order
             $subtotal = $orderItems->sum(function ($orderItem) {
                 return $orderItem->quantity * $orderItem->product->price;
