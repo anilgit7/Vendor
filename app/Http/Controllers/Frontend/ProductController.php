@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,5 +46,53 @@ class ProductController extends Controller
             return redirect()->back()->with('error','Product not found');
         }
         return view('frontend.product',compact('product'));
+    }
+    public function buy_now(Request $request){
+        $stock = 10;
+        $product_id = $request->product_id;
+        $product_quantity = $request->quantity;
+
+        // Get product details from the database or elsewhere
+        $product = Product::find($product_id);
+
+        // Check if the product exists
+        if (!$product) {
+            return response()->json(['error' => true, 'message' => 'Product not found']);
+        }
+        // Check if the requested quantity exceeds the stock
+        if ($product_quantity > $stock) {
+            return response()->json(['info' => true, 'message' => 'Item out of stock']);
+        }
+        // Check if the product is already in the cart
+        $cartItem = Cart::search(function ($cartItem, $rowId) use ($product_id) {
+            return $cartItem->id == $product_id;
+        })->first();
+        
+        if ($cartItem) {
+            $newQuantity = $cartItem->qty + $product_quantity;
+            if ($newQuantity > $stock) {
+                return response()->json(['warning' => true, 'message' => 'Quantity exceeds available stock']);
+            }
+            Cart::update($cartItem->rowId, $newQuantity);
+            // return response()->json(['success' => true, 'message' => 'Cart updated successfully']);
+            // $response = [
+            //     'success' => true,
+            //     'view' => view('frontend.component.cart_counter')->render(),
+            //     'message' => 'Cart updated successfully',
+            // ];
+            // return response()->json($response);
+            return redirect()->route('cart.index')->with(['success'=>true,'message'=>'Item added successfully']);
+
+        }
+        Cart::add($product->id, $product->product_name, $product_quantity,  $product->price, ['images'=>$product->images,'stock'=>$stock]);
+        // return response()->json(['success' => true, 'message' => 'Item added successfully']);
+        // $response = [
+        //     'success' => true,
+        //     'view' => view('frontend.component.cart_counter')->render(),
+        //     'message' => 'Item added successfully',
+        // ];
+        // return response()->json($response);
+        return redirect()->route('cart.index')->with(['success'=>true,'message'=>'Item added successfully']);
+
     }
 }

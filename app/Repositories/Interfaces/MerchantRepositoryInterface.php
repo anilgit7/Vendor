@@ -7,4 +7,5 @@ Interface MerchantRepositoryInterface{
     public function create_product();
     public function get_category();
     public function product_list();
+    public function get_order();
 }

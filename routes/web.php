@@ -32,15 +32,24 @@ route::get('/merchant-register', function(){
 route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 /********************************** Customer Route ****************************************/
-route::group(['middleware' => 'customer'], function(){
+route::group([], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
-    route::get('/cart',[CartController::class,'index'])->name('cart.index');
-    route::post('/add-to-cart', [CartController::class,'addToCart'])->name('cart.add');
-    route::post('/cart/update/{id}',[CartController::class,'update'])->name('cart.update');
-    route::get('/delete/{id}',[CartController::class,'delete'])->name('cart.delete');
-    route::get('/delete-all',[CartController::class,'delete_all'])->name('cart.delete.all');
-    route::get('/checkout',[OrderController::class, 'checkout'])->name('order.checkout');
-    route::post('/order',[OrderController::class, 'order'])->name('order')->middleware('auth');
+    route::group(['middleware'=>['auth', 'customer']], function(){
+        route::get('/profile',[HomeController::class,'user_profile'])->name('user.profile');
+        route::get('/dashboard',[HomeController::class,'dashboard'])->name('user.dashboard');
+        route::get('/order',[HomeController::class,'order'])->name('user.order');
+        route::get('/order/{id}',[HomeController::class,'order_detail'])->name('user.order.detail');
+        route::get('/setting',[HomeController::class,'setting'])->name('user.setting');
+    });
+    route::group(['middleware'=> 'customer'],function(){
+        route::get('/cart',[CartController::class,'index'])->name('cart.index');
+        route::post('/add-to-cart', [CartController::class,'addToCart'])->name('cart.add');
+        route::post('/cart/update/{id}',[CartController::class,'update'])->name('cart.update');
+        route::get('/delete/{id}',[CartController::class,'delete'])->name('cart.delete');
+        route::get('/delete-all',[CartController::class,'delete_all'])->name('cart.delete.all');
+        route::get('/checkout',[OrderController::class, 'checkout'])->name('order.checkout');
+        route::post('/order',[OrderController::class, 'order'])->name('order');
+    });
     route::group(['prefix' => 'search'], function(){
         route::get('/search', [SearchController::class, 'search'])->name('search');
         route::get('/remove-search', [SearchController::class, 'remove_search'])->name('remove.search');
@@ -53,7 +62,7 @@ route::group(['middleware' => 'customer'], function(){
         route::group(['middleware' => 'auth'], function(){
             route::post('/order',[ProductController::class,'order'])->name('product.order');
             // route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
-            route::post('/list/buy/{id}/cart',[ProductController::class, 'buy_now'])->name('buy.now');
+            route::post('/buy',[ProductController::class, 'buy_now'])->name('buy.now');
             route::get('/checkout/success',[EsewaController::class, 'success'])->name('esewa.success');
             route::get('/checkout/failure',[EsewaController::class, 'failure'])->name('esewa.failure');
             route::get('/payment/response',[EsewaController::class, 'response'])->name('payment.response');
@@ -84,6 +93,9 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
     route::get('/edit-category/{id}',[AdminController::class, 'edit_category'])->name('admin.category.edit');
     route::post('/update-category/{id}',[AdminController::class, 'update_category'])->name('admin.category.update');
     route::get('/delete-category/{id}',[AdminController::class, 'delete_category'])->name('admin.category.delete');
+    route::get('/order',[AdminController::class,'order'])->name('admin.order');
+    route::get('/order/{id}',[AdminController::class,'order_detail'])->name('admin.order.detail');
+    route::post('/update-status/{id}',[AdminController::class,'order_status'])->name('admin.order.status');
 });
 
 /*********************************** Merchant Route ******************************************/
@@ -97,6 +109,9 @@ route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
         route::post('/update-product/{id}',[MerchantController::class, 'update_product'])->name('product.update');
         route::get('/delete-product/{id}', [MerchantController::class, 'delete_product'])->name('product.delete');
     });
+    route::get('/order',[MerchantController::class, 'order'])->name('merchant.order');
+    route::get('/order/{id}',[MerchantController::class,'order_detail'])->name('merchant.order.detail');
+    route::post('/update-status/{id}',[MerchantController::class,'order_status'])->name('merchant.order.status');
 });
 // Route::middleware([
 //     'auth:sanctum',

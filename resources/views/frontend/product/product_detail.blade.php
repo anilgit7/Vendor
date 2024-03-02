@@ -55,18 +55,10 @@
                                 </div>
                             </div>
                             <div class="w-full flex flex-col max-3xs:space-y-[.3rem] 3xs:flex-row justify-between gap-[.2rem] text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
-                                <form action="{{ route('buy.now',$product->id) }}" method="post">
+                                <form action="{{ route('buy.now') }}" method="post">
                                     @csrf
-                                    <input type="text" class="hidden" name="name" value="{{$product->product_name}}">
-                                    <input type="hidden" name="price" value="{{$product->price}}">
-                                    @auth
-                                        <input type="hidden" name="user_email" value="{{auth()->user()->email}}">
-                                        <input type="hidden" name="user_phone" value="{{auth()->user()->phone_number}}">
-                                    @endauth
+                                    <input type="hidden" name="product_id" value="{{$product->id}}" id="productId">
                                     <input type="hidden" value="1" name="quantity" id="buy-quantity">
-                                    <input type="hidden" name="image" value="{{$product->images}}">
-                                    <input type="hidden" name="merchant_email" value="{{$product->merchant_email}}">
-                                    
                                     <button type="submit" class="px-[1rem] xs:px-[1.5rem] sm:px-[2.5rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center">Buy now</button>
                                 </form>
                                 <form class="ajax-cart-form" id="addToCart" action="{{route("cart.add")}}" method="post">
