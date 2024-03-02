@@ -18,7 +18,6 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased select-none">
-        @include('message')
         <x-banner />
         <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->
