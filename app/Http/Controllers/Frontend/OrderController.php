@@ -31,7 +31,7 @@ class OrderController extends Controller
                 create_order($request);
                 return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
             }
-            if($request->payment == 'cash'){
+            if($request->payment == 'esewa'){
                 // statements to go to esewa
                 // create_order($request);
                 // return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
