@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="spacey-[.5rem]">
                                                 <h1 class="capitalize font-bold text-[1rem] 2xs:text-[.8rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">{{$productlist->product_name}}</h1>
-                                                <span class="mr-2 max-2xs:text-[.7rem] 2xs:text-[.8rem] font-semibold">{{$productlist->price}}</span>
+                                                <span class="mr-2 max-2xs:text-[.7rem] 2xs:text-[.8rem] font-semibold">Rs. {{$productlist->price}}/-</span>
                                             </div>
                                         </a>
                                         <div class="capitalize flex flex-col items-start font-semibold space-y-[.5rem]">

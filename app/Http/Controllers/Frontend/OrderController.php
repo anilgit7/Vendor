@@ -32,6 +32,24 @@ class OrderController extends Controller
                 return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
             }
             if($request->payment == 'esewa'){
+                $orderData = [
+                    'user_id' => Auth::user()->id,
+                    'billing_name' => $request->first_name . ' ' . $request->last_name,
+                    'order_tracking_id' => 'ot-' . date("U"),
+                    'billing_address' => 'from the map', // You may change this as needed
+                    'billing_email' => $request->email,
+                    'payment' => $request->payment,
+                    'shipping_cost' => $request->shipping,
+                    'tax' => $request->tax,
+                    'subtotal' => Cart::subtotal(),
+                    'total' => Cart::subtotal() + $request->shipping + $request->tax,
+                    'delivery_status' => 'pending',
+                ];
+        
+                // Store the order data in the session
+                session()->put('order_data', $orderData);
+                // dd($orderData);
+                return redirect()->route('payment');
                 // statements to go to esewa
                 // create_order($request);
                 // return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);

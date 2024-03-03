@@ -32,6 +32,7 @@ route::get('/merchant-register', function(){
 route::get('/logout',[HomeController::class,'logout'])->name('logout');
 
 /********************************** Customer Route ****************************************/
+
 route::group([], function(){
     route::get('/',[HomeController::class, 'index'])->name('home');
     route::group(['middleware'=>['auth', 'customer']], function(){
@@ -40,7 +41,11 @@ route::group([], function(){
         route::get('/order',[HomeController::class,'order'])->name('user.order');
         route::get('/order/{id}',[HomeController::class,'order_detail'])->name('user.order.detail');
         route::get('/setting',[HomeController::class,'setting'])->name('user.setting');
+        route::get('/payment', [EsewaController::class, 'initiatePayment'])->name('payment');
+        route::get('/payment/callback', [EsewaController::class, 'paymentCallback'])->name('payment.callback'); 
+        route::get('/esewa',[EsewaController::class,'esewa_view'])->name('esewa.view');
     });
+    
     route::group(['middleware'=> 'customer'],function(){
         route::get('/cart',[CartController::class,'index'])->name('cart.index');
         route::post('/add-to-cart', [CartController::class,'addToCart'])->name('cart.add');
@@ -63,10 +68,10 @@ route::group([], function(){
             route::post('/order',[ProductController::class,'order'])->name('product.order');
             // route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
             route::post('/buy',[ProductController::class, 'buy_now'])->name('buy.now');
-            route::get('/checkout/success',[EsewaController::class, 'success'])->name('esewa.success');
-            route::get('/checkout/failure',[EsewaController::class, 'failure'])->name('esewa.failure');
-            route::get('/payment/response',[EsewaController::class, 'response'])->name('payment.response');
-            route::get('/checkout',[ProductController::class, 'checkout'])->name('products.checkout');
+            
+            // route::get('/checkout',[ProductController::class, 'checkout'])->name('products.checkout');
+
+            
         });
     });
 });
