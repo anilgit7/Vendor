@@ -134,9 +134,41 @@
             </div>
             <div class="bg-white  p-[.8rem] 2xs:p-[2rem] space-y-[.3rem]">
                 <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000] text-[.65rem] 2xs:text-[.9rem] xs:[1.1rem] sm::text-[1.2rem]">Product description</h1>
-                <p class="text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem]">
+                <p class="text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem] sm:text-[1rem]">
                     @if($product->description)
-                        {{$product->description}}
+                        @php
+                            // Assuming $product->description contains your paragraph with 5000 characters
+
+                            // Define the maximum number of characters before splitting
+                            $maxCharacters = 500;
+
+                            // Initialize variables
+                            $newParagraph = '';
+                            $currentCharacterCount = 0;
+                        @endphp
+
+                        @foreach(str_split($product->description) as $character)
+                            @php
+                                // Append the current character to the new paragraph
+                                $newParagraph .= $character;
+                                $currentCharacterCount++;
+
+                                // Check if the maximum characters limit is reached
+                                if ($currentCharacterCount >= $maxCharacters) {
+                                    // If the current character is a period ".", split the paragraph
+                                    if ($character === '.') {
+                                        // Add a line break after the period
+                                        $newParagraph .= "\n";
+                                        $newParagraph .= "\n";
+                                        // Reset the character count
+                                        $currentCharacterCount = 0;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+
+                        {!! nl2br(e($newParagraph)) !!}
+
                     @else
                         No description found
                     @endif
