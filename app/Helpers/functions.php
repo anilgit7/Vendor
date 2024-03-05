@@ -86,6 +86,8 @@ function create_esewa_order(){
         ]);
     }
     Cart::destroy();
+    session()->forget('payment_data');
+    session()->forget('order_data');
 }
 
 function create_signature($message){
