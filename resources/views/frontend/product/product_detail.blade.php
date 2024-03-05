@@ -185,7 +185,6 @@
     const productPrice = document.getElementById('price');
     var count = 1;
     quantityCount.innerHTML = count;
-    // console.log(productQuantity.value)
     const handleIncrement = (price) => {
         if(count<=9){
             count++;
@@ -193,7 +192,6 @@
             productBuyQuantity.value = count;
             productAddQuantity.value = count;
             productPrice.innerHTML = 'Rs. ' + count*price;
-            // console.log(productQuantity.value)
         }
         else{
             count = 10;
@@ -211,14 +209,5 @@
 </script>
 
 <script>
-    var mapShower = document.getElementById('map-shower');
-    var mapViwer = document.getElementById('map-viwer');
-
-    function mapFunction(){
-        mapViwer.classList.remove("hidden");
-    }
-
-    function mapClose(){
-        mapViwer.classList.add('hidden');
-    }
+    
 </script>
