@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\RatingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AdminController;
@@ -63,6 +64,7 @@ route::group([], function(){
     route::get('/{category:slug}',[ProductController::class, 'list_product'])->name('product.list');
     route::group(['prefix' => 'product'], function () {
         route::get('/list',[ProductController::class, 'list_product'])->name('products.list');
+        route::post('/rating/create',[RatingController::class,'creation'])->name('products.rating.create');
         route::get('/details/{product:slug}',[ProductController::class, 'product_detail'])->name('product.detail');
         route::group(['middleware' => 'auth'], function(){
             route::post('/order',[ProductController::class,'order'])->name('product.order');
@@ -117,6 +119,8 @@ route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::get('/order',[MerchantController::class, 'order'])->name('merchant.order');
     route::get('/order/{id}',[MerchantController::class,'order_detail'])->name('merchant.order.detail');
     route::post('/update-status/{id}',[MerchantController::class,'order_status'])->name('merchant.order.status');
+    route::get('/rating',[RatingController::class,'list_rating'])->name('merchant.rating');
+    route::post('/rating/update/{id}',[RatingController::class,'update_status'])->name('merchant.rating.update');
 });
 // Route::middleware([
 //     'auth:sanctum',
