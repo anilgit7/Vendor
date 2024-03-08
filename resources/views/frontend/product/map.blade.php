@@ -43,6 +43,10 @@
                     title: 'Your geolocation',
                     icon: 'http://labs.google.com/ridefinder/images/mm_20_green.png'
                 });
+            },function(error) {
+                console.error("Error getting geolocation:", error);
+            }, {
+                enableHighAccuracy: true // Enable high accuracy mode
             });
         }
     }

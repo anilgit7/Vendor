@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Rating;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,10 +43,12 @@ class ProductController extends Controller
     }
     public function product_detail(Product $product){
         $product = Product::where('slug',$product->slug)->first();
+        $relates = Product::where('category_id',$product->category_id)->inRandomOrder()->take(8)->get();
+        $ratings = $product->ratings()->where('status','show')->get();
         if (!$product) {
             return redirect()->back()->with('error','Product not found');
         }
-        return view('frontend.product',compact('product'));
+        return view('frontend.product',compact('product','relates','ratings'));
     }
     public function buy_now(Request $request){
         $stock = 10;
@@ -74,25 +77,10 @@ class ProductController extends Controller
                 return response()->json(['warning' => true, 'message' => 'Quantity exceeds available stock']);
             }
             Cart::update($cartItem->rowId, $newQuantity);
-            // return response()->json(['success' => true, 'message' => 'Cart updated successfully']);
-            // $response = [
-            //     'success' => true,
-            //     'view' => view('frontend.component.cart_counter')->render(),
-            //     'message' => 'Cart updated successfully',
-            // ];
-            // return response()->json($response);
             return redirect()->route('cart.index')->with(['success'=>true,'message'=>'Item added successfully']);
 
         }
         Cart::add($product->id, $product->product_name, $product_quantity,  $product->price, ['images'=>$product->images,'stock'=>$stock]);
-        // return response()->json(['success' => true, 'message' => 'Item added successfully']);
-        // $response = [
-        //     'success' => true,
-        //     'view' => view('frontend.component.cart_counter')->render(),
-        //     'message' => 'Item added successfully',
-        // ];
-        // return response()->json($response);
         return redirect()->route('cart.index')->with(['success'=>true,'message'=>'Item added successfully']);
-
     }
 }

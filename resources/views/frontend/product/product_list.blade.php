@@ -41,8 +41,8 @@
                     </select>
                 </form>
             </div>
-            <div class="flex flex-row justify-between space-x-[6rem] xl:space-x-[9rem] pb-[5rem]">
-                <div class="w-max">
+            <div class="flex flex-col space-y-[1rem] lg:space-y-0 lg:flex-row lg:space-x-[1rem] pb-[5rem]">
+                <div class="w-full lg:w-max">
                     <h1 class="bg-[#353935] text-[#F28C28] flex items-center py-[1rem] px-[1rem] w-full">
                         <svg class="h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path>
@@ -50,15 +50,15 @@
                         <span>Category</span>
                     </h1>
                     <hr>
-                    <div id="categoryDropDowwn" class="flex bg-[#F28C28] flex flex-col w-max">
+                    <div id="categoryDropDowwn" class="flex bg-[#F28C28] flex flex-row flex-wrap lg:flex-nowrap lg:flex-col w-full lg:w-max">
                         @foreach($categories as $item)
-                            <a href="{{ route('product.list', $item->slug) }}" class="capitalize py-[.5rem] pl-[1rem] pr-[1rem] xl:pr-[2rem] hover:text-[#F28C28] hover:bg-[#353935] {{($item->slug == $category->slug) ? 'bg-[#353935] text-[#F28C28]':''}} ">{{$item->category_name}}</a>
-                            <hr>
+                            <a href="{{ route('product.list', $item->slug) }}" class="max-lg:border-b max-lg:border-white capitalize py-[.5rem] pl-[1rem] pr-[1rem] xl:pr-[2rem] hover:text-[#F28C28] hover:bg-[#353935] {{($item->slug == $category->slug) ? 'bg-[#353935] text-[#F28C28]':''}} ">{{$item->category_name}}</a>
+                            <hr class="max-lg:h-auto max-lg:w-[1px] max-lg:bg-white">
                         @endforeach
                         
                     </div>
                 </div>
-                <div>
+                <div class="w-full">
                     <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-[2rem] xl:gap-[1.5rem] w-full">
                         @if(!$productlists)
                         <h1 class="capitalize font-bold text-[1rem] 2xs:text-[1.5rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">No product found</h1>
@@ -68,7 +68,7 @@
                                     <div class="flex flex-col space-y-[1rem] group">
                                         <a href="{{ route('product.detail',$productlist->slug) }}" class="flex flex-col space-y-[1rem]">
                                             <div  class="h-[5rem] 3xs:h-[6.5rem] 2xs:h-[9.5rem] xs:h-[8.25rem] sm:h-[9.25rem] md:h-[11.25rem] lg:h-[6.25rem] xl:h-[8.5rem] 2xl:h-[9.25rem] w-full">
-                                                <img src="/images/backend/products/{{$productlist->images}}" alt="" class="h-full w-full object-fill group-hover:object-cover lg:object-cover">
+                                                <img src="/images/backend/products/{{$productlist->images}}" alt="" class="h-full w-full object-contain">
                                             </div>
                                             <div class="spacey-[.5rem]">
                                                 <h1 class="capitalize font-bold text-[1rem] 2xs:text-[.8rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">{{$productlist->product_name}}</h1>

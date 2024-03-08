@@ -111,7 +111,9 @@
             @elseif(\Route::current()->getName() == 'merchant.order')
                 @include('backend.merchant.order.view')
             @elseif(\Route::current()->getName() == 'merchant.order.detail')
-                @include('backend.merchant.order.order_detail') 
+                @include('backend.merchant.order.order_detail')
+            @elseif(\Route::current()->getName() == 'merchant.rating')
+                @include('backend.merchant.rating.view') 
             @endif
         </div>
     </div>
