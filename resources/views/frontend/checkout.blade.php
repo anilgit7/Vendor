@@ -7,8 +7,8 @@
     <div class="flex flex-col lg:flex-row px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="lg:min-h-screen w-full lg:mr-2 bg-transparent pt-[1rem] pb-[2rem] lg:px-[2rem] !bg-fixed !bg-no-repeat !bg-center !bg-cover">
             <div class="bg-white max-2xs:px-[1rem] p-[1rem] space-y-[1.6rem] shadow-[0px_0px_20px_5px_rgba(0,0,0,0.35)_inset]">
-                <h1 class="max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Checkout</h1>
-                <form action="{{route('order')}}" method="POST">
+                <h1 class="anime max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Checkout</h1>
+                <form class="anime" action="{{route('order')}}" method="POST">
                 @csrf
                     @php
                         $shipping = 30;
@@ -69,7 +69,7 @@
         </div>
         <div class="h-max bg-transparent lg:min-w-[24rem] lg:ml-auto max-lg:pt-0 py-[1rem] !bg-fixed !bg-no-repeat !bg-center !bg-cover">
             <div class="bg-transparent p-[1rem]">
-                <h1 class="max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Order</h1>
+                <h1 class="anime max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Order</h1>
                 <div class="space-y-[1rem]" id="cartItemList">
                     <hr class="h-[1rem]">
                     <div class="space-y-[.54rem]">
@@ -81,7 +81,7 @@
                             @endphp
                             <div class="space-y-[.55rem] h-[20rem] lg:h-[10rem] overflow-y-scroll scrollbar-hide">
                                 @foreach(Cart::content() as $cart)
-                                    <div class="space-y-[1rem] group">
+                                    <div class="anime space-y-[1rem] group">
                                         <div class="grid grid-cols-3 gap-[2rem] lg:gap-[1rem]">
                                             <div class="bg-[#f7f7f7] h-[2rem] h-[5rem] w-[2rem] w-[5rem] min-md:mx-auto p-2">
                                                 <img src="/images/backend/products/{{$cart->options->images}}"class="h-full rounded-[.5rem] w-fit mx-auto">
@@ -108,8 +108,8 @@
                                 @endforeach
                             </div>
                         </div>
-                        <hr class="h-[1rem]">
-                        <div class="space-y-[2.5rem]">
+                        <hr class="anime h-[1rem]">
+                        <div class="anime space-y-[2.5rem]">
                             <div class="bg-[#f9fafb] max-2xs:px-[.5rem] 2xs:px-[1rem] sm:px-[2rem] py-[1.9rem] rounded-[.5rem] space-y-[.9rem]">
                                 <div class="flex justify-between">
                                     <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Subtotal</h1>

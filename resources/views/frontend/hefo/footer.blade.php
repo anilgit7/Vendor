@@ -1,7 +1,7 @@
 <footer class="bg-[#F28C28] w-full py-[2rem]">
     <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="grid grid-cols-1 max-sm:space-y-[2rem] sm:grid-cols-3">
-            <div class="flex flex-col max-sm:items-center space-y-[.5rem]">
+            <div class="anime flex flex-col max-sm:items-center space-y-[.5rem]">
                 <h1 class="capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[1.2rem]">about us</h1>
                 <div class="flex flex-col max-sm:items-center space-y-[.3rem]">
                     <a href="#" class="capitalize font-semibold"><span class="hover:border-b">about d-mart</span></a>
@@ -10,7 +10,7 @@
                     <a href="#" class="capitalize font-semibold"><span class="hover:border-b">investors policies</span></a>
                 </div>
             </div>
-            <div class="flex flex-col max-sm:items-center space-y-[.5rem] sm:mx-auto">
+            <div class="anime flex flex-col max-sm:items-center space-y-[.5rem] sm:mx-auto">
                 <h1 class="capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[1.2rem]">Get help</h1>
                 <div class="flex flex-col max-sm:items-center space-y-[.3rem]">
                     <a href="#" class="capitalize font-semibold"><span class="hover:border-b">order status</span></a>
@@ -21,7 +21,7 @@
                     <a href="#" class="capitalize font-semibold"><span class="hover:border-b">contact us</span></a>
                 </div>
             </div>
-            <div class="flex flex-col max-sm:items-center space-y-[.5rem] sm:ml-auto">
+            <div class="anime flex flex-col max-sm:items-center space-y-[.5rem] sm:ml-auto">
                 <h1 class="capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[1.2rem]">Stay connect</h1>
                 <div class="flex flex-col max-sm:items-center space-y-[.7rem]">
                     <a href="#" class="capitalize font-semibold hover:border-b flex items-center w-max">

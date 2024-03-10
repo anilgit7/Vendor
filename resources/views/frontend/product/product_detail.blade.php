@@ -1,7 +1,7 @@
 <div class="py-[3rem]">
     <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="flex flex-col space-y-[3rem]">
-            <div class="bg-white flex flex-col 2xl:flex-row justify-between max-2xl:space-y-[1rem] p-[.8rem] 2xs:p-[2rem]">
+            <div class="anime bg-white flex flex-col 2xl:flex-row justify-between max-2xl:space-y-[1rem] p-[.8rem] 2xs:p-[2rem]">
                 <div class="flex flex-col lg:flex-row max-2xl:justify-between 2xl:gap-[2rem] max-lg:space-y-[1rem]">
                     <div class="h-[6rem] 3xs:h-[8rem] 2xs:h-[12rem] xs:h-[18rem] sm:h-[30rem] lg:h-[24rem] w-[6rem] 3xs:w-[8rem] 2xs:w-[12rem] xs:w-[18rem] max-sm:mx-auto sm:w-[30rem] lg:w-[24rem]">
                         <img src="/images/backend/products/{{$product->images}}" alt="" class="h-full w-full">
@@ -83,7 +83,7 @@
                                     <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
                                 </svg>
                             </button>
-                            <h1 class="break mr-[3rem] font-semibold">koteshwor, kathmandu fnksdf dfadfad dfa </h1>
+                            <h1 class="break mr-[3rem] font-semibold" id="formattedAddress">Enable address permission</h1>
                             <div class="ml-auto">
                                 <span>Change</span>
                             </div>
@@ -132,8 +132,8 @@
                 </div>
             </div>
             <div class="bg-white  p-[.8rem] 2xs:p-[2rem] space-y-[.3rem]">
-                <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000] text-[.65rem] 2xs:text-[.9rem] xs:[1.1rem] sm::text-[1.2rem]">Product description</h1>
-                <p class="text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem] sm:text-[1rem]">
+                <h1 class="anime font-bold drop-shadow-[0px_0px_.5px_#000000] text-[.65rem] 2xs:text-[.9rem] xs:[1.1rem] sm::text-[1.2rem]">Product description</h1>
+                <p class="anime text-[.55rem] 3xs:text-[.62rem] 2xs:text-[.75rem] xs:text-[.9rem] sm:text-[1rem]">
                     @if($product->description)
                         @php
                             // Assuming $product->description contains your paragraph with 5000 characters
@@ -181,10 +181,10 @@
             @include('frontend.product.review')
             @if($relates)
                 <div class="w-full space-y-[1rem]">
-                    <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000] text-[1rem] 2xs:text-[1.3rem] sm:text-[1.4rem]">Related Products</h1>
+                    <h1 class="anime font-bold drop-shadow-[0px_0px_.5px_#000000] text-[1rem] 2xs:text-[1.3rem] sm:text-[1.4rem]">Related Products</h1>
                     <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-[2rem] xl:gap-[1.5rem] w-full">
                         @foreach($relates as $row)
-                            <div class="bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
+                            <div class="anime bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
                                 <div class="flex flex-col space-y-[1rem] group">
                                     <a href="{{ route('product.detail',$row->slug) }}" class="flex flex-col space-y-[1rem]">
                                         <div  class="h-[5rem] 3xs:h-[6.5rem] 2xs:h-[9.5rem] xs:h-[8.25rem] sm:h-[9.25rem] md:h-[11.25rem] lg:h-[6.25rem] xl:h-[8.5rem] 2xl:h-[9.25rem] w-full">

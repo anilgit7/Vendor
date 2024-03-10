@@ -1,4 +1,4 @@
-<div class="pt-[1rem] pb-[3rem]">
+<div class="anime pt-[1rem] pb-[3rem]">
     <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="bg-white py-[2rem] px-[2rem] space-y-[1rem]">
             <h1 class="capitalize font-bold text-[1.1rem] 2xs:text-[1.2rem] xs:text-[1.4rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide">Best Seller</h1>

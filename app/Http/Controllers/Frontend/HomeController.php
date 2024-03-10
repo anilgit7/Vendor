@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -13,26 +14,27 @@ use App\Models\User;
 class HomeController extends Controller
 {
     public function index(){
-        $categories = Category::get()->all();
-        return view('frontend.home',compact('categories'));
+        $categories = Category::all();
+        $productDatas = Product::inRandomOrder()->take(7)->get();
+        return view('frontend.home',compact('categories','productDatas'));
     }
     public function logout(){
         Session::flush();
         Auth::logout();
-        return redirect()->route("home");
+        return redirect()->route("home")->with(['success'=>true, 'message'=>'Sucessfully logged out.']);;
     }
     public function userfront(){
         if(Auth::check()){
             // $ut = User::findOrFail(Auth::user()->id);
             $ut=Auth::user()->user_type;
             if($ut==0){
-                return redirect()->route('admin.dashboard')->with(['message'=>'Sucessfully logged in']);
+                return redirect()->route('admin.dashboard')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
             }
             if($ut==1){
-                return redirect()->route('merchant.dashboard')->with(['message'=>'Sucessfully logged in']);
+                return redirect()->route('merchant.dashboard')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
             }
             if($ut==2){
-                return redirect()->route('home')->with(['message'=>'Sucessfully logged in']);
+                return redirect()->route('home')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
             }
         }
         else{

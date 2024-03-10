@@ -1,4 +1,4 @@
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
+<div id="default-carousel" class="anime relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative overflow-hidden h-[13.25rem] 2xs:h-[14.5rem] xs:h-[16.75rem] sm:h-[20rem] md:h-[23.25rem] lg:h-[25.5rem] xl:h-[28.75rem] 2xl:h-[31.25rem]">
          <!-- Item 1 -->

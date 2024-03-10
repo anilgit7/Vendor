@@ -1,5 +1,5 @@
 @auth
-    <div class="bg-white p-[2rem] flex flex-col justify-center items-center space-y-[.5rem]">
+    <div class="anime bg-white p-[2rem] flex flex-col justify-center items-center space-y-[.5rem]">
         <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000] text-[1rem] 2xs:text-[1.3rem] sm:text-[1.4rem]">Write a Review</h1>
         <a href="#review-form" class="px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#efefef] hover:bg-[#f28c28] max-xs:text-center" onclick="reviewFormViewer()">
             <span class="">Review</span>
@@ -8,7 +8,7 @@
 @endauth
 @if($ratings)
     @foreach ($ratings as $rating)
-        <div class="bg-white flex flex-col lg:flex-row max-lg:space-y-[1rem] p-[2rem]">
+        <div class="anime bg-white flex flex-col lg:flex-row max-lg:space-y-[1rem] p-[2rem]">
             <div class="flex flex-col xs:flex-row mr-[1.2rem]">
                 <div class="h-[2.5rem] w-[2.5rem] xs:h-[3rem] xs:w-[3rem] mr-[.8rem]">
                     @if($rating->user->profile_photo_path)
@@ -39,7 +39,7 @@
     @endforeach
 @endif
 @auth
-<div class="hidden bg-white" id="review-form-container">
+<div class="hidden anime bg-white" id="review-form-container">
     <button class="flex ml-auto px-[1rem] xs:px-[1.2rem] sm:px-[1.9rem] py-[.6rem] bg-[#f3f4f6] hover:bg-[#f28c28] max-xs:text-center" onclick="reviewFormViewer()">
         <span class="">X</span>
     </button>
