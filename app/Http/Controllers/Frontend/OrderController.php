@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Order_Item;
+use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,14 @@ class OrderController extends Controller
 {
     public function checkout(){
         if(Cart::count()>0){
-            return view('frontend.checkout');
+            if(Auth::check()){
+                $user = User::where('id',auth()->user()->id)->first();
+                return view('frontend.checkout',compact('user'));
+            }
+            else{
+                $user = '';
+                return view('frontend.checkout',compact('user'));
+            }
         }
         else{
             if(session()->has('success')){
@@ -27,6 +35,12 @@ class OrderController extends Controller
 
     public function order(Request $request){
         if(auth()->check()) {
+            // $user_id = auth()->user()->id;
+            // $user = User::find($user_id);
+            // $user->latitude = $request->latitude;
+            // $user->longitude = $request->longitude;
+            // $user->address = $request->address;
+            // $user->save();
             if($request->payment == 'cash'){
                 create_order($request);
                 return redirect()->back()->with(['success'=>true,'message'=>'Order has been placed.']);
@@ -34,9 +48,9 @@ class OrderController extends Controller
             if($request->payment == 'esewa'){
                 $orderData = [
                     'user_id' => Auth::user()->id,
-                    'billing_name' => $request->first_name . ' ' . $request->last_name,
+                    'billing_name' => $request->name,
                     'order_tracking_id' => 'ot-' . date("U"),
-                    'billing_address' => 'from the map', // You may change this as needed
+                    'billing_address' => $request->address,
                     'billing_email' => $request->email,
                     'payment' => $request->payment,
                     'shipping_cost' => $request->shipping,
@@ -44,6 +58,8 @@ class OrderController extends Controller
                     'subtotal' => Cart::subtotal(),
                     'total' => Cart::subtotal() + $request->shipping + $request->tax,
                     'delivery_status' => 'pending',
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
                 ];
         
                 // Store the order data in the session

@@ -21,24 +21,20 @@
                     <input type="hidden" value="{{$shipping}}" name="shipping">
                     <input type="hidden" name="tax" value="{{$taxAmount}}">
                     <div class="mb-4 space-y-[1rem]">
-                        <div class="grid grid-cols-1 gap-[2rem] sm:gap-0 sm:grid-cols-2">
+                        <div class="grid grid-cols-1 gap-[2rem] sm:gap-0 sm:grid-cols-1">
                             <h3 class="text-[.9rem] sm:text-[1.1rem] text-[#222] text-start px-2">
                                 <div class="relative z-0">
-                                    <input type="text" id="first_name" class="block form-one capitalize text-center px-0 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" name="first_name" minlength="2" maxlength="50" required />
-                                    <label for="first_name" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">First Name</label>
-                                </div>
-                            </h3>
-                            <h3 class="text-[.9rem] sm:text-[1.1rem] text-[#222] text-start px-2">
-                                <div class="relative z-0">
-                                    <input type="text" id="last_name" class="block form-one capitalize text-center px-0 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" name="last_name" minlength="2" maxlength="50" />
-                                    <label for="last_name" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Last Name</label>
+                                    <input type="text" id="name" class="block form-one capitalize px-2 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" name="name" minlength="2" maxlength="50" value="{{ $user ? $user->name : '' }}" required />
+                                    <label for="name" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Full Name</label>
                                 </div>
                             </h3>
                         </div>
                         <div class=" sm:gap-0 sm:grid-cols-2">
                             <h3 class="text-[.9rem] sm:text-[1.1rem] text-[#222] text-start px-2">
                                 <div class="relative z-0">
-                                    <input type="text" id="address" class="block form-one capitalize text-center px-0 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" value="" name="address" minlength="2" maxlength="50" disabled required />
+                                    <input type="hidden" name="latitude" id="latitude" value="{{ $user ? $user->latitude : '' }}">
+                                    <input type="hidden" id="longitude" name="longitude" value="{{ $user ? $user->longitude : '' }}">
+                                    <input type="text" id="address" class="block form-one capitalize px-2 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" value="" name="address" minlength="2" maxlength="250" value="{{ $user ? $user->address : '' }}" required onclick="mapShow()"/>
                                     <label for="address" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Address</label>
                                 </div>
                             </h3>
@@ -46,7 +42,7 @@
                         <div class=" sm:gap-0 sm:grid-cols-2">
                             <h3 class="text-[.9rem] sm:text-[1.1rem] text-[#222] text-start px-2">
                                 <div class="relative z-0">
-                                    <input type="email" id="email" class="block form-one capitalize text-center px-0 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" name="email" minlength="2" maxlength="50" required />
+                                    <input type="email" id="email" class="block form-one px-2 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" name="email" minlength="2" maxlength="50" value="{{ $user ? $user->email : '' }}" required />
                                     <label for="email" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Email</label>
                                 </div>
                             </h3>
@@ -54,7 +50,7 @@
                         <div class=" sm:gap-0 sm:grid-cols-2">
                             <h3 class="text-[.9rem] sm:text-[1.1rem] text-[#222] text-start px-2">
                                 <div class="relative z-0">
-                                    <select name="payment" class="block form-one capitalize text-center px-0 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" id="payment">
+                                    <select name="payment" class="block form-one capitalize px-2 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" id="payment">
                                         <option value="esewa">Esewa</option>
                                         <option value="cash" selected>Cash on delivery</option>
                                     </select>
@@ -152,5 +148,4 @@
         <h1>No records found</h1>
     </div>
 @endif
-
 @endsection

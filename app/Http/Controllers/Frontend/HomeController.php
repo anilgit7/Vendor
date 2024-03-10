@@ -67,4 +67,24 @@ class HomeController extends Controller
     public function setting(){
         return view('frontend.profile');
     }
+
+    public function address(){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('frontend.profile',compact('user'));
+    }
+    public function address_edit(){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('frontend.profile',compact('user'));
+    }
+    public function address_store(Request $request){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $user->latitude = $request->latitude;
+        $user->longitude = $request->longitude;
+        $user->address = $request->address;
+        $user->save();
+        return redirect()->route('user.dashboard')->with(['success'=>true, 'message'=>'Address updated successfully.']);
+    }
 }

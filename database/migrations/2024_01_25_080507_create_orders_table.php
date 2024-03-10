@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('billing_name');
             $table->string('billing_address');
+            $table->decimal('latitude', 15, 7); // 15 total digits, 13 of which are after the decimal point
+            $table->decimal('longitude', 15, 7);
             $table->string('billing_email');
             $table->string('payment');
             $table->integer('subtotal')->nullable();

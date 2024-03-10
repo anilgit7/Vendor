@@ -1,12 +1,12 @@
 <div class="bg-[#f3f4f6] w-full px-[2rem] overflow-scroll">
     <div class="py-[2rem] space-y-[1rem]">
         <div class="space-y-[1.5rem]">
-            @if(empty($orders))
-                <h1 class="text-red-700 font-bold text-[1rem] 2xs:text-[1.2rem]">No orders has been placed.</h1>
+            @if($orders->isEmpty())
+                <h1 class="anime text-red-700 font-bold text-[1rem] 2xs:text-[1.2rem]">No orders has been placed.</h1>
             @else
                 <div class="overflow-scroll scrollbar-hide">
                     <table class="w-full gap-[2rem] space-x-[2rem] rounded-md" id="product_table" style="text-wrap: nowrap;">
-                        <thead>
+                        <thead class="anime">
                             <tr class="border-b">
                                 <th class="text-start pr-[2rem] pb-[.5rem]">S.N</th>
                                 <th class="text-start pr-[2rem] pb-[.5rem]">Customer</th>
@@ -20,7 +20,7 @@
                         <tbody id="product_data">
                             @php $c=1; @endphp
                             @foreach($orders as $order)
-                            <tr class="border-b">
+                            <tr class="border-b anime">
                                 <td class="py-[.5rem] pr-[2rem]">{{$c}}</td>
                                 <td class="py-[.5rem] pr-[2rem] capitalize">{{$order->user->name}}</td>
                                 <td>{{$order->order_tracking_id}}</td>
@@ -37,6 +37,5 @@
                 </div>
             @endif
         </div>
-
     </div>
 </div>
