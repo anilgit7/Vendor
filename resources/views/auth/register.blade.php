@@ -19,11 +19,9 @@
                             </div>
 
                             <div class="mt-4">
-                                <select id="address" placeholder="Address" class="block mt-1 w-full rounded-[.5rem]" type="text" name="address" required autofocus autocomplete="address">
-                                    <option class="capitalize" value="kathamndu" selected>Kathamndu</option>
-                                    <option class="capitalize" value="bhaktapur">Bhaktapur</option>
-                                    <option class="capitalize" value="lalitpur">Lalitpur</option>
-                                </select>
+                                <input type="hidden" name="latitude" id="latitude">
+                                <input type="hidden" id="longitude" name="longitude">
+                                <x-input id="address" placeholder="Address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required onclick="mapShow()"/>
                             </div>
 
                             <div class="mt-4 hidden">

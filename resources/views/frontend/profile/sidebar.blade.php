@@ -13,6 +13,8 @@
         <hr class="max-lg:w-[1px] max-lg:h-auto max-lg:bg-white">
         <a href="{{ route('user.setting') }}" class="capitalize py-[.5rem] pl-[1rem] pr-[1rem] xl:pr-[2rem] hover:text-[#F28C28] hover:bg-[#353935] {{(Route::currentRouteName() == 'user.setting') ? 'bg-[#353935] text-[#F28C28]':''}} ">Setting</a>
         <hr class="max-lg:w-[1px] max-lg:h-auto max-lg:bg-white">
+        <a href="{{ route('user.address') }}" class="capitalize py-[.5rem] pl-[1rem] pr-[1rem] xl:pr-[2rem] hover:text-[#F28C28] hover:bg-[#353935] {{(request()->is('address*')) ? 'bg-[#353935] text-[#F28C28]':''}} ">Address</a>
+        <hr class="max-lg:w-[1px] max-lg:h-auto max-lg:bg-white">
         
     </div>
 </div>

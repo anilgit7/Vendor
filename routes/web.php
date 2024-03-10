@@ -45,6 +45,9 @@ route::group([], function(){
         route::get('/order',[HomeController::class,'order'])->name('user.order');
         route::get('/order/{id}',[HomeController::class,'order_detail'])->name('user.order.detail');
         route::get('/setting',[HomeController::class,'setting'])->name('user.setting');
+        route::get('/address',[HomeController::class, 'address'])->name('user.address');
+        route::get('/address/edit',[HomeController::class, 'address_edit'])->name('user.address.edit');
+        route::post('/address/store',[HomeController::class,'address_store'])->name('user.address.store');
         route::get('/payment', [EsewaController::class, 'initiatePayment'])->name('payment');
         route::get('/payment/callback', [EsewaController::class, 'paymentCallback'])->name('payment.callback'); 
         route::get('/esewa',[EsewaController::class,'esewa_view'])->name('esewa.view');

@@ -7,4 +7,8 @@
     @include('frontend.profile.order_detail')
 @elseif(Route::currentRouteName() == 'user.setting')
     @include('frontend.profile.setting')
+@elseif(Route::currentRouteName() == 'user.address')
+    @include('frontend.profile.address')
+@elseif(Route::currentRouteName() == 'user.address.edit')
+    @include('frontend.profile.address_edit')
 @endif

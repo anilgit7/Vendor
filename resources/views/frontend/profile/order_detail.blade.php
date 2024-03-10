@@ -2,14 +2,14 @@
     <div class="py-[2rem] space-y-[1rem]">
         <div class="space-y-[1.5rem]">
             @if(empty($order->orderItems))
-                <h1 class="text-red-700 font-bold text-[1rem] 2xs:text-[1.2rem]">Details not found.</h1>
+                <h1 class="anime text-red-700 font-bold text-[1rem] 2xs:text-[1.2rem]">Details not found.</h1>
             @else
             <div class="flex flex-col space-y-[1rem] pb-[2rem]">
                 <div class="space-y-[1.54rem]">
                     <div class="space-y-[.2rem]">
                         <div class="space-y-[1.55rem]">
                             @foreach($orderItems as $orderItem)
-                                <div class="space-y-[2.5rem]">
+                                <div class="anime space-y-[2.5rem]">
                                     <div class="grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-6 gap-[2rem] lg:gap-[5rem]">
                                         <div class="bg-[#f7f7f7] h-[5rem] xs:h-[7rem] sm:h-[8rem] w-[5rem] xs:w-[7rem] sm:w-[8rem] rounded-[.5rem] col-span-1 min-md:mx-auto p-2">
                                             <img src="/images/backend/products/{{$orderItem->product->images}}"class="h-full rounded-[.5rem] w-fit mx-auto">
@@ -28,7 +28,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="lg:pl-[9.5rem] space-y-[2.5rem]">
+                    <div class="anime lg:pl-[9.5rem] space-y-[2.5rem]">
                         <div class="bg-[#f9fafb] max-2xs:px-[.5rem] 2xs:px-[1rem] sm:px-[2rem] py-[1.9rem] rounded-[.5rem] space-y-[.9rem]">
                             <div class="flex justify-between">
                                 <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Subtotal</h1>

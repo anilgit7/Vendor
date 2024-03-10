@@ -78,15 +78,15 @@
                     <div class="space-y-[1.1rem]">
                         <h1 class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Delivery</h1>
                         <div class="flex items-start capitalize">
-                            <button class="h-full relative" id="map-shower" onclick="mapFunction()">
+                            <div class="h-full relative">
                                 <svg class="h-4 mr-2 mt-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                     <path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
                                 </svg>
-                            </button>
-                            <h1 class="break mr-[3rem] font-semibold" id="formattedAddress">Enable address permission</h1>
-                            <div class="ml-auto">
-                                <span>Change</span>
                             </div>
+                            <h1 class="break mr-[3rem] font-semibold" id="formattedAddress">Add delivery location</h1>
+                            <!-- <div class="ml-auto">
+                                <button id="map-shower" onclick="mapShow()">Change</button>
+                            </div> -->
                         </div>
                         <div class="flex items-center capitalize">
                             <h1 class="font-semibold">delivery cost</h1>
@@ -225,7 +225,46 @@
         </div>
     </div>
 </div>
-@include('frontend.product.map')
+
+<!--******************** Maps Address function ******************-->
+<script>
+    window.onload = function() {
+        // Check if geolocation is supported by the browser
+        if (navigator.geolocation) {
+            // Use geolocation to get current position
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Get latitude and longitude from the position object
+                var latLng = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                // Call getAddress function with the obtained latitude and longitude
+                getAddress(latLng);
+            }, function(error) {
+                // Handle errors if geolocation fails
+                console.error('Error getting location:', error);
+            });
+        } else {
+            // Handle case where geolocation is not supported by the browser
+            console.error('Geolocation is not supported by this browser.');
+        }
+    };
+    function getAddress(latLng) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'location': latLng }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    document.getElementById('formattedAddress').innerHTML = results[0].formatted_address;
+                } else {
+                    document.getElementById('formattedAddress').innerHTML = 'No results found';
+                }
+            } else {
+                document.getElementById('formattedAddress').innerHTML = 'Geocoder failed due to: ' + status;
+            }
+        });
+    }
+</script>
+<!--*****************************************************************-->
 <script>
     const quantityCount = document.getElementById("quantity_count");
     const productBuyQuantity = document.getElementById("buy-quantity");

@@ -1,5 +1,5 @@
 <header class="bg-[#F28C28] w-full py-[.55rem] z-[100000]" id="fixed-header">
-    <div class="anime px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
+    <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="space-y-[.4rem]">
             <div class="space-y-[.4rem]" id="hide-content">
                 <div class="grid grid-cols-1 3xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-12 text-[#353935] text-[.6rem] 2xs:text-[.8rem] xs:text-[.9rem] font-semibold">

@@ -33,6 +33,9 @@ class CreateNewUser implements CreatesNewUsers
             'user_type'=>$input['user_type'],
             'status' =>$input['status'],
             'phone_number'=>$input['phone_number'],
+            'address' => $input['address'],
+            'latitude' => $input['latitude'],
+            'longitude' => $input['longitude']
         ]);
     }
 }

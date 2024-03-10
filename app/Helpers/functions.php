@@ -40,10 +40,11 @@ function find_product($id){
 function create_order($request){
     $order = new Order;
     $order->user_id = Auth::user()->id;
-    $order->billing_name= $request->first_name.' '.$request->last_name;
+    $order->billing_name= $request->name;
     $order->order_tracking_id = 'ot-'.date("U");
-    // $order->billing_address = $request->address;
-    $order->billing_address = 'from the map';
+    $order->billing_address = $request->address;
+    $order->latitude = $request->latitude;
+    $order->longitude = $request->longitude;
     $order->billing_email = $request->email;
     $order->payment = $request->payment;
     $order->shipping_cost = $request->shipping;
@@ -71,6 +72,8 @@ function create_esewa_order(){
     $order->billing_name= $order_data['billing_name'];
     $order->order_tracking_id = 'ot-'.date("U");
     $order->billing_address = $order_data['billing_address'];
+    $order->latitude = $order_data['latitude'];
+    $order->longitude = $order_data['longitude'];
     $order->billing_email = $order_data['billing_email'];
     $order->payment = $order_data['payment'];
     $order->shipping_cost = $order_data['shipping_cost'];
