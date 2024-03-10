@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\MapController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\RatingController;
@@ -30,7 +31,9 @@ route::get('/userchecking',[HomeController::class,'userfront']);
 route::get('/merchant-register', function(){
     return view('auth.merchant_register');
 })->name('merchant.register')->middleware('logout');
-route::get('/logout',[HomeController::class,'logout'])->name('logout');
+route::get('/logout',[HomeController::class,'logout'])->name('user.logout');
+
+route::post('/store-latlng',[MapController::class,'store'])->name('store.latlng');
 
 /********************************** Customer Route ****************************************/
 
@@ -68,12 +71,7 @@ route::group([], function(){
         route::get('/details/{product:slug}',[ProductController::class, 'product_detail'])->name('product.detail');
         route::group(['middleware' => 'auth'], function(){
             route::post('/order',[ProductController::class,'order'])->name('product.order');
-            // route::post('/list/{id}/cart',[ProductController::class, 'cart'])->name('product.cart');
             route::post('/buy',[ProductController::class, 'buy_now'])->name('buy.now');
-            
-            // route::get('/checkout',[ProductController::class, 'checkout'])->name('products.checkout');
-
-            
         });
     });
 });
@@ -122,12 +120,3 @@ route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::get('/rating',[RatingController::class,'list_rating'])->name('merchant.rating');
     route::post('/rating/update/{id}',[RatingController::class,'update_status'])->name('merchant.rating.update');
 });
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });

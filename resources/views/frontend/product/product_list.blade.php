@@ -1,35 +1,15 @@
 <script>
-    // function sort_by(value){
-    //     // console.log(value);
-    //     var sort = value;
-    //     // console.log(sort);
-    //     $.ajax({
-    //         url:$(this).parent().attr('action'),
-    //         // type:get,
-    //         data: {'sorting':sort},
-    //         success: function(result){
-    //             // console.log('success');
-    //             console.log(result.data);
-    //             // location.reload();
-    //         }
-    //     });
-    // }
-
     function sort_by(val) {
         let origin = window.location.origin;
         let url = origin + '/' + val;
         console.log(url);
         window.location = url;
     }
-
-    // $('#btn-bridal').on('click', function () {
-    //     liveSearch($(this).text());
-    // });
 </script>
 <div class="py-[3rem]">
     <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="flex flex-col space-y-[5rem] relative">
-            <div class="ml-auto">
+            <div class="anime ml-auto">
                 <form action="{{route('products.list',$category->slug)}}">
                     <label for="sorting" class="font-bold drop-shadow-[0px_0px_.5px_#000000]">Sort:</label>
                     <select name="sorting" id="sorting" class="ml-5 bg-[#F28C28] font-semibold rounded-[3rem] focus:ring-0 border-0" onchange="sort_by(this.value)">
@@ -61,10 +41,10 @@
                 <div class="w-full">
                     <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-[2rem] xl:gap-[1.5rem] w-full">
                         @if(!$productlists)
-                        <h1 class="capitalize font-bold text-[1rem] 2xs:text-[1.5rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">No product found</h1>
+                        <h1 class="anime capitalize font-bold text-[1rem] 2xs:text-[1.5rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">No product found</h1>
                         @else
                             @foreach($productlists as $productlist)
-                                <div class="bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
+                                <div class="anime bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
                                     <div class="flex flex-col space-y-[1rem] group">
                                         <a href="{{ route('product.detail',$productlist->slug) }}" class="flex flex-col space-y-[1rem]">
                                             <div  class="h-[5rem] 3xs:h-[6.5rem] 2xs:h-[9.5rem] xs:h-[8.25rem] sm:h-[9.25rem] md:h-[11.25rem] lg:h-[6.25rem] xl:h-[8.5rem] 2xl:h-[9.25rem] w-full">

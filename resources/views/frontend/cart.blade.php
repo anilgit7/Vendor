@@ -5,9 +5,9 @@
 @section('main')
 <div class="min-h-screen bg-transparent px-[2rem] xs:px-[5rem] sm:px-[8rem] xl:px-[16.5rem] py-[7rem] !bg-fixed !bg-no-repeat !bg-center !bg-cover" style="background-image: url('/images/frontend/default-bg.png')">
     <div class="bg-white max-2xs:px-[1rem] px-[3rem] xs:pl-[3rem] sm:pl-[5.5rem] xs:pr-[3rem] sm:pr-[4.5rem] py-[2rem] space-y-[2.6rem] shadow-[0px_0px_20px_5px_rgba(0,0,0,0.35)_inset]">
-        <h1 class="max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Shopping Cart</h1>
+        <h1 class="anime max-2xs:text-[.9rem] text-[1.1rem] sm:text-[1.5rem] lg:text-[2rem] font-bold">Shopping Cart</h1>
         <div class="space-y-[1.55rem]" id="cartItemList">
-            <hr class="h-[1rem]">
+            <hr class="anime h-[1rem]">
             @if(Cart::count()>0)
                 <div class="space-y-[1.54rem]">
                     <div class="space-y-[.2rem]">
@@ -18,7 +18,7 @@
                         @endphp
                         <div class="space-y-[1.55rem]">
                             @foreach(Cart::content() as $cart)
-                                <div class="space-y-[2.5rem]">
+                                <div class="anime space-y-[2.5rem]">
                                     <div class="grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-6 gap-[2rem] lg:gap-[5rem]">
                                         <div class="bg-[#f7f7f7] h-[5rem] xs:h-[7rem] sm:h-[8rem] w-[5rem] xs:w-[7rem] sm:w-[8rem] rounded-[.5rem] col-span-1 min-md:mx-auto p-2">
                                             <img src="/images/backend/products/{{$cart->options->images}}"class="h-full rounded-[.5rem] w-fit mx-auto">
@@ -48,12 +48,11 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="flex">
-
+                        <div class="flex anime">
                             <a href="{{ route('cart.delete.all') }}" class="ml-auto text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove all</a>
                         </div>
                     </div>
-                    <div class="lg:pl-[9.5rem] space-y-[2.5rem]">
+                    <div class="anime lg:pl-[9.5rem] space-y-[2.5rem]">
                         <div class="bg-[#f9fafb] max-2xs:px-[.5rem] 2xs:px-[1rem] sm:px-[2rem] py-[1.9rem] rounded-[.5rem] space-y-[.9rem]">
                             <div class="flex justify-between">
                                 <h1 class="text-[.7rem] 2xs:text-[.65rem] xs:text-[.8rem] sm:text-[.95rem] text-[#4b5563]">Subtotal</h1>
@@ -93,8 +92,8 @@
                     </div>
                 </div>
             @else
-                <h1 class="max-2xs:text-[.8rem] text-[.9rem] xs:text-[1.2rem] font-semibold text-[#374151] pb-4">No items in cart.</h1>
-                <a href="{{ route('home') }}" class="text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Continue Order</a>
+                <h1 class="anime max-2xs:text-[.8rem] text-[.9rem] xs:text-[1.2rem] font-semibold text-[#374151] pb-4">No items in cart.</h1>
+                <a href="{{ route('home') }}" class="anime text-center text-white bg-[#F28C28] font-semibold hover:bg-[#c2660c] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-[.7rem] xs:text-[.95rem] px-5 py-2.5 h-[2.03rem] xs:h-[2.5rem] md:h-[2.7rem] mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Continue Order</a>
             @endif
         </div>
     </div>

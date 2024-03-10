@@ -2,7 +2,17 @@ import 'flowbite';
 import jQuery from 'jquery';
 window.$ = jQuery;
 
+/*************************** Animation scripts **********************************/
+function handleScroll() {
+    document.querySelectorAll('.anime').forEach(block => {
+      const rect = block.getBoundingClientRect();
+      const inView = (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
+      if (inView) block.classList.add('anime-off');
+    });
+  }
 
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
 /*************************** Sidebar Collapse ***********************************/
 const sidebarToggle = document.querySelector('.sidebar-toggle')
 const sidebarOverlay = document.querySelector('.sidebar-overlay')

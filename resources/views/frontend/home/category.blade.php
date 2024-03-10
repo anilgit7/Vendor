@@ -2,7 +2,7 @@
     <div class="px-[1rem] 2xs:px-[1.5rem] sm:px-[3rem] lg:px-[5.9rem]">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-[2rem] xl:gap-[5rem] 2xl:gap-[3rem]">
             @foreach($categories as $category)
-                <div class="bg-white flex flex-col items-center py-[1.5rem] px-[.85rem] space-y-[1.5rem] rounded-[.5rem] hover:shadow-[0px_4px_8px_.5px_rgba(0,0,0,0.25)]">
+                <div class="anime bg-white flex flex-col items-center py-[1.5rem] px-[.85rem] space-y-[1.5rem] rounded-[.5rem] hover:shadow-[0px_4px_8px_.5px_rgba(0,0,0,0.25)]">
                     <h1 class="capitalize font-bold text-[1rem] 2xs:text-[1.2rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">{{$category->category_name}}</h1>
                     <a href="{{ route('product.list', $category->slug) }}" class="flex flex-col items-center space-y-[2rem]">
                         <div class="h-[6rem] 3xs:h-[7.5rem] 2xs:h-[9.5rem] xs:h-[12.25rem] w-full">
