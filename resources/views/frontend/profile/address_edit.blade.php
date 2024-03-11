@@ -12,3 +12,4 @@
         </form>
     </div>
 </div>
+@include('frontend.product.map')
