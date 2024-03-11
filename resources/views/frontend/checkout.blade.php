@@ -148,4 +148,5 @@
         <h1>No records found</h1>
     </div>
 @endif
+@include('frontend.product.map')
 @endsection
