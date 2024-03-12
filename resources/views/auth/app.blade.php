@@ -30,6 +30,5 @@
 
         @livewireScripts
         @include('frontend.hefo.response')
-        @include('frontend.product.map')
     </body>
 </html>

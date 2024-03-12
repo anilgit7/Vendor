@@ -69,4 +69,5 @@
         }
     }
 </script>
+@include('frontend.product.map')
 @endsection

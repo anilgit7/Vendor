@@ -9,6 +9,7 @@ use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Services\AStarAlgorithm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -259,6 +260,20 @@ class AdminController extends Controller
     }
     public function address_path($id){
         $order = Order::find($id);
-        return response()->json(['success'=>true, 'message'=>'Path found successfully.']);
+        $endLat = $order->latitude;
+        $endLng = $order->longitude;
+        $admin_id = auth()->user()->id;
+        $admin = User::find($admin_id);
+        $startLat = $admin->latitude;
+        $startLng = $admin->longitude;
+
+        // Run A* algorithm to find the shortest path
+        $astar = new AStarAlgorithm();
+        $path = $astar->findPath($startLat, $startLng, $endLat, $endLng);
+
+
+        // return response()->json(['success'=>true, 'message'=>'Path found successfully.']);
+        // return response()->json(['path' => $path,'startLat' => $startLat, 'statLng' => $startLng, 'endLat' => $endLat, 'endLng' => $endLng]);
+        return response()->json(['path' => $path]);
     }
 }
