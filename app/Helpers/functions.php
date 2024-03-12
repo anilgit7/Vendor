@@ -32,11 +32,9 @@ function create_slug($title){
     }
     return $slug;
 }
-
 function find_product($id){
     return Product::find($id);
 }
-
 function create_order($request){
     $order = new Order;
     $order->user_id = Auth::user()->id;
@@ -64,7 +62,6 @@ function create_order($request){
     }
     Cart::destroy();
 }
-
 function create_esewa_order(){
     $order_data = session()->get('order_data');
     $order = new Order;
@@ -92,10 +89,22 @@ function create_esewa_order(){
     session()->forget('payment_data');
     session()->forget('order_data');
 }
-
 function create_signature($message){
     $secret = '8gBm/:&EnhH.1/q';
     $s = hash_hmac('sha256', $message, $secret, true);
     $hashInBase64 =  base64_encode($s); 
     return $hashInBase64;
+}
+function get_address(){
+    $user_id = auth()->user()->id;
+    $user = User::find($user_id);
+    return $user;
+}
+function save_address($request){
+    $user_id = auth()->user()->id;
+    $user = User::find($user_id);
+    $user->latitude = $request->latitude;
+    $user->longitude = $request->longitude;
+    $user->address = $request->address;
+    $user->save();
 }

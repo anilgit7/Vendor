@@ -243,4 +243,22 @@ class AdminController extends Controller
             return redirect()->route('admin.order')->with(['success' => false, 'message' => 'Invalid delivery status']);
         }
     }
+    public function address(){
+        $user = get_address();
+        $title = 'address';
+        return view('backend.admin',compact('user','title'));
+    }
+    public function address_edit(){
+        $user = get_address();
+        $title = 'address';
+        return view('backend.admin',compact('user','title'));
+    }
+    public function address_store(Request $request){
+        save_address($request);
+        return redirect()->route('admin.address')->with(['success'=>true, 'message'=>'Address updated successfully.']);
+    }
+    public function address_path($id){
+        $order = Order::find($id);
+        return response()->json(['success'=>true, 'message'=>'Path found successfully.']);
+    }
 }

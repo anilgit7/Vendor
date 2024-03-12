@@ -32,5 +32,4 @@
         @include('frontend.hefo.response')
         @include('frontend.product.map')
     </body>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" async defer></script>
 </html>
