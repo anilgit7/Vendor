@@ -1,4 +1,4 @@
-<div class="hidden absolute top-[9rem] left-[7rem] h-[30rem] w-[85vw] z-[100000]" id="map-viewer">
+<div class="hidden absolute top-[2rem] left-[7rem] h-[30rem] w-[85vw] z-[100000]" id="map-viewer">
     <div class="cursor-pointer text-white w-max px-[.8rem] ml-auto py-[.5rem] z-[100] bg-black" onclick="mapClose()">
         <h1>X</h1>
     </div>

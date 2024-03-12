@@ -104,6 +104,10 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
     route::get('/order',[AdminController::class,'order'])->name('admin.order');
     route::get('/order/{id}',[AdminController::class,'order_detail'])->name('admin.order.detail');
     route::post('/update-status/{id}',[AdminController::class,'order_status'])->name('admin.order.status');
+    route::get('/addres',[AdminController::class,'address'])->name('admin.address');
+    route::get('/address/create',[AdminController::class, 'address_edit'])->name('admin.address.edit');
+    route::post('/address/store',[AdminController::class,'address_store'])->name('admin.address.store');
+    route::get('/address/path/{id}',[AdminController::class,'address_path'])->name('admin.address.path');
 });
 
 /*********************************** Merchant Route ******************************************/
@@ -122,4 +126,7 @@ route::group(['prefix'=>'merchant','middleware'=>'merchant'],function(){
     route::post('/update-status/{id}',[MerchantController::class,'order_status'])->name('merchant.order.status');
     route::get('/rating',[RatingController::class,'list_rating'])->name('merchant.rating');
     route::post('/rating/update/{id}',[RatingController::class,'update_status'])->name('merchant.rating.update');
+    route::get('/addres',[MerchantController::class,'address'])->name('merchant.address');
+    route::get('/address/creat',[MerchantController::class, 'address_edit'])->name('merchant.address.edit');
+    route::post('/address/store',[MerchantController::class,'address_store'])->name('merchant.address.store');
 });

@@ -8,6 +8,8 @@
     @include('backend.ajax.merchant')
 @elseif(\Route::current()->getName() == 'admin.customer.list')
     @include('backend.ajax.customer')
+@elseif(\Route::current()->getName() == 'admin.order')
+    @include('backend.ajax.address')
 @elseif(\Route::current()->getName() == 'merchant.product')
     @include('backend.ajax.product')
 @endif

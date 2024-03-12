@@ -118,6 +118,10 @@
                 @include('backend.admin.order.view')
             @elseif(\Route::current()->getName() == 'admin.order.detail')
                 @include('backend.admin.order.order_detail')
+            @elseif(\Route::current()->getName() == 'admin.address')
+                @include('backend.admin.address.view')
+            @elseif(\Route::current()->getName() == 'admin.address.edit')
+                @include('backend.admin.address.edit')
             @endif
         </div>
     </div>

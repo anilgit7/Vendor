@@ -229,5 +229,18 @@ class MerchantController extends Controller
         $order->save();
         return redirect()->route('merchant.order')->with(['success' => true, 'message' => 'Status updated successfully']);
     }
-    
+    public function address(){
+        $user = get_address();
+        $title = 'address';
+        return view('backend.merchant',compact('user','title'));
+    }
+    public function address_edit(){
+        $user = get_address();
+        $title = 'address';
+        return view('backend.merchant',compact('user','title'));
+    }
+    public function address_store(Request $request){
+        save_address($request);
+        return redirect()->route('merchant.address')->with(['success'=>true, 'message'=>'Address updated successfully.']);
+    }
 }
