@@ -12,7 +12,7 @@
 <script>
     function initMap(pathCoordinates) {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
+            zoom: 15,
             center: {lat: parseFloat(pathCoordinates[0].lat), lng: parseFloat(pathCoordinates[0].lng)} // Set the initial center of the map
         });
         

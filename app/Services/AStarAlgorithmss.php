@@ -14,9 +14,8 @@ class AStarAlgorithm
             'destination' => $endLat . ',' . $endLng,
             'key' => env('GOOGLE_MAP_KEY'),
         ]);
-
+        
         $data = $response->json();
-
         // Extract the coordinates from the response
         $pathCoordinates = [];
         foreach ($data['routes'][0]['legs'][0]['steps'] as $step) {

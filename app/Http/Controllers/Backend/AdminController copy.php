@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\AStarAlgorithm;
-use App\Services\GoogleRoadsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -268,15 +267,8 @@ class AdminController extends Controller
         $startLat = $admin->latitude;
         $startLng = $admin->longitude;
 
-        // Get road nodes
-        $googleRoadsService = new GoogleRoadsService();
-        // $roadNodes = $googleRoadsService->getRoadNodes($startLat, $startLng, $endLat, $endLng);
-        // $path = $googleRoadsService->getRoadNodes($startLat, $startLng, $endLat, $endLng);
-
-
         // Run A* algorithm to find the shortest path
         $astar = new AStarAlgorithm();
-        // $path = $astar->findPath($startLat, $startLng, $endLat, $endLng, $roadNodes);
         $path = $astar->findPath($startLat, $startLng, $endLat, $endLng);
 
 
