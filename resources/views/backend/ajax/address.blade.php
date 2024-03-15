@@ -9,9 +9,22 @@
             type : 'GET',
             success : function(result){
                 console.log(result);
-                initMap(result.path);
+                initMap(result.path, result.user);
             }
         });
     });
+
+    function productAddressPath(product_id){
+        var url = "{{ route('admin.product.address.path', 'product_id') }}";
+        url = url.replace('product_id', product_id);
+        $.ajax({
+            url: url,
+            type : 'GET',
+            success : function(result){
+                console.log(result);
+                initMap(result.path, result.user);
+            }
+        });
+    }
 </script>
 @include('backend.admin.order.map_path')

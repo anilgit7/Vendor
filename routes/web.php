@@ -108,6 +108,7 @@ route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
     route::get('/address/create',[AdminController::class, 'address_edit'])->name('admin.address.edit');
     route::post('/address/store',[AdminController::class,'address_store'])->name('admin.address.store');
     route::get('/address/path/{id}',[AdminController::class,'address_path'])->name('admin.address.path');
+    route::get('/product/address/{id}',[AdminController::class,'product_address_path'])->name('admin.product.address.path');
 });
 
 /*********************************** Merchant Route ******************************************/

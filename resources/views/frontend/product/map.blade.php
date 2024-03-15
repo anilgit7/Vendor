@@ -1,5 +1,5 @@
-<div class="hidden absolute top-[9rem] left-[7rem] h-[30rem] w-[85vw] z-[100000]" id="map-viewer">
-    <div class="cursor-pointer text-white w-max px-[.8rem] ml-auto py-[.5rem] z-[100] bg-black" onclick="mapClose()">
+<div class="hidden bg-[#000000dd] absolute top-0 left-0 px-[3rem] pt-[2rem] pb-[4rem] h-full w-full z-[100000]" id="map-viewer">
+    <div class="cursor-pointer text-white w-max px-[1rem] ml-auto py-[.4rem] z-[100] transition delay-150 ease-in-out bg-[#F28C28] hover:bg-[#D4751C]" onclick="mapClose()">
         <h1>X</h1>
     </div>
     <div id="map"></div>
@@ -7,6 +7,7 @@
 <style>
     #map {
         height: 100%;
+        width: 100%;
     }
 </style>
 <script>
@@ -109,10 +110,13 @@
         }
     function mapShow(){
         mapViwer.classList.remove("hidden");
+        window.scrollTo(0, 0);
+        document.body.style.overflow = "hidden";
         mapFunction();
     }
     function mapClose(){
         mapViwer.classList.add('hidden');
+        document.body.style.overflow = "auto";
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" async defer></script>

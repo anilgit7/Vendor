@@ -31,12 +31,16 @@ body {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1.5s ease, transform 1.5s ease;
-    /* width: 200px;
-    height: 100px; */
-    /* background-color: #f0f0f0; */
     margin-bottom: 20px;
 }
 .anime-off{
     opacity: 1;
     transform: translateY(0);
+}
+
+.map_effect{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    margin-bottom: 20px;
 }
