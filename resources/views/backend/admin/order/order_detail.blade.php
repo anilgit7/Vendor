@@ -77,6 +77,9 @@
                                         <span class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#374151] md:ml-auto">Rs. {{$orderItem->product->price}}/-</span>
                                         <span class="text-[.7rem] xs:text-[.9rem] font-semibold text-[#374151] md:ml-auto">Rs. {{$orderItem->quantity *$orderItem->product->price}}/-</span>
                                     </div>
+                                    <button class="productAddressPath flex bg-blue-500 hover:bg-blue-700 text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md" data-order-id="{{$orderItem->id}}" onclick="productAddressPath('{{$orderItem->id}}')">
+                                        <span class="">Map</span>
+                                    </button>
                                 </div>
                             </div>
                             <hr class="h-[1rem]">
