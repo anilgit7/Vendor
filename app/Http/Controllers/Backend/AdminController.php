@@ -7,9 +7,11 @@ use App\Models\Order;
 use App\Models\Order_Item;
 use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Models\Category;
+use App\Models\Node;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\AStarAlgorithm;
+use App\Services\FilterNodes;
 use App\Services\GoogleRoadsService;
 use App\Services\PathUsingAPI;
 use Illuminate\Http\Request;
@@ -269,25 +271,14 @@ class AdminController extends Controller
         $admin = User::find($admin_id);
         $startLat = $admin->latitude;
         $startLng = $admin->longitude;
-
-        // Get road nodes
-        // $googleRoadsService = new GoogleRoadsService();
-        // $roadNodes = $googleRoadsService->getRoadNodes($startLat, $startLng, $endLat, $endLng);
-        // $path = $googleRoadsService->getRoadNodes($startLat, $startLng, $endLat, $endLng);
-        // $path = $googleRoadsService->getRoadNodes($startLat, $startLng, $endLat, $endLng);
-
-
-        // Run A* algorithm to find the shortest path
-        // $astar = new AStarAlgorithm();
-        // $path = $astar->findPath($startLat, $startLng, $endLat, $endLng, $roadNodes);
-        // $path = $astar->findPath($startLat, $startLng, $endLat, $endLng);
-        $pathFinding = new PathUsingAPI;
-        $path = $pathFinding->findPath($startLat, $startLng, $endLat, $endLng);
-
-        // return response()->json(['success'=>true, 'message'=>'Path found successfully.']);
-        // return response()->json(['path' => $path,'startLat' => $startLat, 'statLng' => $startLng, 'endLat' => $endLat, 'endLng' => $endLng]);
-        return response()->json(['path' => $path,'user' =>$user_name]);
+        $nodes = Node::get();
+        $grid = new FilterNodes();
+        $nodes = $grid->getFilterNodes($startLat, $startLng, $endLat, $endLng, $nodes);
+        $astar = new AStarAlgorithm();
+        $path = $astar->findPath($startLat, $startLng, $endLat, $endLng, $nodes);
+        return response()->json(['path' => $path ,'user' =>$user_name]);
     }
+
 
     public function product_address_path($id){
         $product = Product::find($id);
