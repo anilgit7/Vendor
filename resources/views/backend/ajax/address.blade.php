@@ -1,4 +1,3 @@
-
 <script>
     $('#order_table').on('click','.addressPath',function(){
         var order_id = $(this).attr('data-order-id');
