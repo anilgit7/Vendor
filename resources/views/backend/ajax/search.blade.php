@@ -11,7 +11,7 @@ $(document).ready(function(){
                         $('.search-list').html('');
                         $('.search-list').addClass('bg-white');
                         for(let i=0; i<result.search.length; i++){
-                            var id = (result.search[i]['id'])
+                            var id = (result.search[i]['slug'])
                             var urls = "{{ route('product.detail','id') }}";
                             urls = urls.replace('id',id);
                             $('.search-list').append(
