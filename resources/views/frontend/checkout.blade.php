@@ -35,7 +35,7 @@
                                     <input type="hidden" name="latitude" id="latitude" value="{{ $user ? $user->latitude : '' }}">
                                     <input type="hidden" id="longitude" name="longitude" value="{{ $user ? $user->longitude : '' }}">
                                     <input type="text" id="address" class="block form-one capitalize px-2 w-full text-[.9rem] sm:text-[1.1rem] text-[#222] bg-transparent border-2 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-b-blue-600 peer" placeholder="" value="" name="address" minlength="2" maxlength="250" value="{{ $user ? $user->address : '' }}" required onclick="mapShow()"/>
-                                    <label for="address" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Address</label>
+                                    <label for="address" class="absolute text-sm text-gray-500 font-semibold duration-300 transform -translate-y-6 scale-75 top-3 left-2 z-10 origin-[0] peer-focus:left-2 peer-focus:font-semibold peer-focus:text-[#a0a0a0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 max-[250px]:w-[7rem] bg-white truncate">Address(Click to change)</label>
                                 </div>
                             </h3>
                         </div>

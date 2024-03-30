@@ -41,6 +41,8 @@
                     <div class="bg-[#f9fafb] flex flex-col py-2 px-4">
                         @if($order->delivery_status == 'delivered')
                             <span class="font-bold text-[#111827] capitalize">{{$order->delivery_status}}</span>
+                        @elseif($order->delivery_status == 'processing')
+                            <span class="font-bold text-[#111827] capitalize">{{$order->delivery_status}}</span>
                         @else
                             <form action="{{route('admin.order.status',$order->id)}}" method="POST">
                                 @csrf
@@ -48,7 +50,6 @@
                                     @if($order->delivery_status == 'shipping')
                                         <option value="delivered" {{($order->delivery_status == 'delivered')? 'selected':''}}>Delivered</option>
                                     @else
-                                        <option value="processing" {{($order->delivery_status == 'processing')? 'selected':''}}>Procesing</option>
                                         <option value="pending" {{($order->delivery_status == 'pending')? 'selected':''}}>Pending</option>
                                     @endif
                                 </select>
