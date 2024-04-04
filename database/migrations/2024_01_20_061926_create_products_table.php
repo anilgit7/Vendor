@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('description', 5000);
             $table->string('slug');
             $table->string("price");
-            $table->string("color");
+            $table->string("color")->nullable();
             $table->string("size");
-            $table->string("material");
+            $table->string("material")->nullable();
             $table->string("brand")->nullable();
-            $table->string("weight");
+            $table->string("weight")->nullable();
             $table->string("warranty")->nullable();
-            $table->string("images");
+            $table->string("images")->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

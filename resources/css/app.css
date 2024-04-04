@@ -38,6 +38,18 @@ body {
     transform: translateY(0);
 }
 
+.anime-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    margin-right: 20px; /* Adjust spacing between products */
+}
+  
+.anime-left-off {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .map_effect{
     opacity: 0;
     transform: translateY(20px);

@@ -15,24 +15,28 @@
             <input type="hidden" id="edit_product_id">
 
             <div>
-                <label for="edit_product_name" class="block mb-2 text-sm font-medium text-gray-900">Product Name </label>
+                <label for="edit_product_name" class="block mb-2 text-sm font-medium text-gray-900">Product Name *</label>
                 <input type="text" id="edit_product_name" name="edit_product_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type edit_product name" required>
             </div>
             <div>
-                <label for="edit_product_price" class="block mb-2 text-sm font-medium text-gray-900">Product Price </label>
-                <input type="number" id="edit_product_price" name="edit_product_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price in Rupees" required>
+                <label for="edit_product_price" class="block mb-2 text-sm font-medium text-gray-900">Product Price *</label>
+                <input type="number" id="edit_product_price" name="edit_product_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Price in Rupees" min='1' required>
             </div>
             <div>
-                <label for="edit_product_category" class="block mb-2 text-sm font-medium text-gray-900">Category </label>
+                <label for="edit_product_category" class="block mb-2 text-sm font-medium text-gray-900">Category *</label>
                 <select name="edit_product_category" id="edit_product_category" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2">
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
+                        @if($loop->first)
+                            <option value="{{$category->id}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5" selected>{{$category->category_name}}</option>
+                        @else
+                            <option value="{{$category->id}}" class="w-full rounded-lg bg-gray-50 border border-gray-300 text-gray-500 text-sm focus:ring-primary-600 focus:border-primary-600 p-2.5">{{$category->category_name}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
             <div>
                 <label for="edit_product_color" class="block mb-2 text-sm font-medium text-gray-900">Product Color </label>
-                <input type="text" id="edit_product_color" name="edit_product_color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type edit_product color" required>
+                <input type="text" id="edit_product_color" name="edit_product_color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type edit_product color">
             </div>
             <div>
                 <label for="edit_product_size" class="block mb-2 text-sm font-medium text-gray-900">Size Available </label>
@@ -50,11 +54,11 @@
 
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="edit_product_material" class="block mb-2 text-sm font-medium text-gray-900">Product Material </label>
-                <input type="text" id="edit_product_material" name="edit_product_material" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Cotton,Leather,Fabric,..." required>
+                <input type="text" id="edit_product_material" name="edit_product_material" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Cotton,Leather,Fabric,...">
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="edit_product_weight" class="block mb-2 text-sm font-medium text-gray-900">Weight </label>
-                <input type="number" id="edit_product_weight" name="edit_product_weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Weight in kilogram" required>
+                <input type="number" id="edit_product_weight" name="edit_product_weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Weight in kilogram" min='0.1'>
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
                 <label for="edit_product_brand" class="block mb-2 text-sm font-medium text-gray-900">Brand</label>
@@ -65,8 +69,8 @@
                 <input type="number" id="edit_product_warranty" name="edit_product_warranty" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Warranty in year">
             </div>
             <div class="w-full max-w-[13rem] 2xs:max-w-[15rem] sm:max-w-[17rem] lg:max-w-xs">
-                <label for="edit_product_description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                <textarea name="edit_description" id="edit_product_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" cols="30" rows="10"></textarea>
+                <label for="edit_product_description" class="block mb-2 text-sm font-medium text-gray-900">Description *</label>
+                <textarea name="edit_description" id="edit_product_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" cols="30" rows="10" required></textarea>
             </div>
             <div class="bottom-0 left-0 flex justify-between w-full pb-4 space-x-4 md:px-4">
                 <button type="submit" id="edit_product" value="Edit product" class="flex bg-[#337ab8] hover:bg-[#004a89] text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">

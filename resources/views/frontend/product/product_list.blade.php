@@ -44,7 +44,7 @@
                         <h1 class="anime capitalize font-bold text-[1rem] 2xs:text-[1.5rem] drop-shadow-[0px_0px_.5px_#000000] tracking-wide break">No product found</h1>
                         @else
                             @foreach($productlists as $productlist)
-                                <div class="anime bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
+                                <div class="anime-left bg-white p-[1rem] flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
                                     <div class="flex flex-col space-y-[1rem] group">
                                         <a href="{{ route('product.detail',$productlist->slug) }}" class="flex flex-col space-y-[1rem]">
                                             <div  class="h-[5rem] 3xs:h-[6.5rem] 2xs:h-[9.5rem] xs:h-[8.25rem] sm:h-[9.25rem] md:h-[11.25rem] lg:h-[6.25rem] xl:h-[8.5rem] 2xl:h-[9.25rem] w-full">

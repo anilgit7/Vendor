@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function logout(){
         Session::flush();
         Auth::logout();
-        return redirect()->route("home")->with(['success'=>true, 'message'=>'Sucessfully logged out.']);;
+        return redirect()->route("home")->with(['success'=>true, 'message'=>'Sucessfully logged out.']);
     }
     public function userfront(){
         if(Auth::check()){

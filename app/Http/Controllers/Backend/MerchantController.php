@@ -52,11 +52,12 @@ class MerchantController extends Controller
             $product->brand = $request->product_brand;
             $product->weight = $request->product_weight;
             $product->warranty = $request->product_warranty;
-            $image = $request->image;
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->image->move('images/backend/products',$imagename);
-            $product->images = $imagename;
-    
+            if ($request->hasFile('image')) {
+                $image = $request->image;
+                $imagename = time().'.'.$image->getClientOriginalExtension();
+                $request->image->move('images/backend/products',$imagename);
+                $product->images = $imagename;
+            }
             $product->save();
             return response()->json(['message'=>'Product added successfully']);
         }
@@ -110,11 +111,14 @@ class MerchantController extends Controller
             $product->brand = $request->edit_product_brand;
             $product->weight = $request->edit_product_weight;
             $product->warranty = $request->edit_product_warranty;
-            if($request->edit_product_image){
-                $product_image = $product->images;
-                $image_path = 'images/backend/products/'.$product_image;
-                if (File::exists($image_path)){
-                    File::delete($image_path);
+            
+            if ($request->hasFile('edit_product_image')){
+                if($product->images){
+                    $product_image = $product->images;
+                    $image_path = 'images/backend/products/'.$product_image;
+                    if (File::exists($image_path)){
+                        File::delete($image_path);
+                    }
                 }
                 $image = $request->edit_product_image;
                 $imagename = time().'.'.$image->getClientOriginalExtension();

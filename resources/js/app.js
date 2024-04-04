@@ -3,14 +3,26 @@ import jQuery from 'jquery';
 window.$ = jQuery;
 
 /*************************** Animation scripts **********************************/
+/***************** Animation Top **************/
 function handleScroll() {
     document.querySelectorAll('.anime').forEach(block => {
       const rect = block.getBoundingClientRect();
       const inView = (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
       if (inView) block.classList.add('anime-off');
     });
-  }
 
+    const products = document.querySelectorAll('.anime-left');
+    products.forEach((product, index) => {
+        const rect = product.getBoundingClientRect();
+        const inView = (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
+        if (inView) {
+        setTimeout(() => {
+            product.classList.add('anime-left-off');
+        }, index * 200); // Adjust the delay between each product animation
+        }
+    });
+  }
+/********************************************************************************/
   window.addEventListener('scroll', handleScroll);
   handleScroll();
 /*************************** Sidebar Collapse ***********************************/
