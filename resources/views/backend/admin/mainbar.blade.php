@@ -9,7 +9,7 @@
             <li class="mr-2">
                 <a href="{{ route('admin.dashboard') }}" class="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
             </li>
-            @if($title)
+            @if(!empty($title))
                 <li class="text-gray-600 mr-2 font-medium">/</li>
                 <li class="cursor-default text-gray-600 mr-2 font-medium capitalize">{{ $title }}</li>
             @endif
@@ -122,6 +122,8 @@
                 @include('backend.admin.address.view')
             @elseif(\Route::current()->getName() == 'admin.address.edit')
                 @include('backend.admin.address.edit')
+            @elseif(\Route::current()->getName() == 'admin.address.path.process')
+                @include('backend.admin.address.process')
             @endif
         </div>
     </div>

@@ -26,9 +26,12 @@
                         <td class="capitalize">{{$order->payment}}</td>
                         <td>Rs. {{$order->total}}/-</td>
                         <td class="flex py-[.5rem] place-content-end">
-                            <button class="addressPath flex bg-blue-500 hover:bg-blue-700 text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md" data-order-id="{{$order->id}}">
+                            <button class="addressPath flex bg-blue-500 hover:bg-blue-700 text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md mr-2" data-order-id="{{$order->id}}">
                                 <span class="">Map</span>
                             </button>
+                            <a href="{{route('admin.address.path.process',$order->order_tracking_id)}}" class="flex bg-red-500 hover:bg-red-700 text-white w-fit rounded-md items-center justify-between w-fit p-4 py-1.5 font-medium text-left capitalize rounded-md">
+                                <span class="">Process</span>
+                            </a>
                         </td>
                     </tr>
                     @php $c++ @endphp
