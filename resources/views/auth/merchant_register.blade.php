@@ -8,7 +8,7 @@
                 <div class="pb-[2rem] space-y-[2rem]">
                 <h1 class="text-center capitalize drop-shadow-[0px_0px_.5px_#000000] font-bold text-[2.5rem]">Create an Account</h1>
                     <div class="bg-[#353935] py-[1rem] sm:py-[3rem] px-[1rem] sm:px-[6rem] rounded-[.8rem]">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('custom.register') }}">
                             @csrf
                             <div>
                                 <x-input id="name" placeholder="Name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

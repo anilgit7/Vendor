@@ -6,7 +6,7 @@
                 <div class="w-full h-[11rem] 3xs:h-[12.5rem] 2xs:h-[15.5rem] xs:h-[14.25rem] mx-auto overflow-x-hidden overflow-y-hidden">
                     <div id="for_you_slider" class="h-full w-max flex gap-8 items-center justify-start transition ease-out duration-700">
                         @foreach($productDatas as $item)
-                            <div class="flex flex-shrink-0 w-[11.7rem]">
+                            <div class="anime-left flex flex-shrink-0 w-[11.7rem]">
                                 <div class="bg-white flex flex-col hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
                                     <a href="{{route('product.detail',$item->slug)}}" class="flex flex-col space-y-[1rem] group">
                                         <div class="p-[1rem] h-[5rem] 3xs:h-[6.5rem] 2xs:h-[9.5rem] xs:h-[8.25rem] sm:h-[9.25rem] md:h-[11.25rem] lg:h-[10.25rem] xl:h-[8.5rem] 2xl:h-[9.25rem] w-[10rem] bg-[#aaa]">

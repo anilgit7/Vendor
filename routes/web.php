@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\MapController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -27,11 +29,13 @@ use App\Http\Controllers\Frontend\SearchController;
 // });
 
 /********************************** Public Route ****************************************/
-route::get('/userchecking',[HomeController::class,'userfront']);
+route::get('/userchecking',[HomeController::class,'userfront'])->name('check.role');
 route::get('/merchant-register', function(){
     return view('auth.merchant_register');
 })->name('merchant.register')->middleware('logout');
 route::get('/logout',[HomeController::class,'logout'])->name('user.logout');
+route::post('/login',[LoginController::class,'authenticate'])->name('login');
+route::post('/register',[RegisterController::class,'authenticate'])->name('custom.register');
 
 route::post('/store-latlng',[MapController::class,'store'])->name('store.latlng');
 

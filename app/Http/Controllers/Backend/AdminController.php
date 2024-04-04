@@ -57,7 +57,12 @@ class AdminController extends Controller
             $merchant_name =ucfirst($merchant->name);
             $merchant->status = $request->status;
             $merchant->update();
-            return response()->json(['message' => 'Merchant '.$merchant_name.' verified successfully']);
+            if($request->status == 'rejected'){
+                return response()->json(['message' => 'Merchant '.$merchant_name.' rejected successfully']);
+            }
+            if($request->status == 'verified'){
+                return response()->json(['message' => 'Merchant '.$merchant_name.' verified successfully']);
+            }
         }
         else{
             return response()->json([
