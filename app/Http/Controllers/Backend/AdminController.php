@@ -271,14 +271,25 @@ class AdminController extends Controller
         $admin = User::find($admin_id);
         $startLat = $admin->latitude;
         $startLng = $admin->longitude;
-        $nodes = Node::get();
-        $grid = new FilterNodes();
-        $nodes = $grid->getFilterNodes($startLat, $startLng, $endLat, $endLng, $nodes);
-        $astar = new AStarAlgorithm();
-        $path = $astar->findPath($startLat, $startLng, $endLat, $endLng, $nodes);
+        $grid = new AStarAlgorithm();
+        $path = $grid->closest_nodes($startLat, $startLng, $endLat, $endLng);
         return response()->json(['path' => $path ,'user' =>$user_name]);
     }
 
+    public function address_path_test($id){
+        $order = Order::where('order_tracking_id',$id)->first();
+        $user_name = ucfirst($order->billing_name);
+        $endLat = $order->latitude;
+        $endLng = $order->longitude;
+        $admin_id = auth()->user()->id;
+        $admin = User::find($admin_id);
+        $startLat = $admin->latitude;
+        $startLng = $admin->longitude;
+        $grid = new AStarAlgorithm();
+        $nodes = $grid->node_details($startLat, $startLng, $endLat, $endLng);
+        $paths = $grid->closest_nodes($startLat, $startLng, $endLat, $endLng);
+        return view('backend.admin',compact('paths', 'nodes' ,'startLat', 'startLng', 'endLat', 'endLng'));
+    }
 
     public function product_address_path($id){
         $product = Product::find($id);
