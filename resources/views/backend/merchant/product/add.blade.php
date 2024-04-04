@@ -4,13 +4,13 @@
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         <span class="sr-only">Close menu</span>
     </button>
+    <h1 class="text-[.8rem] text-[#444]">'*' fields are required</h1>
     <form id="form_add_product">
         @csrf
         <div class="space-y-4">
             <!-- <input type="hidden" name="merchant_email" value="{{auth()->user()->email}}"> -->
             <input type="hidden" name="merchant_id" value="{{auth()->user()->id}}">
             <!-- <input type="hidden" name="shop_name" value="{{auth()->user()->name}}"> -->
-
             <div>
                 <label for="product_name" class="block mb-2 text-sm font-medium text-gray-900">Product Name </label>
                 <input type="text" id="product_name" name="product_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type product name" required>

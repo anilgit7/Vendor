@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nodes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('title');
             $table->decimal('latitude', 10, 8); // Change precision and scale as needed
             $table->decimal('longitude', 11, 8);
             $table->timestamps();
