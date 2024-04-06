@@ -12,7 +12,6 @@ class AStarAlgorithm
         foreach($nodes as $node){
             $lat2 = $node->latitude;
             $lng2 = $node->longitude;
-            // $g = $this->duration($src_lng,$src_lat,$lng2,$lat2);
             $g = $this->distance($src_lng,$src_lat,$lng2,$lat2);
             $node['g'] = $g;
             $h = $this->heuristic($lng2,$lat2,$dest_lng,$dest_lat);
@@ -43,7 +42,6 @@ class AStarAlgorithm
         $distance = $angle * $earthRadius;
         return $distance / 1000; // Convert meters to kilometers
     }
-
     function get_edge($current , $edges){
         $allEdge = [];
         foreach($edges as $edge){
@@ -53,9 +51,7 @@ class AStarAlgorithm
         }
         return $allEdge;
     }
-    
-
-    function closest_nodes($src_lat, $src_lng, $dest_lat, $dest_lng) {
+    function astar($src_lat, $src_lng, $dest_lat, $dest_lng) {
         $nodes = Node::get();
         $edges = Edge::get();
         $src = [
@@ -70,14 +66,12 @@ class AStarAlgorithm
         foreach($nodes as $node){
             $lat2 = $node->latitude;
             $lng2 = $node->longitude;
-            // $g = $this->duration($src_lng,$src_lat,$lng2,$lat2);
             $g = $this->distance($src_lng,$src_lat,$lng2,$lat2);
             $node['g'] = $g;
             $h = $this->heuristic($lng2,$lat2,$dest_lng,$dest_lat);
             $node['h'] = $h;
             $node['f'] = $node->g+$node->h;
         }
-
         $open = [];
         foreach ($nodes as $node) {
             // if (($src_lat != $node->latitude || $src_lng != $node->longitude) && ($dest_lat != $node->latitude || $dest_lng != $node->longitude))
@@ -86,52 +80,31 @@ class AStarAlgorithm
                 $open[] = $node;
             }
         }
-        // dd($open);
         $path = null;
         $path = $this->path_construct_src($path, $src);
         $closed = [];
-        $closed[] = [
-            'title' => $path['title'],
-            'lat' =>  $path['lat'],
-            'lng' =>  $path['lng'],
-            'g' => $path['g'],
-            'h' => $path['h'],
-            'f' => $path['f']
-        ];
+        $closed = $this->closedModule($closed,$path);
         $closestNodes = $this->find_closest_node($open,'g', $dest_lat, $dest_lng);
+        $closestEndNode = $this->find_closest_node($open,'h', $dest_lat, $dest_lng);
         $currents = $closestNodes; // Assign closest nodes to $current
         while (!empty($open)) {
             $end = $this->is_end_node($currents,$dest_lat, $dest_lng);
             if($end == true){
-                // dd($this->path_construct($path, $currents));
-                // return $this->path_construct($path, $currents);
                 $path = $this->path_construct($path, $currents);
-                $closed[] = [
-                    'title' => $path['title'],
-                    'lat' =>  $path['lat'],
-                    'lng' =>  $path['lng'],
-                    'g' => $path['g'],
-                    'h' => $path['h'],
-                    'f' => $path['f']
-                ];
+                $closed = $this->closedModule($closed,$path);
                 return $closed;
             }
             $open = $this->remove_node($open, $currents);
-            
+            $endNode = $this->is_closest_end_node($currents, $closestEndNode);
             $path = $this->path_construct($path, $currents);
-            $closed[] = [
-                'title' => $path['title'],
-                'lat' =>  $path['lat'],
-                'lng' =>  $path['lng'],
-                'g' => $path['g'],
-                'h' => $path['h'],
-                'f' => $path['f']
-            ];
+            $closed = $this->closedModule($closed,$path);
+            if($endNode === true){
+                $closed = $this->end_path_construction($path, $dest_lat, $dest_lng, $closed);
+                return $closed;
+            }
             foreach($currents as $current){
                 $getEdge = $this->get_edge($current, $edges);
-                // dd($getEdge);
             }
-            // dd($edges, $getEdge);
             $fitEdge = [];
             foreach ($edges as $edge) {
                 $found = false; // Flag to indicate if the edge matches any in $getEdge
@@ -146,9 +119,6 @@ class AStarAlgorithm
                 }
             }
             $edges = $fitEdge;
-            // dd($edges, $fitEdge);
-            // $edges = $this->remove_node($edges, $getEdge);
-            // $filteredge = [];
             $filteredge = $this->filter_edge($getEdge, $path);
             $foundNodes = [];
             foreach($filteredge as $neighbour){
@@ -164,39 +134,34 @@ class AStarAlgorithm
                     }
                 }
             }
-            // dd($foundNodes);
             $currents = $this->find_closest_node($foundNodes,'f',$dest_lat, $dest_lng);
             $open = $this->remove_node($open, $currents);
-            
             if(empty($currents)){
-                $currents = [
-                    'title' => 'Destination',
-                    'lat' =>$dest_lat,
-                    'lng' =>$dest_lng,
-                    'g' => 0,
-                    'h' => 0,
-                    'f' => 0
-                ];
-                // dd('ok');
-                $path = $this->path_construct_end($path, $currents);
-                $closed[] = [
-                    'title' => $path['title'],
-                    'lat' =>  $path['lat'],
-                    'lng' =>  $path['lng'],
-                    'g' => $path['g'],
-                    'h' => $path['h'],
-                    'f' => $path['f']
-                ];
+                $closed = $this->end_path_construction($path, $dest_lat, $dest_lng, $closed);
                 return $closed;
-                // return $path;
             }
             $foundNodes = null;
         }
-        // dd($path, $open, $edges);
+        dd('no path found');
+        $closed = null;
+        $closed[] = [
+            'title' => 'Source',
+            'lat' =>  $src_lat,
+            'lng' =>  $src_lng,
+            'g' => 0,
+            'h' => 0,
+            'f' => 0
+        ];
+        $closed[] = [
+            'title' => 'Destination',
+            'lat' =>  $dest_lat,
+            'lng' =>  $dest_lng,
+            'g' => 0,
+            'h' => 0,
+            'f' => 0
+        ];
         return $closed;
-        // return $path;
     }
-
     function filter_edge($getEdge, $path){
         $filter = [];
         foreach($getEdge as $edge){
@@ -209,7 +174,6 @@ class AStarAlgorithm
         }
         return $filter;
     }
-
     function is_end_node($currents,$dest_lat, $dest_lng){
         foreach($currents as $current){
             if($current->latitude == $dest_lat && $current->longitude == $dest_lng){
@@ -218,87 +182,105 @@ class AStarAlgorithm
         }
         return false;
     }
+    function is_closest_end_node($currents, $closestEndNode){
+        foreach($currents as $current){
+            foreach($closestEndNode as $close){
+                if($current->latitude == $close->latitude && $current->longitude == $close->longitude){
+                    return true;
+                    // break;
+                }
+            }
+        }
+        return false;
+    }
     function find_closest_node($allNode,$status, $dest_lat, $dest_lng){
         $closestNodes = [];
-        $minF = null;
+        $minStatus = null;
         foreach ($allNode as $node) {
-            if ($minF === null || $node[$status] < $minF) {
-                // dd($node->h, $dest_lat);
+            if ($minStatus === null || $node[$status] < $minStatus) {
                 if(($node->latitude == $dest_lat && $node->longitude == $dest_lng) || $node->h == 0){
-                    // dd('end test');
                     $closestNodes = [$node];
                     return $closestNodes;
                 }
                 else{
-                    $minF = $node[$status];
-                    $closestNodes = [$node]; // Store the current closest node
+                    $minStatus = $node[$status];
+                    $closestNodes = [$node];
                 }
             }
-            elseif ($node[$status] == $minF) {
+            elseif ($node[$status] == $minStatus) {
                 $closestNodes[] = $node; // If there are multiple nodes with the same 'g' value, add them to the array
-                // dd($closestNodes);
-                dd('test');
-                // $closestNodes = array_min('');
             }
         }
-        return $closestNodes;
+        $minF = null;
+        $closeNode = [];
+        foreach($closestNodes as $closestNode){
+            if($minF == null || $closestNode->f < $minF){
+                $minF = $closestNode->f;
+                $closeNode = [$closestNode];
+            }
+        }
+        return $closeNode;
     }
-
     function remove_node($open, $current){
         $open = array_diff($open, $current);
         return $open;
     }
-
     function path_construct_end($path, $addpath){
-        $take = $path ? $path : null;
-            $path = null;
-            // dd($addpath);
-            // foreach($addpaths as $addpath){
-                $path = [
-                    'title' => $addpath['title'],
-                    'lat' => $addpath['lat'],
-                    'lng' => $addpath['lng'],
-                    'g' => $addpath['g'],
-                    'h' => $addpath['h'],
-                    'f' => $addpath['f'],
-                    'parent' => $take
-                ];
-            // }
+        $previousPath = $path ? $path : null;
+        $path = null;
+        $path = $this->pathModule($previousPath, $addpath);
         return $path;
     }
-
     function path_construct($path, $addpaths){
-        
-        $take = $path ? $path : null;
+        $previousPath = $path ? $path : null;
         if(!empty($path)){
             $path = null;
             foreach($addpaths as $addpath){
-                $path = [
-                    'title' => $addpath['title'],
-                    'lat' => $addpath['latitude'],
-                    'lng' => $addpath['longitude'],
-                    'g' => $addpath['g'],
-                    'h' => $addpath['h'],
-                    'f' => $addpath['f'],
-                    'parent' => $take
-                ];
+                $path = $this->pathModule($previousPath, $addpath);
             }
         }
         return $path; // Return the modified path
     }
-
     function path_construct_src($path, $addpaths){
-        $take = $path ? $path : null;
-                $path = [
-                    'title' => $addpaths['title'],
-                    'lat' => $addpaths['latitude'],
-                    'lng' => $addpaths['longitude'],
-                    'g' => $addpaths['g'],
-                    'h' => $addpaths['h'],
-                    'f' => $addpaths['f'],
-                    'parent' => $take
-                ];
+        $previousPath = $path ? $path : null;
+        $path = $this->pathModule($previousPath, $addpaths);
         return $path; // Return the modified path
     }
-
+    function end_path_construction($path, $dest_lat, $dest_lng, $closedNodes){
+        $currents = [
+            'title' => 'Destination',
+            'latitude' =>$dest_lat,
+            'longitude' =>$dest_lng,
+            'g' => 0,
+            'h' => 0,
+            'f' => 0
+        ];
+        $path = $this->path_construct_end($path, $currents);
+        $closed = $this->closedModule($closedNodes,$path);
+        return $closed;
+    }
+    function closedModule($closedNodes,$path){
+        $closed = $closedNodes;
+        $closed[] = [
+            'title' => $path['title'],
+            'lat' =>  $path['lat'],
+            'lng' =>  $path['lng'],
+            'g' => $path['g'],
+            'h' => $path['h'],
+            'f' => $path['f']
+        ];
+        return $closed;
+    }
+    function pathModule($previousPath, $createPath){
+        $path = [
+            'title' => $createPath['title'],
+            'lat' => $createPath['latitude'],
+            'lng' => $createPath['longitude'],
+            'g' => $createPath['g'],
+            'h' => $createPath['h'],
+            'f' => $createPath['f'],
+            'parent' => $previousPath
+        ];
+        return $path;
+    }
 }
