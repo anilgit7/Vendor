@@ -277,7 +277,7 @@ class AdminController extends Controller
         $startLat = $admin->latitude;
         $startLng = $admin->longitude;
         $grid = new AStarAlgorithm();
-        $path = $grid->closest_nodes($startLat, $startLng, $endLat, $endLng);
+        $path = $grid->astar($startLat, $startLng, $endLat, $endLng);
         return response()->json(['path' => $path ,'user' =>$user_name]);
     }
 
@@ -292,7 +292,7 @@ class AdminController extends Controller
         $startLng = $admin->longitude;
         $grid = new AStarAlgorithm();
         $nodes = $grid->node_details($startLat, $startLng, $endLat, $endLng);
-        $paths = $grid->closest_nodes($startLat, $startLng, $endLat, $endLng);
+        $paths = $grid->astar($startLat, $startLng, $endLat, $endLng);
         return view('backend.admin',compact('paths', 'nodes' ,'startLat', 'startLng', 'endLat', 'endLng'));
     }
 
