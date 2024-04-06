@@ -104,7 +104,6 @@ class EdgeSeeder extends Seeder
             ['name' => 'H2', 'title' => 'Mulpani - Pipalbot', 'lat1' => 27.703856, 'lng1' => 85.390515, 'lat2' => 27.706312, 'lng2' => 85.394008],
             ['name' => 'H2', 'title' => 'Pipalbot - Mulpani', 'lat1' => 27.706312, 'lng1' => 85.394008, 'lat2' => 27.703856, 'lng2' => 85.390515],
 
-
             ['name' => 'B1', 'title' => 'Koteshwor - Balkumari Pul', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.673604, 'lng2' => 85.342603],
             ['name' => 'B1', 'title' => 'Balkumari Pul - Koteshwor', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.679001, 'lng2' => 85.349374],
              
@@ -134,6 +133,117 @@ class EdgeSeeder extends Seeder
 
             ['name' => 'H2', 'title' => 'Balkot Chowk - Redcross Chowk', 'lat1' => 27.665948, 'lng1' => 85.366460, 'lat2' => 27.669490, 'lng2' => 85.365914],
             ['name' => 'H2', 'title' => 'Redcross Chowk - Balkot Chowk', 'lat1' => 27.669490, 'lng1' => 85.365914, 'lat2' => 27.665948, 'lng2' => 85.366460],
+
+
+
+            ['name' => 'H2', 'title' => 'Balkumari Pul - Balkumari', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.670090, 'lng2' => 85.338433],
+            ['name' => 'H2', 'title' => 'Balkumari - Balkumari Pul', 'lat1' => 27.670090, 'lng1' => 85.338433, 'lat2' => 27.673604, 'lng2' => 85.342603],
+            
+            ['name' => 'H2', 'title' => 'Balkumari - Bhol Dhoka', 'lat1' => 27.670090, 'lng1' => 85.338433, 'lat2' => 27.673102, 'lng2' => 85.332208],
+            ['name' => 'H2', 'title' => 'Bhol Dhoka - Balkumari', 'lat1' => 27.673102, 'lng1' => 85.332208, 'lat2' => 27.670090, 'lng2' => 85.338433],
+
+            ['name' => 'H2', 'title' => 'Bhol Dhoka - Patan DS', 'lat1' => 27.673102, 'lng1' => 85.332208, 'lat2' => 27.674703, 'lng2' => 85.325657],
+            ['name' => 'H2', 'title' => 'Patan DS - Bhol Dhoka', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.673102, 'lng2' => 85.332208],
+
+            ['name' => 'H2', 'title' => 'Patan DS - Patan Dhoka', 'lat1' => 27.673102, 'lng1' => 85.332208, 'lat2' => 27.678737, 'lng2' => 85.320945],
+            ['name' => 'H2', 'title' => 'Patan Dhoka - Patan DS', 'lat1' => 27.678737, 'lng1' => 85.320945, 'lat2' => 27.673102, 'lng2' => 85.332208],
+
+            ['name' => 'H2', 'title' => 'Patan Dhoka - Chakupat', 'lat1' => 27.678737, 'lng1' => 85.320945, 'lat2' => 27.684871, 'lng2' => 85.318719],
+            ['name' => 'H2', 'title' => 'Chakupat - Patan Dhoka', 'lat1' => 27.684871, 'lng1' => 85.318719, 'lat2' => 27.678737, 'lng2' => 85.320945],
+
+            ['name' => 'H2', 'title' => 'Chakupat - Kupandol', 'lat1' => 27.684871, 'lng1' => 85.318719, 'lat2' => 27.688287, 'lng2' => 85.315730],
+            ['name' => 'H2', 'title' => 'Kupandol - Chakupat', 'lat1' => 27.688287, 'lng1' => 85.315730, 'lat2' => 27.684871, 'lng2' => 85.318719],
+
+            ['name' => 'H2', 'title' => 'Chakupat - Pulchowk', 'lat1' => 27.684871, 'lng1' => 85.318719, 'lat2' => 27.676778, 'lng2' => 85.316473],
+            ['name' => 'H2', 'title' => 'Pulchowk - Chakupat', 'lat1' => 27.676778, 'lng1' => 85.316473, 'lat2' => 27.684871, 'lng2' => 85.318719],
+            
+            ['name' => 'H2', 'title' => 'Kupandol - Tripuramarga', 'lat1' => 27.688287, 'lng1' => 85.315730, 'lat2' => 27.690779, 'lng2' => 85.317420],
+            ['name' => 'H2', 'title' => 'Tripuramarga - Kupandol', 'lat1' => 27.690779, 'lng1' => 85.317420, 'lat2' => 27.688287, 'lng2' => 85.315730],
+
+            ['name' => 'H2', 'title' => 'Tripuramarga - Maitighar', 'lat1' => 27.690779, 'lng1' => 85.317420, 'lat2' => 27.694282, 'lng2' => 85.319754],
+            ['name' => 'H2', 'title' => 'Maitighar - Tripuramarga', 'lat1' => 27.694282, 'lng1' => 85.319754, 'lat2' => 27.690779, 'lng2' => 85.317420],
+
+            ['name' => 'H2', 'title' => 'Maitighar - Babarmahal', 'lat1' => 27.694282, 'lng1' => 85.319754, 'lat2' => 27.692496, 'lng2' => 85.324827],
+            ['name' => 'H2', 'title' => 'Babarmahal - Maitighar', 'lat1' => 27.692496, 'lng1' => 85.324827, 'lat2' => 27.694282, 'lng2' => 85.319754],
+
+            ['name' => 'H2', 'title' => 'Babarmahal - Bijulibazar', 'lat1' => 27.692496, 'lng1' => 85.324827, 'lat2' => 27.690005, 'lng2' => 85.328612],
+            ['name' => 'H2', 'title' => 'Bijulibazar - Babarmahal', 'lat1' => 27.690005, 'lng1' => 85.328612, 'lat2' => 27.692496, 'lng2' => 85.324827],
+
+            ['name' => 'H2', 'title' => 'Bijulibazar - Alphabeta', 'lat1' => 27.690005, 'lng1' => 85.328612, 'lat2' => 27.688924, 'lng2' => 85.331658],
+            ['name' => 'H2', 'title' => 'Alphabeta - Bijulibazar', 'lat1' => 27.688924, 'lng1' => 85.331658, 'lat2' => 27.690005, 'lng2' => 85.328612],
+
+            ['name' => 'H2', 'title' => 'Alphabeta - New Baneshwor', 'lat1' => 27.688924, 'lng1' => 85.331658, 'lat2' => 27.688041, 'lng2' => 85.335630],
+            ['name' => 'H2', 'title' => 'New Baneshwor - Alphabeta', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.688924, 'lng2' => 85.331658],
+
+            ['name' => 'H2', 'title' => 'New Baneshwor - Tinkune', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.685710, 'lng2' => 85.346388],
+            ['name' => 'H2', 'title' => 'Tinkune - New Baneshwor', 'lat1' => 27.685710, 'lng1' => 85.346388, 'lat2' => 27.688041, 'lng2' => 85.335630],
+
+            ['name' => 'H2', 'title' => 'New Baneshwor - Sankhamul', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.681269, 'lng2' => 85.331963],
+            ['name' => 'H2', 'title' => 'Sankhamul - New Baneshwor', 'lat1' => 27.681269, 'lng1' => 85.331963, 'lat2' => 27.688041, 'lng2' => 85.335630],
+
+            ['name' => 'H2', 'title' => 'Sankhamul - Mangalbazar', 'lat1' => 27.681269, 'lng1' => 85.331963, 'lat2' => 27.679482, 'lng2' => 85.329354],
+            ['name' => 'H2', 'title' => 'Mangalbazar - Sankhamul', 'lat1' => 27.679482, 'lng1' => 85.329354, 'lat2' => 27.681269, 'lng2' => 85.331963],
+
+            ['name' => 'H2', 'title' => 'Mangalbazar - Patan DS', 'lat1' => 27.679482, 'lng1' => 85.329354, 'lat2' => 27.674703, 'lng2' => 85.325657],
+            ['name' => 'H2', 'title' => 'Patan DS - Mangalbazar', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.679482, 'lng2' => 85.329354],
+            
+            ['name' => 'B1', 'title' => 'Koteshwor - Tinkune', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.685710, 'lng2' => 85.346388],
+            ['name' => 'B1', 'title' => 'Tinkune - Koteshwor', 'lat1' => 27.685710, 'lng1' => 85.346388, 'lat2' => 27.679001, 'lng2' => 85.349374],
+            
+            ['name' => 'H2', 'title' => 'Balkumari - Gwarko', 'lat1' => 27.670090, 'lng1' => 85.338433, 'lat2' => 27.666433, 'lng2' => 85.332274],
+            ['name' => 'H2', 'title' => 'Gwarko - Balkumari', 'lat1' => 27.666433, 'lng1' => 85.332274, 'lat2' => 27.670090, 'lng2' => 85.338433],
+
+            ['name' => 'H2', 'title' => 'Gwarko - Satdobato', 'lat1' => 27.666433, 'lng1' => 85.332274, 'lat2' => 27.658426, 'lng2' => 85.324676],
+            ['name' => 'H2', 'title' => 'Satdobato - Gwarko', 'lat1' => 27.658426, 'lng1' => 85.324676, 'lat2' => 27.666433, 'lng2' => 85.332274],
+
+            ['name' => 'H2', 'title' => 'Satdobato - Chapagaundobato', 'lat1' => 27.658426, 'lng1' => 85.324676, 'lat2' => 27.657568, 'lng2' => 85.322646],
+            ['name' => 'H2', 'title' => 'Chapagaundobato - Satdobato', 'lat1' => 27.657568, 'lng1' => 85.322646, 'lat2' => 27.658426, 'lng2' => 85.324676],
+
+            ['name' => 'H2', 'title' => 'Chapagaundobato - Mahalaxmisthan', 'lat1' => 27.657568, 'lng1' => 85.322646, 'lat2' => 27.661580, 'lng2' => 85.317471],
+            ['name' => 'H2', 'title' => 'Mahalaxmisthan - Chapagaundobato', 'lat1' => 27.661580, 'lng1' => 85.317471, 'lat2' => 27.657568, 'lng2' => 85.322646],
+
+            ['name' => 'H2', 'title' => 'Mahalaxmisthan - Kusunti', 'lat1' => 27.661580, 'lng1' => 85.317471, 'lat2' => 27.664906, 'lng2' => 85.313192],
+            ['name' => 'H2', 'title' => 'Kusunti - Mahalaxmisthan', 'lat1' => 27.664906, 'lng1' => 85.313192, 'lat2' => 27.661580, 'lng2' => 85.317471],
+
+            ['name' => 'H2', 'title' => 'Kusunti - Nakhkhu', 'lat1' => 27.664906, 'lng1' => 85.313192, 'lat2' => 27.666600, 'lng2' => 85.308006],
+            ['name' => 'H2', 'title' => 'Nakhkhu - Kusunti', 'lat1' => 27.666600, 'lng1' => 85.308006, 'lat2' => 27.664906, 'lng2' => 85.313192],
+
+            ['name' => 'H2', 'title' => 'Nakhkhu - Ekantakuna', 'lat1' => 27.666600, 'lng1' => 85.308006, 'lat2' => 27.669754, 'lng2' => 85.310850],
+            ['name' => 'H2', 'title' => 'Ekantakuna - Nakhkhu', 'lat1' => 27.669754, 'lng1' => 85.310850, 'lat2' => 27.666600, 'lng2' => 85.308006],
+
+            ['name' => 'H2', 'title' => 'Ekantakuna - Jawalakhel', 'lat1' => 27.669754, 'lng1' => 85.310850, 'lat2' => 27.672981, 'lng2' => 85.314096],
+            ['name' => 'H2', 'title' => 'Jawalakhel - Ekantakuna', 'lat1' => 27.672981, 'lng1' => 85.314096, 'lat2' => 27.669754, 'lng2' => 85.310850],
+
+            ['name' => 'H2', 'title' => 'Pulchowk - Jawalakhel', 'lat1' => 27.676778, 'lng1' => 85.316473, 'lat2' => 27.672981, 'lng2' => 85.314096],
+            ['name' => 'H2', 'title' => 'Jawalakhel - Pulchowk', 'lat1' => 27.672981, 'lng1' => 85.314096, 'lat2' => 27.676778, 'lng2' => 85.316473],
+
+            ['name' => 'H2', 'title' => 'Kumaripati - Jawalakhel', 'lat1' => 27.669669, 'lng1' => 85.322088, 'lat2' => 27.672981, 'lng2' => 85.314096],
+            ['name' => 'H2', 'title' => 'Jawalakhel - Kumaripati', 'lat1' => 27.672981, 'lng1' => 85.314096, 'lat2' => 27.669669, 'lng2' => 85.322088],
+
+            ['name' => 'H2', 'title' => 'Kumaripati - Prayag Pokhari', 'lat1' => 27.669669, 'lng1' => 85.322088, 'lat2' => 27.668342, 'lng2' => 85.325090],
+            ['name' => 'H2', 'title' => 'Prayag Pokhari - Kumaripati', 'lat1' => 27.668342, 'lng1' => 85.325090, 'lat2' => 27.669669, 'lng2' => 85.322088],
+
+            ['name' => 'H2', 'title' => 'Kumaripati - Patan DS', 'lat1' => 27.669669, 'lng1' => 85.322088, 'lat2' => 27.674703, 'lng2' => 85.325657],
+            ['name' => 'H2', 'title' => 'Patan DS - Kumaripati', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.669669, 'lng2' => 85.322088],
+
+            ['name' => 'H2', 'title' => 'Kumaripati - Patan Hospital', 'lat1' => 27.669669, 'lng1' => 85.322088, 'lat2' => 27.668074, 'lng2' => 85.321527],
+            ['name' => 'H2', 'title' => 'Patan Hospital - Kumaripati', 'lat1' => 27.668074, 'lng1' => 85.321527, 'lat2' => 27.669669, 'lng2' => 85.322088],
+
+            ['name' => 'H2', 'title' => 'Lagankhel - Patan Hospital', 'lat1' => 27.666639, 'lng1' => 85.323477, 'lat2' => 27.668074, 'lng2' => 85.321527],
+            ['name' => 'H2', 'title' => 'Patan Hospital - Lagankhel', 'lat1' => 27.668074, 'lng1' => 85.321527, 'lat2' => 27.666639, 'lng2' => 85.323477],
+
+            ['name' => 'H2', 'title' => 'Lagankhel - Prayag Pokhari', 'lat1' => 27.666639, 'lng1' => 85.323477, 'lat2' => 27.668342, 'lng2' => 85.325090],
+            ['name' => 'H2', 'title' => 'Prayag Pokhari - Lagankhel', 'lat1' => 27.668342, 'lng1' => 85.325090, 'lat2' => 27.666639, 'lng2' => 85.323477],
+
+            ['name' => 'H2', 'title' => 'Sincha - Prayag Pokhari', 'lat1' => 27.667305, 'lng1' => 85.330230, 'lat2' => 27.668342, 'lng2' => 85.325090],
+            ['name' => 'H2', 'title' => 'Prayag Pokhari - Sincha', 'lat1' => 27.668342, 'lng1' => 85.325090, 'lat2' => 27.667305, 'lng2' => 85.330230],
+
+            ['name' => 'H2', 'title' => 'Sincha - Gwarko', 'lat1' => 27.667305, 'lng1' => 85.330230, 'lat2' => 27.666433, 'lng2' => 85.332274],
+            ['name' => 'H2', 'title' => 'Gwarko - Sincha', 'lat1' => 27.666433, 'lng1' => 85.332274, 'lat2' => 27.667305, 'lng2' => 85.330230],
+
+            ['name' => 'H2', 'title' => 'Lagankhel - Satdobato', 'lat1' => 27.666639, 'lng1' => 85.323477, 'lat2' => 27.658426, 'lng2' => 85.324676],
+            ['name' => 'H2', 'title' => 'Satdobato - Lagankhel', 'lat1' => 27.658426, 'lng1' => 85.324676, 'lat2' => 27.666639, 'lng2' => 85.323477],
+        
         ];
         Edge::insert($edges);
     }

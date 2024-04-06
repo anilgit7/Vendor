@@ -15,6 +15,8 @@ class NodeSeeder extends Seeder
     {
         $nodes = [
             ['name' => 'A', 'title' => 'New Baneshwor', 'latitude' => 27.688041, 'longitude' => 85.335630],
+            ['name' => 'A', 'title' => 'Sankhamul', 'latitude' => 27.681269, 'longitude' => 85.331963],
+            ['name' => 'A', 'title' => 'Mangalbazar', 'latitude' => 27.679482, 'longitude' => 85.329354],
             ['name' => 'B', 'title' => 'Babarmahal', 'latitude' => 27.692496, 'longitude' => 85.324827],
             ['name' => 'B', 'title' => 'Bijulibazar', 'latitude' => 27.690005, 'longitude' => 85.328612],
             ['name' => 'B', 'title' => 'Alphabeta', 'latitude' => 27.688924, 'longitude' => 85.331658],
@@ -39,9 +41,11 @@ class NodeSeeder extends Seeder
             ['name' => 'C', 'title' => 'Kusunti', 'latitude' => 27.664906, 'longitude' => 85.313192],
             ['name' => 'C', 'title' => 'Nakhkhu', 'latitude' => 27.666600, 'longitude' => 85.308006],
             
-            ['name' => 'C', 'title' => 'Lagankhel', 'latitude' => 27.666923, 'longitude' => 85.323529],
+            ['name' => 'C', 'title' => 'Lagankhel', 'latitude' => 27.666639, 'longitude' => 85.323477],
             ['name' => 'C', 'title' => 'Prayag Pokhari', 'latitude' => 27.668342, 'longitude' => 85.325090],
-            ['name' => 'C', 'title' => 'Kumaripati', 'latitude' => 27.669693, 'longitude' => 85.321573],
+            ['name' => 'C', 'title' => 'Sincha', 'latitude' => 27.667305, 'longitude' => 85.330230],
+            ['name' => 'C', 'title' => 'Patan Hospital', 'latitude' => 27.668074, 'longitude' => 85.321527],
+            ['name' => 'C', 'title' => 'Kumaripati', 'latitude' => 27.669669, 'longitude' => 85.322088],
             ['name' => 'C', 'title' => 'Jawalakhel', 'latitude' => 27.672981, 'longitude' => 85.314096],
             ['name' => 'C', 'title' => 'Ekantakuna', 'latitude' => 27.669754, 'longitude' => 85.310850],
              
