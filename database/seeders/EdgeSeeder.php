@@ -21,7 +21,7 @@ class EdgeSeeder extends Seeder
             ['name' => 'B1', 'title' => 'Jadibuti - Koteshwor', 'lat1' => 27.675120, 'lng1' => 85.352063, 'lat2' => 27.679001, 'lng2' => 85.349374],
 
             ['name' => 'C1', 'title' => 'Jadibuti - Pepsicola', 'lat1' => 27.675120, 'lng1' => 85.352063, 'lat2' => 27.689183, 'lng2' => 85.360791],
-            ['name' => 'C2', 'title' => 'Pepsicola -Jadibuti', 'lat1' => 27.689183, 'lng1' => 85.360791, 'lat2' => 27.675120, 'lng2' => 85.352063],
+            ['name' => 'C2', 'title' => 'Pepsicola - Jadibuti', 'lat1' => 27.689183, 'lng1' => 85.360791, 'lat2' => 27.675120, 'lng2' => 85.352063],
 
             ['name' => 'D1', 'title' => 'Jadibuti - Lokanthali', 'lat1' => 27.675120, 'lng1' => 85.352063, 'lat2' => 27.674608, 'lng2' => 85.360525],
             ['name' => 'D2', 'title' => 'Lokanthali - Jadibuti', 'lat1' => 27.674608, 'lng1' => 85.360525, 'lat2' => 27.675120, 'lng2' => 85.352063],
