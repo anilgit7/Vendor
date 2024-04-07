@@ -18,8 +18,8 @@
         });
         // Place markers for each coordinate
         pathCoordinates.forEach(function(coordinate, index) {
-            var title = (index === 0 )? 'Admin' : (index === pathCoordinates.length - 1 ? user : ''); // Set different titles for start and end points
-            var color = (index === 0 )? 'blue' : (index === pathCoordinates.length - 1 ? 'red' : ''); // Set different colors for start and end points
+            var title = (index === 0 )? 'Admin' : (index === pathCoordinates.length - 1 ? user : coordinate['title']); // Set different titles for start and end points
+            var color = (index === 0 )? 'blue' : (index === pathCoordinates.length - 1 ? 'red' : 'yellow'); // Set different colors for start and end points
             placeMarker(coordinate, title, color);
         });
         function placeMarker(location, title, color) {

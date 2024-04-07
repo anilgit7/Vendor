@@ -7,7 +7,7 @@
             url: url,
             type : 'GET',
             success : function(result){
-                console.log(result);
+                // console.log(result);
                 initMap(result.path, result.user);
             }
         });
