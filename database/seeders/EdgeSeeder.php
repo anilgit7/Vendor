@@ -104,8 +104,11 @@ class EdgeSeeder extends Seeder
             ['name' => 'B1', 'title' => 'Koteshwor - Balkumari Pul', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.673604, 'lng2' => 85.342603],
             ['name' => 'B1', 'title' => 'Balkumari Pul - Koteshwor', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.679001, 'lng2' => 85.349374],
              
-            ['name' => 'H1', 'title' => 'Balkumari Pul - Laligurans', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.668459, 'lng2' => 85.349430],
-            ['name' => 'H1', 'title' => 'Laligurans - Balkumari Pul', 'lat1' => 27.668459, 'lng1' => 85.349430, 'lat2' => 27.673604, 'lng2' => 85.342603],
+            ['name' => 'H1', 'title' => 'Balkumari Pul - CCRC', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.671407, 'lng2' => 85.344999],
+            ['name' => 'H1', 'title' => 'CCRC - Balkumari Pul', 'lat1' => 27.671407, 'lng1' => 85.344999, 'lat2' => 27.673604, 'lng2' => 85.342603],
+
+            ['name' => 'H1', 'title' => 'CCRC - Laligurans', 'lat1' => 27.671407, 'lng1' => 85.344999, 'lat2' => 27.668459, 'lng2' => 85.349430],
+            ['name' => 'H1', 'title' => 'Laligurans - CCRC', 'lat1' => 27.668459, 'lng1' => 85.349430, 'lat2' => 27.671407, 'lng2' => 85.344999],
 
             ['name' => 'H1', 'title' => 'Laligurans - Mahalaxmi', 'lat1' => 27.668459, 'lng1' => 85.349430, 'lat2' => 27.667652, 'lng2' => 85.349164],
             ['name' => 'H1', 'title' => 'Mahalaxmi - Laligurans', 'lat1' => 27.667652, 'lng1' => 85.349164, 'lat2' => 27.668459, 'lng2' => 85.349430],

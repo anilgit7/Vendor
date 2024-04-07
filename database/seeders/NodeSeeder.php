@@ -66,6 +66,7 @@ class NodeSeeder extends Seeder
             ['name' => 'C', 'title' => 'Jawalakhel', 'latitude' => 27.672981, 'longitude' => 85.314096],
             ['name' => 'C', 'title' => 'Ekantakuna', 'latitude' => 27.669754, 'longitude' => 85.310850],
              
+            ['name' => 'C', 'title' => 'CCRC', 'latitude' => 27.671407, 'longitude' => 85.344999],
             ['name' => 'C', 'title' => 'Laligurans', 'latitude' => 27.668459, 'longitude' => 85.349430],
             ['name' => 'C', 'title' => 'Mahalaxmi', 'latitude' => 27.667652, 'longitude' => 85.349164],
             ['name' => 'C', 'title' => 'Tikathali', 'latitude' => 27.667150, 'longitude' => 85.353295],
