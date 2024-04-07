@@ -14,9 +14,6 @@ class EdgeSeeder extends Seeder
     public function run(): void
     {
         $edges = [
-            // ['name' => 'A1', 'title' => 'New Baneshwor - Koteshwor', 'lat1' => 27.6892, 'lng1' => 85.3298, 'lat2' => 27.6806, 'lng2' => 85.3469],
-            // ['name' => 'A2', 'title' => 'Koteshwor - New Baneshwor', 'lat1' => 27.6806, 'lng1' => 85.3469, 'lat2' => 27.6892, 'lng2' => 85.3298],
-
             ['name' => 'B1', 'title' => 'Koteshwor - Jadibuti', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.675120, 'lng2' => 85.352063],
             ['name' => 'B1', 'title' => 'Jadibuti - Koteshwor', 'lat1' => 27.675120, 'lng1' => 85.352063, 'lat2' => 27.679001, 'lng2' => 85.349374],
 
@@ -71,23 +68,23 @@ class EdgeSeeder extends Seeder
             ['name' => 'F1', 'title' => 'Khahare Chowk - Kadaghari', 'lat1' => 27.696435, 'lng1' => 85.366234,  'lat2'=>27.697726, 'lng2' => 85.371774],
             ['name' => 'F1', 'title' => 'Kadaghari - Khahare Chowk', 'lat1' => 27.697726, 'lng1' => 85.371774, 'lat2' => 27.696435, 'lng2' => 85.366234],
 
-            ['name' => 'G1', 'title' => 'Khahare Chowk - Mantar', 'lat1' => 27.674345, 'lng1' => 85.373964, 'lat2' => 27.673174, 'lng2' => 85.385452],
-            ['name' => 'G1', 'title' => 'Mantar - Khahare Chowk', 'lat1' => 27.673174, 'lng1' => 85.385452, 'lat2' => 27.674345, 'lng2' => 85.373964],
+            ['name' => 'G1', 'title' => 'Khahare Chowk - Mantar', 'lat1' => 27.674345, 'lng1' => 85.373964, 'lat2' => 27.705902, 'lng2' => 85.370739],
+            ['name' => 'G1', 'title' => 'Mantar - Khahare Chowk', 'lat1' => 27.705902, 'lng1' => 85.370739, 'lat2' => 27.674345, 'lng2' => 85.373964],
 
-            ['name' => 'G1', 'title' => 'Mantar - Tej Binayek', 'lat1' => 27.673174, 'lng1' => 85.385452, 'lat2' => 27.706910, 'lng2' => 85.378874],
-            ['name' => 'G1', 'title' => 'Tej Binayek - Mantar', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.673174, 'lng2' => 85.385452],
+            ['name' => 'G1', 'title' => 'Mantar - Tej Binayek', 'lat1' => 27.705902, 'lng1' => 85.370739, 'lat2' => 27.706910, 'lng2' => 85.378874],
+            ['name' => 'G1', 'title' => 'Tej Binayek - Mantar', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.705902, 'lng2' => 85.370739],
 
             ['name' => 'F1', 'title' => 'Kadaghari - Gothatar', 'lat1' => 27.697726, 'lng1' => 85.371774, 'lat2' => 27.701133, 'lng2' => 85.379180],
             ['name' => 'F1', 'title' => 'Gothatar - Kadaghari', 'lat1' => 27.701133, 'lng1' => 85.379180, 'lat2' => 27.697726, 'lng2' => 85.371774],
 
-            ['name' => 'G1', 'title' => 'Gothatar - Tej Binayek', 'lat1' => 27.674345, 'lng1' => 85.373964, 'lat2' => 27.706910, 'lng2' => 85.378874],
-            ['name' => 'G1', 'title' => 'Tej Binayek - Gothatar', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.674345, 'lng2' => 85.373964],
+            ['name' => 'G1', 'title' => 'Gothatar - Tej Binayek', 'lat1' => 27.701133, 'lng1' => 85.379180, 'lat2' => 27.706910, 'lng2' => 85.378874],
+            ['name' => 'G1', 'title' => 'Tej Binayek - Gothatar', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.701133, 'lng2' => 85.379180],
 
             ['name' => 'G1', 'title' => 'Tej Binayek - Chapabot', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.707639, 'lng2' => 85.383083],
             ['name' => 'G1', 'title' => 'Chapabot - Tej Binayek', 'lat1' => 27.707639, 'lng1' => 85.383083, 'lat2' => 27.706910, 'lng2' => 85.378874],
 
-            ['name' => 'H1', 'title' => 'Gothatar - Thapagoan', 'lat1' => 27.674345, 'lng1' => 85.373964, 'lat2' => 27.700882, 'lng2' => 85.385171],
-            ['name' => 'H1', 'title' => 'Thapagoan - Gothatar', 'lat1' => 27.700882, 'lng1' => 85.385171, 'lat2' => 27.674345, 'lng2' => 85.373964],
+            ['name' => 'H1', 'title' => 'Gothatar - Thapagoan', 'lat1' => 27.701133, 'lng1' => 85.379180, 'lat2' => 27.700882, 'lng2' => 85.385171],
+            ['name' => 'H1', 'title' => 'Thapagoan - Gothatar', 'lat1' => 27.700882, 'lng1' => 85.385171, 'lat2' => 27.701133, 'lng2' => 85.379180],
 
             ['name' => 'H1', 'title' => 'Thapagoan - Mulpani', 'lat1' => 27.700882, 'lng1' => 85.385171, 'lat2' => 27.703856, 'lng2' => 85.390515],
             ['name' => 'H1', 'title' => 'Mulpani - Thapagoan', 'lat1' => 27.703856, 'lng1' => 85.390515, 'lat2' => 27.700882, 'lng2' => 85.385171],
@@ -103,7 +100,7 @@ class EdgeSeeder extends Seeder
 
             ['name' => 'H2', 'title' => 'Mulpani - Pipalbot', 'lat1' => 27.703856, 'lng1' => 85.390515, 'lat2' => 27.706312, 'lng2' => 85.394008],
             ['name' => 'H2', 'title' => 'Pipalbot - Mulpani', 'lat1' => 27.706312, 'lng1' => 85.394008, 'lat2' => 27.703856, 'lng2' => 85.390515],
-
+//checked
             ['name' => 'B1', 'title' => 'Koteshwor - Balkumari Pul', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.673604, 'lng2' => 85.342603],
             ['name' => 'B1', 'title' => 'Balkumari Pul - Koteshwor', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.679001, 'lng2' => 85.349374],
              
@@ -114,7 +111,7 @@ class EdgeSeeder extends Seeder
             ['name' => 'H1', 'title' => 'Mahalaxmi - Laligurans', 'lat1' => 27.667652, 'lng1' => 85.349164, 'lat2' => 27.668459, 'lng2' => 85.349430],
 
             ['name' => 'H1', 'title' => 'Mahalaxmi - Tikathali', 'lat1' => 27.667652, 'lng1' => 85.349164, 'lat2' => 27.667150, 'lng2' => 85.353295],
-            ['name' => 'H1', 'title' => 'Mahalaxmi - Tikathali', 'lat1' => 27.667652, 'lng1' => 85.349164, 'lat2' => 27.667150, 'lng2' => 85.353295],
+            ['name' => 'H1', 'title' => 'Tikathali - Mahalaxmi', 'lat1' => 27.667150, 'lng1' => 85.353295, 'lat2' => 27.667652, 'lng2' => 85.349164],
 
             ['name' => 'H2', 'title' => 'Tikathali - Radhakrishna', 'lat1' => 27.667150, 'lng1' => 85.353295, 'lat2' => 27.665540, 'lng2' => 85.355763],
             ['name' => 'H2', 'title' => 'Radhakrishna - Tikathali', 'lat1' => 27.665540, 'lng1' => 85.355763, 'lat2' => 27.667150, 'lng2' => 85.353295],
@@ -145,8 +142,8 @@ class EdgeSeeder extends Seeder
             ['name' => 'H2', 'title' => 'Bhol Dhoka - Patan DS', 'lat1' => 27.673102, 'lng1' => 85.332208, 'lat2' => 27.674703, 'lng2' => 85.325657],
             ['name' => 'H2', 'title' => 'Patan DS - Bhol Dhoka', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.673102, 'lng2' => 85.332208],
 
-            ['name' => 'H2', 'title' => 'Patan DS - Patan Dhoka', 'lat1' => 27.673102, 'lng1' => 85.332208, 'lat2' => 27.678737, 'lng2' => 85.320945],
-            ['name' => 'H2', 'title' => 'Patan Dhoka - Patan DS', 'lat1' => 27.678737, 'lng1' => 85.320945, 'lat2' => 27.673102, 'lng2' => 85.332208],
+            ['name' => 'H2', 'title' => 'Patan DS - Patan Dhoka', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.678737, 'lng2' => 85.320945],
+            ['name' => 'H2', 'title' => 'Patan Dhoka - Patan DS', 'lat1' => 27.678737, 'lng1' => 85.320945, 'lat2' => 27.674703, 'lng2' => 85.325657],
 
             ['name' => 'H2', 'title' => 'Patan Dhoka - Chakupat', 'lat1' => 27.678737, 'lng1' => 85.320945, 'lat2' => 27.684871, 'lng2' => 85.318719],
             ['name' => 'H2', 'title' => 'Chakupat - Patan Dhoka', 'lat1' => 27.684871, 'lng1' => 85.318719, 'lat2' => 27.678737, 'lng2' => 85.320945],
