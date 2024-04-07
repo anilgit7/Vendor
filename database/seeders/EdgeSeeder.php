@@ -100,7 +100,7 @@ class EdgeSeeder extends Seeder
 
             ['name' => 'H2', 'title' => 'Mulpani - Pipalbot', 'lat1' => 27.703856, 'lng1' => 85.390515, 'lat2' => 27.706312, 'lng2' => 85.394008],
             ['name' => 'H2', 'title' => 'Pipalbot - Mulpani', 'lat1' => 27.706312, 'lng1' => 85.394008, 'lat2' => 27.703856, 'lng2' => 85.390515],
-//checked
+
             ['name' => 'B1', 'title' => 'Koteshwor - Balkumari Pul', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.673604, 'lng2' => 85.342603],
             ['name' => 'B1', 'title' => 'Balkumari Pul - Koteshwor', 'lat1' => 27.673604, 'lng1' => 85.342603, 'lat2' => 27.679001, 'lng2' => 85.349374],
              
