@@ -127,13 +127,16 @@ class AStarAlgorithm
                     }
                 }
             }
-            $currents = $this->find_closest_node($foundNodes,'f',$dest_lat, $dest_lng);
+            $currents = $this->find_closest_node($foundNodes,'h',$dest_lat, $dest_lng);
             $open = $this->remove_node($open, $currents);
+
             if(empty($currents)){
                 $closed = $this->end_path_construction($path, $dest_lat, $dest_lng, $closed);
+                dd($path);
                 return $closed;
             }
             $foundNodes = null;
+            
         }
         dd('no path found');
         $closed = null;
