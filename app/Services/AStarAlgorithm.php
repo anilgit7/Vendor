@@ -12,22 +12,13 @@ class AStarAlgorithm
         foreach($nodes as $node){
             $lat2 = $node->latitude;
             $lng2 = $node->longitude;
-            $g = $this->distance($src_lng,$src_lat,$lng2,$lat2);
+            $g = $this->heuristic($src_lng,$src_lat,$lng2,$lat2);
             $node['g'] = $g;
             $h = $this->heuristic($lng2,$lat2,$dest_lng,$dest_lat);
             $node['h'] = $h;
             $node['f'] = $node->g+$node->h;
         }
         return $nodes;
-    }
-    private function distance($lat1, $lon1, $lat2, $lon2) {
-        $earth_radius = 6371; // Earth's radius in kilometers
-        $delta_lat = deg2rad($lat2 - $lat1);
-        $delta_lon = deg2rad($lon2 - $lon1);
-        $a = sin($delta_lat / 2) * sin($delta_lat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($delta_lon / 2) * sin($delta_lon / 2);
-        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-        $distance = $earth_radius * $c;
-        return $distance; // Distance in kilometers
     }
     function heuristic($lng1, $lat1, $lng2, $lat2) {
         // Use Haversine formula to calculate heuristic distance
@@ -66,7 +57,7 @@ class AStarAlgorithm
         foreach($nodes as $node){
             $lat2 = $node->latitude;
             $lng2 = $node->longitude;
-            $g = $this->distance($src_lng,$src_lat,$lng2,$lat2);
+            $g = $this->heuristic($src_lng,$src_lat,$lng2,$lat2);
             $node['g'] = $g;
             $h = $this->heuristic($lng2,$lat2,$dest_lng,$dest_lat);
             $node['h'] = $h;
@@ -85,7 +76,9 @@ class AStarAlgorithm
         $closed = [];
         $closed = $this->closedModule($closed,$path);
         $closestNodes = $this->find_closest_node($open,'g', $dest_lat, $dest_lng);
+        // dd($closestNodes);
         $closestEndNode = $this->find_closest_node($open,'h', $dest_lat, $dest_lng);
+        // dd($closestNodes, $closestEndNode);
         $currents = $closestNodes; // Assign closest nodes to $current
         while (!empty($open)) {
             $end = $this->is_end_node($currents,$dest_lat, $dest_lng);
@@ -206,6 +199,8 @@ class AStarAlgorithm
                     $minStatus = $node[$status];
                     $closestNodes = [$node];
                 }
+                // $minStatus = $node[$status];
+                //     $closestNodes = [$node];
             }
             elseif ($node[$status] == $minStatus) {
                 $closestNodes[] = $node; // If there are multiple nodes with the same 'g' value, add them to the array
@@ -213,6 +208,7 @@ class AStarAlgorithm
         }
         $minF = null;
         $closeNode = [];
+        // dd($closestNodes);
         foreach($closestNodes as $closestNode){
             if($minF == null || $closestNode->f < $minF){
                 $minF = $closestNode->f;
