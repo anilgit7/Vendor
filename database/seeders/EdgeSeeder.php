@@ -172,8 +172,8 @@ class EdgeSeeder extends Seeder
             ['name' => 'H2', 'title' => 'Alphabeta - New Baneshwor', 'lat1' => 27.688924, 'lng1' => 85.331658, 'lat2' => 27.688041, 'lng2' => 85.335630],
             ['name' => 'H2', 'title' => 'New Baneshwor - Alphabeta', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.688924, 'lng2' => 85.331658],
 
-            ['name' => 'H2', 'title' => 'New Baneshwor - Tinkune', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.685710, 'lng2' => 85.346388],
-            ['name' => 'H2', 'title' => 'Tinkune - New Baneshwor', 'lat1' => 27.685710, 'lng1' => 85.346388, 'lat2' => 27.688041, 'lng2' => 85.335630],
+            ['name' => 'H2', 'title' => 'New Baneshwor - Tinkune', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.685367, 'lng2' => 85.349132],
+            ['name' => 'H2', 'title' => 'Tinkune - New Baneshwor', 'lat1' => 27.685367, 'lng1' => 85.349132, 'lat2' => 27.688041, 'lng2' => 85.335630],
 
             ['name' => 'H2', 'title' => 'New Baneshwor - Sankhamul', 'lat1' => 27.688041, 'lng1' => 85.335630, 'lat2' => 27.681269, 'lng2' => 85.331963],
             ['name' => 'H2', 'title' => 'Sankhamul - New Baneshwor', 'lat1' => 27.681269, 'lng1' => 85.331963, 'lat2' => 27.688041, 'lng2' => 85.335630],
@@ -184,8 +184,59 @@ class EdgeSeeder extends Seeder
             ['name' => 'H2', 'title' => 'Mangalbazar - Patan DS', 'lat1' => 27.679482, 'lng1' => 85.329354, 'lat2' => 27.674703, 'lng2' => 85.325657],
             ['name' => 'H2', 'title' => 'Patan DS - Mangalbazar', 'lat1' => 27.674703, 'lng1' => 85.325657, 'lat2' => 27.679482, 'lng2' => 85.329354],
             
-            ['name' => 'B1', 'title' => 'Koteshwor - Tinkune', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.685710, 'lng2' => 85.346388],
-            ['name' => 'B1', 'title' => 'Tinkune - Koteshwor', 'lat1' => 27.685710, 'lng1' => 85.346388, 'lat2' => 27.679001, 'lng2' => 85.349374],
+            ['name' => 'B1', 'title' => 'Koteshwor - Tinkune', 'lat1' => 27.679001, 'lng1' => 85.349374, 'lat2' => 27.685367, 'lng2' => 85.349132],
+            ['name' => 'B1', 'title' => 'Tinkune - Koteshwor', 'lat1' => 27.685367, 'lng1' => 85.349132, 'lat2' => 27.679001, 'lng2' => 85.349374],
+
+            ['name' => 'B1', 'title' => 'Tinkune - Sinamangal', 'lat1' => 27.685367, 'lng1' => 85.349132, 'lat2' => 27.696090, 'lng2' => 85.355328],
+            ['name' => 'B1', 'title' => 'Sinamangal - Tinkune', 'lat1' => 27.696090, 'lng1' => 85.355328, 'lat2' => 27.685367, 'lng2' => 85.349132],
+
+            ['name' => 'B1', 'title' => 'Sinamangal - Airport', 'lat1' => 27.696090, 'lng1' => 85.355328, 'lat2' => 27.698855, 'lng2' => 85.354994],
+            ['name' => 'B1', 'title' => 'Airport - Sinamangal', 'lat1' => 27.698855, 'lng1' => 85.354994, 'lat2' => 27.696090, 'lng2' => 85.355328],
+
+            ['name' => 'B1', 'title' => 'Airport - Aircargo', 'lat1' => 27.698855, 'lng1' => 85.354994, 'lat2' => 27.703063, 'lng2' => 85.352205],
+            ['name' => 'B1', 'title' => 'Aircargo - Airport', 'lat1' => 27.703063, 'lng1' => 85.352205, 'lat2' => 27.698855, 'lng2' => 85.354994],
+
+            ['name' => 'B1', 'title' => 'Aircargo - Tilganga', 'lat1' => 27.703063, 'lng1' => 85.352205, 'lat2' => 27.706277, 'lng2' => 85.351081],
+            ['name' => 'B1', 'title' => 'Tilganga - Aircargo', 'lat1' => 27.706277, 'lng1' => 85.351081, 'lat2' => 27.703063, 'lng2' => 85.352205],
+
+            ['name' => 'B1', 'title' => 'Tilganga - Pashupatinath', 'lat1' => 27.706277, 'lng1' => 85.351081, 'lat2' => 27.705665, 'lng2' => 85.346696],
+            ['name' => 'B1', 'title' => 'Pashupatinath - Tilganga', 'lat1' => 27.705665, 'lng1' => 85.346696, 'lat2' => 27.706277, 'lng2' => 85.351081],
+
+            ['name' => 'B1', 'title' => 'Pashupatinath - Gousala', 'lat1' => 27.705665, 'lng1' => 85.346696, 'lat2' => 27.707869, 'lng2' => 85.343355],
+            ['name' => 'B1', 'title' => 'Gousala - Pashupatinath', 'lat1' => 27.707869, 'lng1' => 85.343355, 'lat2' => 27.705665, 'lng2' => 85.346696],
+
+            ['name' => 'B1', 'title' => 'Gousala - Mitrapark', 'lat1' => 27.707869, 'lng1' => 85.343355, 'lat2' => 27.712990, 'lng2' => 85.345368],
+            ['name' => 'B1', 'title' => 'Mitrapark - Gousala', 'lat1' => 27.712990, 'lng1' => 85.345368, 'lat2' => 27.707869, 'lng2' => 85.343355],
+
+            ['name' => 'B1', 'title' => 'Mitrapark - Chabel', 'lat1' => 27.712990, 'lng1' => 85.345368, 'lat2' => 27.717015, 'lng2' => 85.346520],
+            ['name' => 'B1', 'title' => 'Chabel - Mitrapark', 'lat1' => 27.717015, 'lng1' => 85.346520, 'lat2' => 27.712990, 'lng2' => 85.345368],
+
+            ['name' => 'B1', 'title' => 'Chabel - KL Tower', 'lat1' => 27.717015, 'lng1' => 85.346520, 'lat2' => 27.719080, 'lng2' => 85.350362],
+            ['name' => 'B1', 'title' => 'KL Tower - Chabel', 'lat1' => 27.719080, 'lng1' => 85.350362, 'lat2' => 27.717015, 'lng2' => 85.346520],
+
+            ['name' => 'B1', 'title' => 'KL Tower - Hayet', 'lat1' => 27.719080, 'lng1' => 85.350362, 'lat2' => 27.719531, 'lng2' => 85.354544],
+            ['name' => 'B1', 'title' => 'Hayet - KL Tower', 'lat1' => 27.719531, 'lng1' => 85.354544, 'lat2' => 27.719080, 'lng2' => 85.350362],
+
+            ['name' => 'B1', 'title' => 'Hayet - Boudhha', 'lat1' => 27.719531, 'lng1' => 85.354544, 'lat2' => 27.720739, 'lng2' => 85.361404],
+            ['name' => 'B1', 'title' => 'Boudhha - Hayet', 'lat1' => 27.720739, 'lng1' => 85.361404, 'lat2' => 27.719531, 'lng2' => 85.354544],
+
+            ['name' => 'B1', 'title' => 'Boudhha - Gaucharan', 'lat1' => 27.720739, 'lng1' => 85.361404, 'lat2' => 27.720477, 'lng2' => 85.364986],
+            ['name' => 'B1', 'title' => 'Gaucharan - Boudhha', 'lat1' => 27.720477, 'lng1' => 85.364986, 'lat2' => 27.720739, 'lng2' => 85.361404],
+
+            ['name' => 'B1', 'title' => 'Gaucharan - Jorpati', 'lat1' => 27.720477, 'lng1' => 85.364986, 'lat2' => 27.718649, 'lng2' => 85.370542],
+            ['name' => 'B1', 'title' => 'Jorpati - Gaucharan', 'lat1' => 27.718649, 'lng1' => 85.370542, 'lat2' => 27.720477, 'lng2' => 85.364986],
+
+            ['name' => 'B1', 'title' => 'Jorpati - Nayabasti', 'lat1' => 27.718649, 'lng1' => 85.370542, 'lat2' => 27.714507, 'lng2' => 85.371005],
+            ['name' => 'B1', 'title' => 'Nayabasti - Jorpati', 'lat1' => 27.714507, 'lng1' => 85.371005, 'lat2' => 27.718649, 'lng2' => 85.370542],
+
+            ['name' => 'B1', 'title' => 'Nayabasti - Sanodol', 'lat1' => 27.714507, 'lng1' => 85.371005, 'lat2' => 27.710192, 'lng2' => 85.374246],
+            ['name' => 'B1', 'title' => 'Sanodol - Nayabasti', 'lat1' => 27.710192, 'lng1' => 85.374246, 'lat2' => 27.714507, 'lng2' => 85.371005],
+
+            ['name' => 'B1', 'title' => 'Sanodol - Madanashrit', 'lat1' => 27.710192, 'lng1' => 85.374246, 'lat2' => 27.710618, 'lng2' => 85.376942],
+            ['name' => 'B1', 'title' => 'Madanashrit - Sanodol', 'lat1' => 27.710618, 'lng1' => 85.376942, 'lat2' => 27.710192, 'lng2' => 85.374246],
+
+            ['name' => 'B1', 'title' => 'Madanashrit - Tej Binayek', 'lat1' => 27.710618, 'lng1' => 85.376942, 'lat2' => 27.706910, 'lng2' => 85.378874],
+            ['name' => 'B1', 'title' => 'Tej Binayek - Madanashrit', 'lat1' => 27.706910, 'lng1' => 85.378874, 'lat2' => 27.710618, 'lng2' => 85.376942],
             
             ['name' => 'H2', 'title' => 'Balkumari - Gwarko', 'lat1' => 27.670090, 'lng1' => 85.338433, 'lat2' => 27.666433, 'lng2' => 85.332274],
             ['name' => 'H2', 'title' => 'Gwarko - Balkumari', 'lat1' => 27.666433, 'lng1' => 85.332274, 'lat2' => 27.670090, 'lng2' => 85.338433],
