@@ -76,9 +76,7 @@ class AStarAlgorithm
         $closed = [];
         $closed = $this->closedModule($closed,$path);
         $closestNodes = $this->find_closest_node($open,'g', $dest_lat, $dest_lng);
-        // dd($closestNodes);
         $closestEndNode = $this->find_closest_node($open,'h', $dest_lat, $dest_lng);
-        // dd($closestNodes, $closestEndNode);
         $currents = $closestNodes; // Assign closest nodes to $current
         while (!empty($open)) {
             $end = $this->is_end_node($currents,$dest_lat, $dest_lng);
@@ -129,10 +127,8 @@ class AStarAlgorithm
             }
             $currents = $this->find_closest_node($foundNodes,'h',$dest_lat, $dest_lng);
             $open = $this->remove_node($open, $currents);
-
             if(empty($currents)){
                 $closed = $this->end_path_construction($path, $dest_lat, $dest_lng, $closed);
-                // dd($path);
                 return $closed;
             }
             $foundNodes = null;
@@ -182,7 +178,6 @@ class AStarAlgorithm
             foreach($closestEndNode as $close){
                 if($current->latitude == $close->latitude && $current->longitude == $close->longitude){
                     return true;
-                    // break;
                 }
             }
         }
@@ -201,8 +196,6 @@ class AStarAlgorithm
                     $minStatus = $node[$status];
                     $closestNodes = [$node];
                 }
-                // $minStatus = $node[$status];
-                //     $closestNodes = [$node];
             }
             elseif ($node[$status] == $minStatus) {
                 $closestNodes[] = $node; // If there are multiple nodes with the same 'g' value, add them to the array
@@ -210,7 +203,6 @@ class AStarAlgorithm
         }
         $minF = null;
         $closeNode = [];
-        // dd($closestNodes);
         foreach($closestNodes as $closestNode){
             if($minF == null || $closestNode->f < $minF){
                 $minF = $closestNode->f;
