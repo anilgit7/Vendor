@@ -132,11 +132,10 @@ class AStarAlgorithm
 
             if(empty($currents)){
                 $closed = $this->end_path_construction($path, $dest_lat, $dest_lng, $closed);
-                dd($path);
+                // dd($path);
                 return $closed;
             }
             $foundNodes = null;
-            
         }
         dd('no path found');
         $closed = null;
