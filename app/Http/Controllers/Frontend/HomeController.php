@@ -34,7 +34,7 @@ class HomeController extends Controller
                 return redirect()->route('merchant.dashboard')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
             }
             if($ut==2){
-                return redirect()->route('home')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
+                return redirect()->route('user.dashboard')->with(['success'=>true, 'message'=>'Sucessfully logged in.']);
             }
         }
         else{

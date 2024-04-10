@@ -290,10 +290,11 @@ class AdminController extends Controller
         $admin = User::find($admin_id);
         $startLat = $admin->latitude;
         $startLng = $admin->longitude;
-        $grid = new AStarAlgorithm();
-        $nodes = $grid->node_details($startLat, $startLng, $endLat, $endLng);
-        $paths = $grid->astar($startLat, $startLng, $endLat, $endLng);
-        return view('backend.admin',compact('paths', 'nodes' ,'startLat', 'startLng', 'endLat', 'endLng'));
+        $astar = new AStarAlgorithm();
+        $nodes = $astar->node_details($startLat, $startLng, $endLat, $endLng);
+        $edges = $astar->edge_details($startLat, $startLng, $endLat, $endLng);
+        $paths = $astar->astar($startLat, $startLng, $endLat, $endLng);
+        return view('backend.admin',compact('paths', 'nodes', 'edges' ,'startLat', 'startLng', 'endLat', 'endLng'));
     }
 
     public function product_address_path($id){

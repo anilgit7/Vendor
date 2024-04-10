@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\MapController;
@@ -36,7 +37,7 @@ route::get('/merchant-register', function(){
 route::get('/logout',[HomeController::class,'logout'])->name('user.logout');
 route::post('/login',[LoginController::class,'authenticate'])->name('login');
 route::post('/register',[RegisterController::class,'authenticate'])->name('custom.register');
-
+route::post('/change-password',[PasswordController::class, 'update'])->name('change.password');
 route::post('/store-latlng',[MapController::class,'store'])->name('store.latlng');
 
 /********************************** Customer Route ****************************************/

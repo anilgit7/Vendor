@@ -20,6 +20,10 @@ class AStarAlgorithm
         }
         return $nodes;
     }
+    function edge_details($src_lat, $src_lng, $dest_lat, $dest_lng){
+        $edges = Edge::get();
+        return $edges;
+    }
     function heuristic($lng1, $lat1, $lng2, $lat2) {
         // Use Haversine formula to calculate heuristic distance
         $earthRadius = 6371000; // meters
@@ -54,15 +58,8 @@ class AStarAlgorithm
             'f' => 0,
             'parent' =>null
         ];
-        foreach($nodes as $node){
-            $lat2 = $node->latitude;
-            $lng2 = $node->longitude;
-            $g = $this->heuristic($src_lng,$src_lat,$lng2,$lat2);
-            $node['g'] = $g;
-            $h = $this->heuristic($lng2,$lat2,$dest_lng,$dest_lat);
-            $node['h'] = $h;
-            $node['f'] = $node->g+$node->h;
-        }
+        $nodes = $this->node_details($src_lat, $src_lng, $dest_lat, $dest_lng);
+        $edges = $this->edge_details($src_lat, $src_lng, $dest_lat, $dest_lng);
         $open = [];
         foreach ($nodes as $node) {
             // if (($src_lat != $node->latitude || $src_lng != $node->longitude) && ($dest_lat != $node->latitude || $dest_lng != $node->longitude))
@@ -77,6 +74,7 @@ class AStarAlgorithm
         $closed = $this->closedModule($closed,$path);
         $closestNodes = $this->find_closest_node($open,'g', $dest_lat, $dest_lng);
         $closestEndNode = $this->find_closest_node($open,'h', $dest_lat, $dest_lng);
+        // dd($closestEndNode);
         $currents = $closestNodes; // Assign closest nodes to $current
         while (!empty($open)) {
             $end = $this->is_end_node($currents,$dest_lat, $dest_lng);
