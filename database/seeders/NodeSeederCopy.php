@@ -14,13 +14,24 @@ class NodeSeeder extends Seeder
     public function run(): void
     {
         $nodes = [
-            ['name' => 'A', 'title' => 'New Baneshwor', 'latitude' => 27.6892, 'longitude' => 85.3298],
-            ['name' => 'B', 'title' => 'Koteshwor', 'latitude' => 27.6806, 'longitude' => 85.3469],
-            ['name' => 'C', 'title' => 'Jadibuti', 'latitude' =>  27.6896, 'longitude' => 85.3515],
-            ['name' => 'D', 'title' => 'Pepsicola', 'latitude' => 27.7016, 'longitude' => 85.3579],
-            ['name' => 'E', 'title' => 'Lokanthali', 'latitude' => 27.7021, 'longitude' => 85.3657],
-            ['name' => 'F', 'title' => 'Kadaghari', 'latitude' => 27.7009, 'longitude' => 85.3796],
-            ['name' => 'G', 'title' => 'Gothatar', 'latitude' => 27.6872, 'longitude' => 85.3625],
+            
+            // ['name' => 'C', 'title' => 'Sinamangal', 'latitude' => 27.696090, 'longitude' => 85.355328],
+            // ['name' => 'C', 'title' => 'Airport', 'latitude' => 27.698855, 'longitude' => 85.354994],
+            // ['name' => 'C', 'title' => 'Aircargo', 'latitude' => 27.703063, 'longitude' => 85.352205],
+            // ['name' => 'C', 'title' => 'Tilganga', 'latitude' => 27.706277, 'longitude' => 85.351081],
+            // ['name' => 'C', 'title' => 'Pashupatinath', 'latitude' => 27.705665, 'longitude' => 85.346696],
+            // ['name' => 'C', 'title' => 'Gousala', 'latitude' => 27.707869, 'longitude' => 85.343355],
+            // ['name' => 'C', 'title' => 'Mitrapark', 'latitude' => 27.712990, 'longitude' => 85.345368],
+            // ['name' => 'C', 'title' => 'Chabel', 'latitude' => 27.717015, 'longitude' => 85.346520],
+            // ['name' => 'C', 'title' => 'KL Tower', 'latitude' => 27.719080, 'longitude' => 85.350362],
+            // ['name' => 'C', 'title' => 'Hayet', 'latitude' => 27.719531, 'longitude' => 85.354544],
+            // ['name' => 'C', 'title' => 'Boudhha', 'latitude' => 27.720739, 'longitude' => 85.361404],
+            // ['name' => 'C', 'title' => 'Gaucharan', 'latitude' => 27.720477, 'longitude' => 85.364986],
+            // ['name' => 'C', 'title' => 'Jorpati', 'latitude' => 27.718649, 'longitude' => 85.370542],
+            // ['name' => 'C', 'title' => 'Nayabasti', 'latitude' => 27.714507, 'longitude' => 85.371005],
+            // ['name' => 'C', 'title' => 'Sanodol', 'latitude' => 27.710192, 'longitude' => 85.374246],
+            // ['name' => 'C', 'title' => 'Madanashrit', 'latitude' => 27.710618, 'longitude' => 85.376942],
+
         ]; 
 
         Node::insert($nodes);
