@@ -16,7 +16,8 @@ class HomeController extends Controller
     public function index(){
         $categories = Category::all();
         $productDatas = Product::inRandomOrder()->take(7)->get();
-        return view('frontend.home',compact('categories','productDatas'));
+        $bestSells = Product::orderBy('sold', 'desc')->take(6)->get();
+        return view('frontend.home',compact('categories','productDatas','bestSells'));
     }
     public function logout(){
         Session::flush();

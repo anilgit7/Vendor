@@ -59,6 +59,9 @@ function create_order($request){
             'product_id' => $cartItem->id,
             'quantity' => $cartItem->qty,
         ]);
+        $products = Product::where('id', $cartItem->id)->first();
+        $products->sold = $products->sold+$cartItem->qty;
+        $products->save();
     }
     Cart::destroy();
 }
@@ -84,6 +87,9 @@ function create_esewa_order(){
             'product_id' => $cartItem->id,
             'quantity' => $cartItem->qty,
         ]);
+        $products = Product::where('id', $cartItem->id)->first();
+        $products->sold = $products->sold+$cartItem->qty;
+        $products->save();
     }
     Cart::destroy();
     session()->forget('payment_data');
