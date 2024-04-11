@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string("weight")->nullable();
             $table->string("warranty")->nullable();
             $table->string("images")->nullable();
+            $table->integer('sold')->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
