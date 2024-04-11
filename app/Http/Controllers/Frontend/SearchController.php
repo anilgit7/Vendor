@@ -35,12 +35,17 @@ class SearchController extends Controller
     
     public function result_page(Request $request){
         $search_name = ucfirst($request->search);
-        $searches=Product::whereHas('category',function($query) use ($request){
-                $query->where('category_name','like','%'.$request->search.'%');
-            })
-            ->orwhere('id','like','%'.$request->search.'%')
-            ->orwhere('product_name','like','%'.$request->search.'%')
-            ->get();
+        if($request->search != ''){
+            $searches=Product::whereHas('category',function($query) use ($request){
+                    $query->where('category_name','like','%'.$request->search.'%');
+                })
+                ->orwhere('id','like','%'.$request->search.'%')
+                ->orwhere('product_name','like','%'.$request->search.'%')
+                ->get();
+        }
+        else{
+            $searches = '';
+        }
         return view('frontend.product',compact('searches','search_name'));
     }
 }
