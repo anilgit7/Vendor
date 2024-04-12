@@ -32,6 +32,21 @@ class NodeSeeder extends Seeder
             // ['name' => 'C', 'title' => 'Sanodol', 'latitude' => 27.710192, 'longitude' => 85.374246],
             // ['name' => 'C', 'title' => 'Madanashrit', 'latitude' => 27.710618, 'longitude' => 85.376942],
 
+
+
+
+            
+            // ['name' => 'M', 'title' => 'Khahare Chowk', 'latitude' => 27.696435, 'longitude' => 85.366234],
+            // ['name' => 'M', 'title' => 'Mantar', 'latitude' => 27.705902, 'longitude' => 85.370739],
+            // ['name' => 'N', 'title' => 'Kadaghari', 'latitude' => 27.697726, 'longitude' => 85.371774],
+            // ['name' => 'O', 'title' => 'Gothatar', 'latitude' => 27.701133, 'longitude' => 85.379180],
+            // ['name' => 'P', 'title' => 'Tej Binayek', 'latitude' => 27.706910, 'longitude' => 85.378874],
+            // ['name' => 'T', 'title' => 'Chapabot', 'latitude' => 27.707639, 'longitude' => 85.383083],
+            // ['name' => 'U', 'title' => 'Bhaimal', 'latitude' => 27.708523, 'longitude' => 85.388647],
+            // ['name' => 'Q', 'title' => 'Thapagoan', 'latitude' => 27.700882, 'longitude' => 85.385171],
+            // ['name' => 'R', 'title' => 'Mulpani', 'latitude' => 27.703856, 'longitude' => 85.390515],
+            // ['name' => 'S', 'title' => 'Pipalbot', 'latitude' => 27.706312, 'longitude' => 85.394008],
+
         ]; 
 
         Node::insert($nodes);

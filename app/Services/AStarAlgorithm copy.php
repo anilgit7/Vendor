@@ -72,7 +72,7 @@ class AStarAlgorithm
         $path = $this->path_construct_src($path, $src);
         $closed = [];
         $closed = $this->closedModule($closed,$path);
-        $closestNodes = $this->find_closest_src_node($open,'g', $dest_lat, $dest_lng);
+        $closestNodes = $this->find_closest_node($open,'g', $dest_lat, $dest_lng);
         $closestEndNode = $this->find_closest_node($open,'h', $dest_lat, $dest_lng);
         // dd($closestEndNode);
         $currents = $closestNodes; // Assign closest nodes to $current
@@ -180,42 +180,6 @@ class AStarAlgorithm
             }
         }
         return false;
-    }
-    function find_closest_src_node($allNode,$status, $dest_lat, $dest_lng){
-        $closestNodes = [];
-        $minStatus = null;
-        $minF = null;
-        foreach ($allNode as $node) {
-            if ($minStatus === null || ($node[$status] < $minStatus)) {
-                if(($node->latitude == $dest_lat && $node->longitude == $dest_lng) || $node->h == 0){
-                    $closestNodes = [$node];
-                    return $closestNodes;
-                }
-                else{
-                    if($minF === null || ($node['f'] < $minF)){
-                        $minStatus = $node[$status];
-                        $minF = $node['f'];
-                        $closestNodes = [$node];
-                    }
-                    // else{
-
-                    // }
-                }
-            }
-            elseif ($node[$status] == $minStatus) {
-                $closestNodes[] = $node; // If there are multiple nodes with the same 'g' value, add them to the array
-            }
-        }
-        // dd($closestNodes);
-        $minF = null;
-        $closeNode = [];
-        foreach($closestNodes as $closestNode){
-            if($minF == null || $closestNode->f < $minF){
-                $minF = $closestNode->f;
-                $closeNode = [$closestNode];
-            }
-        }
-        return $closeNode;
     }
     function find_closest_node($allNode,$status, $dest_lat, $dest_lng){
         $closestNodes = [];

@@ -63,7 +63,7 @@ class NodeSeeder extends Seeder
             ['name' => 'C', 'title' => 'Redcross Chowk', 'latitude' => 27.669490, 'longitude' => 85.365914],
              
             ['name' => 'D', 'title' => 'Jadibuti', 'latitude' =>  27.675120, 'longitude' => 85.352063],
-            ['name' => 'E', 'title' => 'Pepsicola', 'latitude' => 27.689183, 'longitude' => 85.360791],
+            // ['name' => 'E', 'title' => 'Pepsicola', 'latitude' => 27.689183, 'longitude' => 85.360791],
             ['name' => 'F', 'title' => 'Lokanthali', 'latitude' => 27.674608, 'longitude' => 85.360525],
             ['name' => 'G', 'title' => 'Kausaltar', 'latitude' => 27.674209, 'longitude' => 85.365494],
             ['name' => 'H', 'title' => 'Gatthaghar', 'latitude' => 27.674345, 'longitude' => 85.373964],
@@ -72,16 +72,6 @@ class NodeSeeder extends Seeder
             ['name' => 'K', 'title' => 'Sallaghari', 'latitude' => 27.672395, 'longitude' => 85.407767],
             ['name' => 'L', 'title' => 'Suryabinayak', 'latitude' => 27.665471, 'longitude' => 85.424229],
             
-            ['name' => 'M', 'title' => 'Khahare Chowk', 'latitude' => 27.696435, 'longitude' => 85.366234],
-            ['name' => 'M', 'title' => 'Mantar', 'latitude' => 27.705902, 'longitude' => 85.370739],
-            ['name' => 'N', 'title' => 'Kadaghari', 'latitude' => 27.697726, 'longitude' => 85.371774],
-            ['name' => 'O', 'title' => 'Gothatar', 'latitude' => 27.701133, 'longitude' => 85.379180],
-            ['name' => 'P', 'title' => 'Tej Binayek', 'latitude' => 27.706910, 'longitude' => 85.378874],
-            ['name' => 'T', 'title' => 'Chapabot', 'latitude' => 27.707639, 'longitude' => 85.383083],
-            ['name' => 'U', 'title' => 'Bhaimal', 'latitude' => 27.708523, 'longitude' => 85.388647],
-            ['name' => 'Q', 'title' => 'Thapagoan', 'latitude' => 27.700882, 'longitude' => 85.385171],
-            ['name' => 'R', 'title' => 'Mulpani', 'latitude' => 27.703856, 'longitude' => 85.390515],
-            ['name' => 'S', 'title' => 'Pipalbot', 'latitude' => 27.706312, 'longitude' => 85.394008],
 
             ['name' => 'V', 'title' => 'NOC', 'latitude' => 27.682653, 'longitude' => 85.370070],
             ['name' => 'W', 'title' => 'Sanothimi Ground', 'latitude' => 27.681853, 'longitude' => 85.377238],

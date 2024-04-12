@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
                 'user_type'=>'0',
                 'status' => 'verified',
                 'phone_number'=>'',
+                'latitude'=>'27.6715239',
+                'longitude'=>'85.3086754',
                 'password'=>Hash::make('admin'),
             ],
             [
@@ -30,6 +32,8 @@ class UserSeeder extends Seeder
                 'user_type'=>'1',
                 'status' => 'verified',
                 'phone_number'=>'',
+                'latitude'=>'27.6755019',
+                'longitude'=>'85.3680559',
                 'password'=>Hash::make('admin'),
             ],
             [
@@ -38,6 +42,8 @@ class UserSeeder extends Seeder
                 'user_type'=>'1',
                 'status' => 'verified',
                 'phone_number'=>'',
+                'latitude'=>'27.6907634',
+                'longitude'=>'85.3395521',
                 'password'=>Hash::make('admin'),
             ],
             [
@@ -46,6 +52,8 @@ class UserSeeder extends Seeder
                 'user_type'=>'1',
                 'status' => 'verified',
                 'phone_number'=>'',
+                'latitude'=>'27.7045238',
+                'longitude'=>'85.3242053',
                 'password'=>Hash::make('admin'),
             ],
             [
@@ -54,6 +62,8 @@ class UserSeeder extends Seeder
                 'user_type'=>'2',
                 'status' => 'verified',
                 'phone_number'=>'',
+                'latitude'=>'27.6749323',
+                'longitude'=>'85.3694758',
                 'password'=>Hash::make('admin'),
             ],
         ];
